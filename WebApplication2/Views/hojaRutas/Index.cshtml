@@ -1,0 +1,56 @@
+﻿@model IEnumerable<WebApplication2.Models.hojaRuta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { }, new {@class = "btn btn-primary" })
+</p>
+<table class="table table-data__tool table-striped table-earning">
+    <tr>
+        <th>N° Hoja de Ruta</th>
+        <th>Patente Vehiculo</th>
+        <th>Fecha de Creación</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de Modificacion</th>
+        <th>BOTON</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idHojaRuta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.patente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaModificacion)
+            </td>
+            <td>
+                <a class="btn btn-success" data-toggle="dropdown" href="#">
+                    MENU
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
+                    <li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
+                    <li>@Html.ActionLink("Agregar Chofer", "AddChofer", new { id = item.idHojaRuta })</li>
+                    <li>@Html.ActionLink("Agregar Peonetas", "AddPeoneta", new { id = item.idHojaRuta })</li>
+                    <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>
+                </ul>                                             
+            </td>
+        </tr>
+    }
+
+</table>

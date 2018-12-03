@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebApplication2.Models.guias>
+
+@{
+    ViewBag.Title = "Index";
+
+    <h2>Agregar Guias A Hoja de Ruta</h2>
+    <br/>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
+    </p>
+    <br/>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.rut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ciudad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.observacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hojaRuta.idHojaRuta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hojaRuta.patente)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ciudad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaIngreso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.observacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idHojaRuta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hojaRuta.patente)
+                </td>
+                <td>
+                    @Html.ActionLink("Agregar a Hoja De Ruta", "AddGuiaHR", new { idNumeroGuias = item.numeroGuia }, new { @class = "btn btn-primary" }) |
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br/>
+    @Html.ActionLink("Finalizar", "Siguiente", new {}, new { @class = "btn btn-warning" })
+}

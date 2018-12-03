@@ -1,0 +1,66 @@
+﻿@model WebApplication2.Models.hojaRuta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>hojaRuta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaModificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaModificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaTramo.trimestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaTramo.trimestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vehiculo.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vehiculo.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vehiculo1.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vehiculo1.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idHojaRuta }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,139 @@
+﻿@model WebApplication2.Models.ColaboradorHojaRutaViewModel
+@{
+    ViewBag.Title = "Create";
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <link href="~/Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" />
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <h3 class="title-5 m-b-35" style="margin-top: 1em;">Asignacion de Colaboradores</h3>
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-info" onclick="AddChofer(0)">Añadir Chofer</a> <br /><br />
+        <a href="#" class="btn btn-info" onclick="AddPeoneta(0)">Añadir Peoneta</a> <br /><br />
+        <table class="table table-bordered table-striped tablecontainer" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>R.U.N.</th>
+                    <th>NOMBRE</th>
+                    <th>CARGO</th>
+
+
+                </tr>
+            </thead>
+            <tbody id="SetCHRList">
+                <tr id="LoadingStatus" style="color:red"></tr>
+            </tbody>
+        </table>
+
+        @*Modal Añadir Colaborador*@
+
+        <div class="modal fadeOut" id="MyModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 id="ModalTitle"></h4>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form">
+                            <fieldset id="SubmitForm">
+                                <div class="col-md-10">
+                                    @Html.DropDownList("run", null, htmlAttributes: new { @id = "chrRun", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.run, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <a href="#" class="btn btn-block btn-danger" id="GuardarChofer">Guardar</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.ActionLink("Siguiente", "Siguiente", new { }, new { @class = "btn btn-success" })
+    </div>
+
+  
+}
+
+
+
+<script>
+    $("#LoadingStatus").html("Loading...");
+    $.get("/colaboradorHojaRutas/GetCHRList", null, DataBind);
+    function DataBind(chrList) {
+        //This Code For Receive All Data From Controller And Show It In Client Side
+        var SetData = $("#SetCHRList");
+        for (var i = 0; i < chrList.length; i++) {
+            var Data = "<tr class='row_" + chrList[i].idColHojaRuta + "'>" +
+                "<td>" + chrList[i].rut + "</td>" +
+                "<td>" + chrList[i].nombre + " " + chrList[i].apellidoPaterno + " " + chrList[i].apellidoMaterno + "</td>" +
+                "<td>" + chrList[i].cargo + "</td>" +
+                "<td>" + "<a href='Guia' class='btn  btn-warning' onclick='AgregarGuia(" + chrList[i].idColHojaRuta + ")' ><span class='glyphicon glyphicon - edit'></span></a>" + "</td>" +
+                "</tr>";
+            SetData.append(Data);
+            $("#LoadingStatus").html(" ");
+
+        }
+    }
+    // Modal Agregar Colaborador
+    function AddChofer(run) {
+        $("#form")[0].reset();
+        $("#ModalTitle").html("Agregar Chofer");
+        $("#chrRun option:selected").text("--Seleccione Colaborador--");
+        $("#MyModal").modal();
+
+    }
+    // Guardar Colaborador
+    $("#GuardarChofer").click(function () {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/colaboradorHojaRutas/GuardarChoferInDB",
+            data: data,
+            success: function (result) {
+                alert("¡Completado!");
+                window.location.href = "/colaboradorHojaRutas/Create";
+                $("#MyModal").modal("hide");
+            }
+        })
+    })
+</script>
+
+
+@*
+    <h2>Create</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>colaboradorHojaRuta</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.run, "run", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("run", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.run, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+*@

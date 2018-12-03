@@ -1,0 +1,50 @@
+﻿@model WebApplication2.Models.hojaRutaDetalle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>hojaRutaDetalle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaSalida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaSalida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaLlegada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaLlegada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hojaRuta.patente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hojaRuta.patente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idHojaRutaDetalle }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
