@@ -1,225 +1,99 @@
 ﻿@model WebApplication2.Models.ResumenHojaRutaViewModel
 @{
     ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
-<div class="container">
-    <table class="table table-condensed table-bordered table-hover">
-        <thead style="background-color: #1e7338; color: white;">
-            <tr>
-                @*<th>ID H. Ruta</th>*@
-                <th>N° Guía</th>
-                <th>R.U.T.</th>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Ciudad</th>
-                <th>Fecha de ingreso</th>
-                <th>Observación</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var g in Model.guiasID)
-            {
+    <h2>Index</h2>
+    <div class="container">
+        <table class="table table-condensed table-bordered table-hover">
+            <thead style="background-color: #1e7338; color: white;">
                 <tr>
-                    @*<td>
-                            @Html.DisplayFor(Model => g.idHojaRuta)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(Model => g.numeroGuia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.rut)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.direccion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.telefono)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.ciudad)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.fechaIngreso)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.observacion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.estado)
-                    </td>
+                    @*<th>ID H. Ruta</th>*@
+                    <th>N° Guía</th>
+                    <th>R.U.T.</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Ciudad</th>
+                    <th>Fecha de ingreso</th>
+                    <th>Observación</th>
+                    <th>Estado</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <br />
-    <table class="table table-condensed table-bordered table-hover">
-        <thead style="background-color: #1e7338; color: white;">
-            <tr>
-                @*<th>ID H. Ruta</th>
-                    <th>R.U.N.</th>*@
-                <th>R.U.T.</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Cargo</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var ch in Model.colaboradorHojaRutaID)
-            {
-                <tr>
-                    @*<td>
-                            @Html.DisplayFor(Model => ch.idHojaRuta)
+            </thead>
+            <tbody>
+                @foreach (var g in Model.guiasID)
+                {
+                    <tr>
+                        @*<td>
+                                @Html.DisplayFor(Model => g.idHojaRuta)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(Model => g.numeroGuia)
                         </td>
                         <td>
-                            @Html.DisplayFor(Model => ch.run)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.rut)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.apellidoPaterno)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.cargo)
-                    </td>
+                            @Html.DisplayFor(Model => g.rut)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.ciudad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.fechaIngreso)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.observacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.estado)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <table class="table table-condensed table-bordered table-hover">
+            <thead style="background-color: #1e7338; color: white;">
+                <tr>
+                    @*<th>ID H. Ruta</th>
+                        <th>R.U.N.</th>*@
+                    <th>R.U.T.</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Cargo</th>
                 </tr>
-            }
-        </tbody>
-
-
-    </table>
-    <br />
-    <a class="btn btn-success btn-block" data-toggle="collapse" href="#collapseRuta" role="button" aria-expanded="false" aria-controls="collapseExample" style="padding: 0.8em;">
-        Generar ruta
-    </a>
-    <br />
-    <!-- Área para cargar collapse de ruta -->
-    <div class="collapse" id="collapseRuta" style="margin-top: 1em;">
-        <div class="card card-body">
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#map">Mapa de direcciones</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#infoPanel">Descripción de direcciones</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div id="map" class="tab-pane fad in active">
-                    <div class="row">
-                        <form id="frmLocation" action="" role="form" class="col-md-6" style="margin-top: 1em;">
-                            <div class="form-group">
-                                <label for="txtLocation" class="sr-only">Location</label>
-                                <input id="txtLocation" type="text" value="Bernardo Ohiggins 916, Constitución, Región del Maule" class="form-control" />
-                            </div>
-
-                            <div class="form-group">
-                                <input id="btnAddLocation" type="button" value="Añadir" class="btn btn-success col-md-6" style="padding: 0.8em;" />
-                                <div id="successMessage" class="alert alert-success success-msg col-md-5" role="alert">
-                                    ¡Agregado a la lista!
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="ddlSource" class="sr-only">Source</label>
-                                <select id="ddlSource" class="form-control">
-                                    <option value="">-- Origen --</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ddlDestination" class="sr-only">Destination</label>
-                                <select id="ddlDestination" class="form-control">
-                                    <option value="">-- Destino --</option>
-                                </select>
-                            </div>
-
-                            <div class="checkbox">
-                                <label>
-                                    <input id="chkDestinationIsSameAsSource" type="checkbox" />
-                                    Igual que el origen
-                                </label>
-                            </div>
-                            <br />
-                            <div class="form-group">
-                                <label for="ddlTravelMode" class="sr-only">Travel Mode</label>
-                                <select id="ddlTravelMode" class="form-control">
-                                    <option value="">-- Modo de viaje --</option>
-                                    <option value="DRIVING">Conducir</option>
-                                    <option value="WALKING">Caminar</option>
-                                    <option value="BICYCLING">Bicicleta</option>
-                                </select>
-                            </div>
-
-                            <div class="checkbox">
-                                <label>
-                                    <input id="chkOptimizePath" type="checkbox" checked="checked" />
-                                    Optimizar ruta
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <input id="btnClearDirections" type="button" value="Limpiar" class="btn btn-block btn-warning" style="padding: 0.8em;" />
-                                <input id="btnDisplayDirections" type="button" value="Mostrar" class="btn btn-block btn-success" style="padding: 0.8em;" />
-                            </div>
-                            <br />
-                            @*<div id="successMessage" class="alert alert-success alert-dismissible success-msg" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <strong>Success! </strong>Location added to Source and Destination drop down lists.
-                                </div>*@
-                        </form>
-                        <div id="googleMap" class="col-md-6 map" style="margin-top: 1em;"></div>
-                    </div>
-                </div>
-
-                <div id="infoPanel" class="tab-pane fad">
-                    <div id="panel" class="col-md-12 panel"></div>
-                </div>
-            </div>
-        </div>
+            </thead>
+            <tbody>
+                @foreach (var ch in Model.colaboradorHojaRutaID)
+                {
+                    <tr>
+                        @*<td>
+                                @Html.DisplayFor(Model => ch.idHojaRuta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(Model => ch.run)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.rut)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.apellidoPaterno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.cargo)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-
-    <!-- Área para cargar modal de ruta -->
-    <div class="modal" id="rutaModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 id="rutaModalTitle"></h4>
-                    <a href="#" class="close" data-dismiss="modal">&times;</a>
-                </div>
-                <div class="modal-body">
-                    <p id="rutaModalContent"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal limpiar ubicaciones -->
-    <div class="modal" id="limpiaRutaModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 id="limpiaRutaModalTitulo"></h4>
-                    <a href="#" class="close" data-dismiss="modal">&times;</a>
-                </div>
-                <div class="modal-body">
-                    <p id="limpiaRutaModalContenido"></p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" id="modal-btn-cancelar">Cancelar</a>
-                    <a href="#" class="btn btn-primary" id="modal-btn-limpiar">Limpiar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQFeAyqNAmW4CDImQEIOKsNHQMiKIaxX4&libraries=places"></script>
+}

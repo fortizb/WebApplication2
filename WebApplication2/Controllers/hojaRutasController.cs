@@ -18,6 +18,7 @@ namespace WebApplication2.Controllers
       
         public ActionResult Index()
         {
+
             if (Session["Login"] == null)
             {
                 return RedirectToAction("Login", "Home");
@@ -71,6 +72,7 @@ namespace WebApplication2.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
             else
             {
                 if (ModelState.IsValid)
@@ -117,7 +119,7 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idHojaRuta,patente,fechaCreacion,fechaIngreso,fechaModificacion,estado")] hojaRuta hojaRuta)
+        public ActionResult Edit([Bind(Include = "idHojaRuta,patente,fechaCreacion,fechaModificacion,estado")] hojaRuta hojaRuta)
         {
             if (Session["Login"] == null)
             {

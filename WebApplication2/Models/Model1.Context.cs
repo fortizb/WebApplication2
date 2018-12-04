@@ -32,7 +32,6 @@ namespace WebApplication2.Models
         public virtual DbSet<hojaRuta> hojaRuta { get; set; }
         public virtual DbSet<hojaRutaDetalle> hojaRutaDetalle { get; set; }
         public virtual DbSet<rol> rol { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<vehiculo> vehiculo { get; set; }
     }
