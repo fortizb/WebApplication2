@@ -1,27 +1,21 @@
 ﻿@model WebApplication2.Models.ColaboradorHojaRutaViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Agregar colaborador";
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <link href="~/Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" />
     <div class="container">
 
-        <div class="row">
-            <div class="col">
-                <h3 class="title-5 m-b-35" style="margin-top: 1em;">Asignacion de Colaboradores</h3>
-            </div>
-        </div>
+        <h3 style="margin-top: 1em;">Asignación de colaboradores</h3>
 
-        <a href="#" class="btn btn-info" onclick="AddChofer(0)">Añadir Chofer</a> <br /><br />
-        <a href="#" class="btn btn-info" onclick="AddPeoneta(0)">Añadir Peoneta</a> <br /><br />
-        <table class="table table-bordered table-striped tablecontainer" style="width: 100%">
+        <a href="#" class="btn btn-info" onclick="AddChofer(0)" style="margin-top: 1em;"><i class="fa fa-plus"></i>&nbsp;Añadir colaborador</a>
+
+        <table class="table table-bordered" style="margin-top: 1.5em;">
             <thead>
                 <tr>
                     <th>R.U.N.</th>
                     <th>NOMBRE</th>
                     <th>CARGO</th>
-
-
                 </tr>
             </thead>
             <tbody id="SetCHRList">
@@ -55,10 +49,11 @@
                 </div>
             </div>
         </div>
-        @Html.ActionLink("Siguiente", "Siguiente", new { }, new { @class = "btn btn-success" })
+        @*@Html.ActionLink("Siguiente", "Siguiente", new { }, new { @class = "btn btn-success" })*@
+        <a class="btn btn-success" href="@Url.Action("Siguiente", "colaboradorHojaRutas")" style="margin-top: 1em;">Siguiente&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
     </div>
 
-  
+
 }
 
 
@@ -74,7 +69,6 @@
                 "<td>" + chrList[i].rut + "</td>" +
                 "<td>" + chrList[i].nombre + " " + chrList[i].apellidoPaterno + " " + chrList[i].apellidoMaterno + "</td>" +
                 "<td>" + chrList[i].cargo + "</td>" +
-                "<td>" + "<a href='Guia' class='btn  btn-warning' onclick='AgregarGuia(" + chrList[i].idColHojaRuta + ")' ><span class='glyphicon glyphicon - edit'></span></a>" + "</td>" +
                 "</tr>";
             SetData.append(Data);
             $("#LoadingStatus").html(" ");

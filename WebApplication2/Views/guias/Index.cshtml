@@ -4,12 +4,7 @@
     ViewBag.Title = "Index";
     <style type="text/css">
         #tablaDireccion td:hover {
-            background-color: #e0e0e0;
             cursor: pointer;
-        }
-
-         #tablaDireccion td:active {
-            background-color: #bdbdbd;
         }
 
         #listaOrigen {
@@ -18,18 +13,8 @@
     </style>
 
     <div class="container">
-        <h2>Agregar Guias A Hoja de Ruta</h2>
-        <br />
-
-        <p>
-            @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
-        </p>
-        <a href="@Url.Action("Create", "guias")" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            <span>&nbsp;Crear guía</span>
-        </a>
-        <br />
-        <table id="tablaDireccion" class="table">
+        <h3 style="margin-top: 1em;">Agregar guías a hoja de ruta</h3>
+        <table id="tablaDireccion" class="table table-bordered" style="margin-top: 1em;">
             <thead>
                 <tr>
                     <th>
@@ -83,7 +68,11 @@
                             @Html.DisplayFor(modelItem => item.hojaRuta.patente)
                         </td>
                         <td>
-                            @Html.ActionLink("Agregar a Hoja De Ruta", "AddGuiaHR", new { idNumeroGuias = item.numeroGuia }, new { @class = "btn btn-primary" })
+                            @*@Html.ActionLink("Agregar a Hoja De Ruta", "AddGuiaHR", new { idNumeroGuias = item.numeroGuia }, new { @class = "btn btn-primary" })*@
+                            <a href="@Url.Action("AddGuiaHR", "guias", new { idNumeroGuias = item.numeroGuia }, null)" class="btn btn-primary">
+                                <i class="fa fa-plus"></i>
+                                <span>&nbsp;Agregar a hoja de ruta</span>
+                            </a>
                         </td>
                     </tr>
                 }
@@ -92,9 +81,13 @@
         <br />
         <p class="msj-hecho text-center text-danger" style="margin-top: 0.5em;"><b id="mensajeAgregado"></b></p>
         <br />
-        <a class="btn btn-success" data-toggle="collapse" href="#collapseRuta" role="button" aria-expanded="false" aria-controls="collapseExample">Mostrar mapa</a> |
-        <input id="btnLimpiarRuta" type="button" value="Limpiar ruta" class="btn btn-warning" /> |
-        @Html.ActionLink("Finalizar", "Siguiente", new { }, new { @class = "btn btn-warning" })
+        <a class="btn btn-success" data-toggle="collapse" href="#collapseRuta" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i>&nbsp; mapa</a>&nbsp;&nbsp;
+        <button id="btnLimpiarRuta" type="button" class="btn btn-warning"><i class="fa fa-trash"></i>&nbsp;Limpiar ruta</button>&nbsp;&nbsp;
+        @*@Html.ActionLink("Finalizar", "Siguiente", new { }, new { @class = "btn btn-warning" })*@
+        <a href="@Url.Action("Siguiente", "guias", new { }, null)" class="btn btn-warning">
+            <i class="fa fa-check-circle"></i>
+            <span>&nbsp;Finalizar</span>
+        </a>
         <br />
         <!-- Área para cargar collapse de ruta -->
         <div class="collapse" id="collapseRuta" style="margin-top: 1em;">
@@ -170,6 +163,18 @@
                 </div>
             </div>
         </div>
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>                
+            </thead>
+            <tbody></tbody>
+        </table>
         <br />
         <div id="panel-direcciones"></div>
     </div>

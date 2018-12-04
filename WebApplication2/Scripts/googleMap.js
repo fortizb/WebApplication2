@@ -136,19 +136,19 @@ $("#tablaDireccion tbody tr").click(function () {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsRenderer.setDirections(response);
 
-            var totalDistance = 0;
-            var totalDuration = 0;
-            var waypointsDuration = wayPoints.length * 0.2;
+            var totalDistancia = 0;
+            var totalDuracion = 0;
+            var waypointsDuracion = wayPoints.length * 0.2;
             var legs = response.routes[0].legs;
             for (var i = 0; i < legs.length; ++i) {
-                totalDistance += legs[i].distance.value;
-                totalDuration += legs[i].duration.value;
+                totalDistancia += legs[i].distance.value;
+                totalDuracion += legs[i].duration.value;
             }
             //alert('Paradas: '+wayPoints.length);
-            $('#totalDistance').val((totalDistance / 1000).toFixed(1));
-            $('#totalDuration').val(((totalDuration / 3600) + waypointsDuration).toFixed(1));
-            $('#fuelAprox').val(((totalDistance / 1000) / 15).toFixed(1));
-            $('#costoAprox').val((((totalDistance / 1000) / 15) * 653).toFixed(1));
+            $('#totalDistancia').val((totalDistancia / 1000).toFixed(1));
+            $('#totalDuracion').val(((totalDuracion / 3600) + waypointsDuracion).toFixed(1));
+            $('#combustibleAprox').val(((totalDistancia / 1000) / 15).toFixed(1));
+            $('#costoAprox').val((((totalDistancia / 1000) / 15) * 653).toFixed(1));
         } else {
             alert('No encontramos los resultados de su búsqueda.');
         }

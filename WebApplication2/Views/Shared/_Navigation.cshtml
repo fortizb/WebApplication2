@@ -10,32 +10,35 @@
             <div class="header__navbar">
                 <ul class="list-unstyled">
                     <li class="has-sub">
-                        <a href="Dashboard">
-                            <i class="fas fa-tachometer-alt"></i>Dashboard
-                            <span class="bot-line"></span>
+                        <a href="@Url.Action("DashboardUsuario", "Home")">
+                            <i class="fa fa-briefcase"></i>
+                            <span>&nbsp;Dashboard</span>
                         </a>
 
                     </li>
-                    <li>
-                        <a href="Reportes">
-                            <i class="fas fa-bar-chart-o"></i>
-                            <span class="bot-line"></span>Reportes
+                    @*<li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class="fa fa-briefcase"></i>
+                            <span>&nbsp;Reportes</span>
+                        </a>
+                    </li>*@
+                    <li class="has-sub">
+                        @*@Html.ActionLink("Hoja de ruta", "Index", "hojaRutas")*@
+                        <a href="@Url.Action("Index", "hojaRutas")">
+                            <i class="fa fa-copy"></i>
+                            <span>&nbsp;Hoja de ruta</span>
                         </a>
                     </li>
-                    <li class="has-sub">
-                        @Html.ActionLink("Hoja de ruta", "Index", "hojaRutas")
-                        </a>
-                    </li>
-                    <li class="has-sub">
+                    @*<li class="has-sub">
                         <a href="HojaRutaDetalle">
                             <i class="fas fa-copy"></i>
                             <span class="bot-line"></span> Mapa
                         </a>
-                    </li>
+                    </li>*@
                     <li class="has-sub">
                         <a href="#">
                             <i class="fas fa-group"></i>
-                            <span class="bot-line"></span>Personal
+                            <span class="bot-line"></span>Gestión
                         </a>
                         <ul class="header3-sub-list list-unstyled">
                             <li>
