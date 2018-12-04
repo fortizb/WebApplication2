@@ -79,7 +79,7 @@
                 <div class="col-md-6 col-lg-4">
                     <!-- CHART-->
                     <div class="statistic-chart-1">
-                        <h3 class="title-3 m-b-30">chart</h3>
+                        <h3 class="title-3 m-b-30">Despachos mensuales</h3>
                         <div class="chart-wrap">
                             <canvas id="widgetChart5"></canvas>
                         </div>
@@ -125,18 +125,25 @@
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <!-- CHART PERCENT-->
-
-                    <hr />
-                    <div>
-                        <h1>Pie Chart</h1>
+                    <div class="chart-percent-2">
+                        <h3 class="title-3 m-b-30">Despachos Realizados</h3>
+                        <div class="chart-wrap">
+                            <canvas id="percent-chart2"></canvas>
+                            <div id="chartjs-tooltip">
+                                <table></table>
+                            </div>
+                        </div>
+                        <div class="chart-info">
+                            <div class="chart-note">
+                                <span class="dot dot--blue"></span>
+                                <span>Realizados</span>
+                            </div>
+                            <div class="chart-note">
+                                <span class="dot dot--red"></span>
+                                <span>Pendientes</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <img src="@Url.Action("ChartPie")" alt="Chart" />
-                    </div>
-                    <hr />
-                    <div>
-                     
-
                     <!-- END CHART PERCENT-->
                 </div>
             </div>
