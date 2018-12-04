@@ -76,13 +76,6 @@
           <Property Name="fechaLlegada" Type="datetime" />
           <Property Name="observaciones" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="rol">
-          <Key>
-            <PropertyRef Name="rolID" />
-          </Key>
-          <Property Name="rolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="rolDesc" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="usuarioID" />
@@ -354,14 +347,6 @@
           <Property Name="fechaLlegada" Type="DateTime" Precision="3" />
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="hojaRuta" Relationship="Self.FK__hojaRutaD__idHoj__1CBC4616" FromRole="hojaRutaDetalle" ToRole="hojaRuta" />
-        </EntityType>
-        <EntityType Name="rol">
-          <Key>
-            <PropertyRef Name="rolID" />
-          </Key>
-          <Property Name="rolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="rolDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_rol" FromRole="rol" ToRole="usuario" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>

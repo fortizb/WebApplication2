@@ -1,0 +1,48 @@
+﻿@model WebApplication2.Models.usuario
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Login</legend>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.usuarioNombre)</td>
+                <td>@Html.TextBoxFor(a => a.usuarioNombre)</td>
+                <td>@Html.ValidationMessageFor(a => a.usuarioNombre)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.usuarioClave)
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.usuarioClave)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.usuarioClave)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+
+                </td>
+                <span style="color:red;">@ViewBag.MSG</span>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}  

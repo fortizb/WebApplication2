@@ -13,10 +13,10 @@ namespace WebApplication2.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dimacodevEntities : DbContext
+    public partial class dimacodevEntities1 : DbContext
     {
-        public dimacodevEntities()
-            : base("name=dimacodevEntities")
+        public dimacodevEntities1()
+            : base("name=dimacodevEntities1")
         {
         }
     

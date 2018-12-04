@@ -12,94 +12,127 @@ namespace WebApplication2.Controllers
 {
     public class colaboradorHojaRutasController : Controller
     {
-        private dimacodevEntities db = new dimacodevEntities();
+        private dimacodevEntities1 db = new dimacodevEntities1();
 
         // GET: colaboradorHojaRutas
         public ActionResult Index()
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            var colaboradorHojaRuta = db.colaboradorHojaRuta.Include(c => c.colaborador).Include(c => c.hojaRuta).Where(c => c.idHojaRuta == id);
-            return View(colaboradorHojaRuta.ToList());
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                var colaboradorHojaRuta = db.colaboradorHojaRuta.Include(c => c.colaborador).Include(c => c.hojaRuta).Where(c => c.idHojaRuta == id);
+                return View(colaboradorHojaRuta.ToList());
+            }
         }
 
         // GET: colaboradorHojaRutas/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
-            if (colaboradorHojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
+                if (colaboradorHojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(colaboradorHojaRuta);
             }
-            return View(colaboradorHojaRuta);
         }
-
         // GET: colaboradorHojaRutas/Create
         public ActionResult Create()
         {
-            
-            ViewBag.run = db.colaborador.Where(p => p.activo == true)
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+
+                ViewBag.run = db.colaborador.Where(p => p.activo == true)
            .Select(p => new SelectListItem
            {
                Text = p.nombre + " " + p.apellidoPaterno + " " + p.apellidoMaterno,
                Value = p.run.ToString()
            });
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            return View();
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                return View();
+            }
         }
         public ActionResult Siguiente()
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            return RedirectToAction("Index", "guias");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                return RedirectToAction("Index", "guias");
+            }
         }
         public JsonResult GetCHRList()
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            List<ColaboradorHojaRutaViewModel> chrList = db.colaboradorHojaRuta.Where(x => x.idHojaRuta == id).Select(x => new ColaboradorHojaRutaViewModel
-            {
-                idColHojaRuta = x.idColHojaRuta,
-                idHojaRuta = x.idHojaRuta,
-                rut = x.colaborador.rut,
-                nombre = x.colaborador.nombre,
-                apellidoPaterno = x.colaborador.apellidoPaterno,
-                apellidoMaterno = x.colaborador.apellidoMaterno,
-                cargo = x.colaborador.cargo
-
             
-            }).ToList();
-            return Json(chrList, JsonRequestBehavior.AllowGet);
-        }
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                List<ColaboradorHojaRutaViewModel> chrList = db.colaboradorHojaRuta.Where(x => x.idHojaRuta == id).Select(x => new ColaboradorHojaRutaViewModel
+                {
+                    idColHojaRuta = x.idColHojaRuta,
+                    idHojaRuta = x.idHojaRuta,
+                    rut = x.colaborador.rut,
+                    nombre = x.colaborador.nombre,
+                    apellidoPaterno = x.colaborador.apellidoPaterno,
+                    apellidoMaterno = x.colaborador.apellidoMaterno,
+                    cargo = x.colaborador.cargo
 
-        public JsonResult GuardarChoferInDB(ColaboradorHojaRutaViewModel model)
-        {
+
+                }).ToList();
+                return Json(chrList, JsonRequestBehavior.AllowGet);
+            
+        }
+    
+
+    public JsonResult GuardarChoferInDB(ColaboradorHojaRutaViewModel model)
+    {
+        
             var result = false;
             try
             {
-                 int id = Convert.ToInt32(TempData["id"]);
+                int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
                 colaboradorHojaRuta col = new colaboradorHojaRuta();
-                    col.idHojaRuta = id;
-                    col.run = model.run;
-                    
-                    db.colaboradorHojaRuta.Add(col);
-                    db.SaveChanges();
-                    result = true;
+                col.idHojaRuta = id;
+                col.run = model.run;
+
+                db.colaboradorHojaRuta.Add(col);
+                db.SaveChanges();
+                result = true;
             }
-            
+
             catch (Exception ex)
             {
                 throw ex;
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        
+    }
+        
 
 
         /*
@@ -139,18 +172,25 @@ namespace WebApplication2.Controllers
         // GET: colaboradorHojaRutas/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
-            if (colaboradorHojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
+                if (colaboradorHojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.run = new SelectList(db.colaborador, "run", "rut", colaboradorHojaRuta.run);
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", colaboradorHojaRuta.idHojaRuta);
+                return View(colaboradorHojaRuta);
             }
-            ViewBag.run = new SelectList(db.colaborador, "run", "rut", colaboradorHojaRuta.run);
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", colaboradorHojaRuta.idHojaRuta);
-            return View(colaboradorHojaRuta);
         }
 
         // POST: colaboradorHojaRutas/Edit/5
@@ -160,41 +200,61 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idColHojaRuta,idHojaRuta,run")] colaboradorHojaRuta colaboradorHojaRuta)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.Entry(colaboradorHojaRuta).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            ViewBag.run = new SelectList(db.colaborador, "run", "rut", colaboradorHojaRuta.run);
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", colaboradorHojaRuta.idHojaRuta);
-            return View(colaboradorHojaRuta);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(colaboradorHojaRuta).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.run = new SelectList(db.colaborador, "run", "rut", colaboradorHojaRuta.run);
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", colaboradorHojaRuta.idHojaRuta);
+                return View(colaboradorHojaRuta);
+            }
         }
 
         // GET: colaboradorHojaRutas/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
-            if (colaboradorHojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
+                if (colaboradorHojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(colaboradorHojaRuta);
             }
-            return View(colaboradorHojaRuta);
         }
-
         // POST: colaboradorHojaRutas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
-            db.colaboradorHojaRuta.Remove(colaboradorHojaRuta);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                colaboradorHojaRuta colaboradorHojaRuta = db.colaboradorHojaRuta.Find(id);
+                db.colaboradorHojaRuta.Remove(colaboradorHojaRuta);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

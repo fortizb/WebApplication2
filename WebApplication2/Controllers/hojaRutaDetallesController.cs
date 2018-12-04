@@ -12,35 +12,56 @@ namespace WebApplication2.Controllers
 {
     public class hojaRutaDetallesController : Controller
     {
-        private dimacodevEntities db = new dimacodevEntities();
+        private dimacodevEntities1 db = new dimacodevEntities1();
 
         // GET: hojaRutaDetalles
         public ActionResult Index()
         {
-            var hojaRutaDetalle = db.hojaRutaDetalle.Include(h => h.hojaRuta);
-            return View(hojaRutaDetalle.ToList());
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var hojaRutaDetalle = db.hojaRutaDetalle.Include(h => h.hojaRuta);
+                return View(hojaRutaDetalle.ToList());
+            }
         }
 
         // GET: hojaRutaDetalles/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
-            if (hojaRutaDetalle == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
+                if (hojaRutaDetalle == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(hojaRutaDetalle);
             }
-            return View(hojaRutaDetalle);
         }
 
         // GET: hojaRutaDetalles/Create
         public ActionResult Create()
         {
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente");
-            return View();
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente");
+                return View();
+            }
         }
 
         // POST: hojaRutaDetalles/Create
@@ -50,31 +71,45 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idHojaRutaDetalle,idHojaRuta,fechaSalida,fechaLlegada,observaciones")] hojaRutaDetalle hojaRutaDetalle)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.hojaRutaDetalle.Add(hojaRutaDetalle);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.hojaRutaDetalle.Add(hojaRutaDetalle);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", hojaRutaDetalle.idHojaRuta);
-            return View(hojaRutaDetalle);
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", hojaRutaDetalle.idHojaRuta);
+                return View(hojaRutaDetalle);
+            }
         }
 
         // GET: hojaRutaDetalles/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
-            if (hojaRutaDetalle == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
+                if (hojaRutaDetalle == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", hojaRutaDetalle.idHojaRuta);
+                return View(hojaRutaDetalle);
             }
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", hojaRutaDetalle.idHojaRuta);
-            return View(hojaRutaDetalle);
         }
 
         // POST: hojaRutaDetalles/Edit/5
@@ -84,29 +119,43 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idHojaRutaDetalle,idHojaRuta,fechaSalida,fechaLlegada,observaciones")] hojaRutaDetalle hojaRutaDetalle)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.Entry(hojaRutaDetalle).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", hojaRutaDetalle.idHojaRuta);
-            return View(hojaRutaDetalle);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(hojaRutaDetalle).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", hojaRutaDetalle.idHojaRuta);
+                return View(hojaRutaDetalle);
+            }
         }
 
         // GET: hojaRutaDetalles/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
-            if (hojaRutaDetalle == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
+                if (hojaRutaDetalle == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(hojaRutaDetalle);
             }
-            return View(hojaRutaDetalle);
         }
 
         // POST: hojaRutaDetalles/Delete/5
@@ -114,12 +163,18 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
-            db.hojaRutaDetalle.Remove(hojaRutaDetalle);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                hojaRutaDetalle hojaRutaDetalle = db.hojaRutaDetalle.Find(id);
+                db.hojaRutaDetalle.Remove(hojaRutaDetalle);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
