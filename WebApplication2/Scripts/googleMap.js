@@ -11,8 +11,8 @@ var panelSumario = document.getElementById('panel-direcciones');
 //    $('#txtUbicacion2').val($('#txtUbicacionTD').text());
 //});
 
-$("#tablaDirecciones tbody tr").click(function () {
-    var txtDireccion = $(this).find("td:first-child").text();
+$("#tablaDireccion tbody tr").click(function () {
+    var txtDireccion = $(this).find("td:eq(2)").text();
     //alert(total);
     $('#txtUbicacion2').val(txtDireccion);
     //});
@@ -250,7 +250,7 @@ function initializeMap() {
             }
         });
     });
-    document.getElementById('tablaDirecciones').addEventListener('click', function () {
+    document.getElementById('tablaDireccion').addEventListener('click', function () {
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
 }

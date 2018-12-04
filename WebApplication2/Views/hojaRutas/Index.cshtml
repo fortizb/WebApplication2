@@ -43,7 +43,7 @@
                     <li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
                     <li>@Html.ActionLink("Agregar Chofer", "AddChofer", new { id = item.idHojaRuta })</li>
                     <li>@Html.ActionLink("Agregar Peonetas", "AddPeoneta", new { id = item.idHojaRuta })</li>
-                    <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>
+                    <li><a class="dropdown-item" href="@Url.Action("Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)">Info</a></li>
                 </ul>                                             
             </td>
         </tr>
