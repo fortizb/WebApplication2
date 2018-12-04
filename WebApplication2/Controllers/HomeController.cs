@@ -75,13 +75,12 @@ namespace WebApplication2.Controllers
             ArrayList xValue = new ArrayList();
             ArrayList yValue = new ArrayList();
 
-            var results = (from c in _context.guias select c);
-           
-            results.ToList().ForEach(ss => xValue.Add(ss.hojaRuta.idHojaRuta));
-            results.ToList().ForEach(rs => yValue.Add(rs.numeroGuia));
+            var results = (from c in _context.guias select c);       
+            results.ToList().ForEach(ss => xValue.Add(ss.hojaRuta.fechaCreacion));
+            results.ToList().ForEach(rs => yValue.Add(rs.hojaRuta.idHojaRuta));
 
-            new Chart(width: 600, height: 400, theme: ChartTheme.Green)
-                .AddTitle("Chart")
+            new Chart(width: 600, height: 400, theme: ChartTheme.Vanilla)
+                .AddTitle("Hojas de Rutas")
                 .AddSeries("Default", chartType: "Pie", xValue: xValue, yValues: yValue)
                 .Write("bmp");
             return null;

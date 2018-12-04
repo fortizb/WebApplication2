@@ -9,7 +9,10 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @if (Session["Login"] != null)
+    {
     @Html.Partial("_Navigation")
+    }
     @RenderBody()
 
 
