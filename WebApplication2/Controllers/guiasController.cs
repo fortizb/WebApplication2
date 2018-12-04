@@ -12,44 +12,72 @@ namespace WebApplication2.Controllers
 {
     public class guiasController : Controller
     {
-        private dimacodevEntities db = new dimacodevEntities();
+        private dimacodevEntities1 db = new dimacodevEntities1();
 
         // GET: guias
         public ActionResult Index()
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            var guias = db.guias.Where(x => x.idHojaRuta == 2 && x.estado == "Pendiente").Include(g => g.hojaRuta);
-            return View(guias.ToList());
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                var guias = db.guias.Where(x => x.idHojaRuta == 2 && x.estado == "Pendiente").Include(g => g.hojaRuta);
+                return View(guias.ToList());
+            }
         }
 
 
         // GET: guias/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            guias guias = db.guias.Find(id);
-            if (guias == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                guias guias = db.guias.Find(id);
+                if (guias == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(guias);
             }
-            return View(guias);
         }
         public ActionResult Siguiente()
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            return RedirectToAction("Index", "guias");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                return RedirectToAction("Index", "guias");
+            }
         }
 
         // GET: guias/Create
         public ActionResult Create()
         {
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente");
-            return View();
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente");
+                return View();
+            }
         }
 
         // POST: guias/Create
@@ -59,41 +87,54 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "numeroGuia,rut,nombre,direccion,telefono,ciudad,observacion")] guias guias)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                guias.idHojaRuta = 2;
-                guias.fechaIngreso = DateTime.Now;
-                guias.estado = "Pendiente";
-                db.guias.Add(guias);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    guias.idHojaRuta = 2;
+                    guias.fechaIngreso = DateTime.Now;
+                    guias.estado = "Pendiente";
+                    db.guias.Add(guias);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", guias.idHojaRuta);
-            return View(guias);
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", guias.idHojaRuta);
+                return View(guias);
+            }
         }
 
         // GET: guias/Edit/5
         public ActionResult AddGuiaHR(int? idNumeroGuias)
         {
-            if (idNumeroGuias == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            guias guias = db.guias.Find(idNumeroGuias);
-            if (guias == null)
+            else
             {
-                return HttpNotFound();
-            }
-           
+                if (idNumeroGuias == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                guias guias = db.guias.Find(idNumeroGuias);
+                if (guias == null)
+                {
+                    return HttpNotFound();
+                }
 
-            int id = Convert.ToInt32(TempData["id"]);
-            guias.idHojaRuta = id;
-            db.SaveChanges();
-            TempData["id"] = id;
-            return RedirectToAction("Index");
-         
-        
+
+                int id = Convert.ToInt32(TempData["id"]);
+                guias.idHojaRuta = id;
+                db.SaveChanges();
+                TempData["id"] = id;
+                return RedirectToAction("Index");
+
+            }
         }
 
         // POST: guias/Edit/5
@@ -103,33 +144,47 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idHojaRuta")] guias guias)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                int id = Convert.ToInt32(TempData["id"]);
-                guias.idHojaRuta = id;
-                db.Entry(guias).State = EntityState.Modified;
-                db.SaveChanges();
-                TempData["id"] = id;
-                return RedirectToAction("Index");
-
+                return RedirectToAction("Login", "Home");
             }
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", guias.idHojaRuta);
-            return View(guias);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    int id = Convert.ToInt32(TempData["id"]);
+                    guias.idHojaRuta = id;
+                    db.Entry(guias).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["id"] = id;
+                    return RedirectToAction("Index");
+
+                }
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", guias.idHojaRuta);
+                return View(guias);
+            }
         }
 
         // GET: guias/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            guias guias = db.guias.Find(id);
-            if (guias == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                guias guias = db.guias.Find(id);
+                if (guias == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(guias);
             }
-            return View(guias);
         }
 
         // POST: guias/Delete/5
@@ -137,10 +192,17 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            guias guias = db.guias.Find(id);
-            db.guias.Remove(guias);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                guias guias = db.guias.Find(id);
+                db.guias.Remove(guias);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

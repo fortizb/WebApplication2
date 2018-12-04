@@ -12,33 +12,54 @@ namespace WebApplication2.Controllers
 {
     public class vehiculoesController : Controller
     {
-        private dimacodevEntities db = new dimacodevEntities();
+        private dimacodevEntities1 db = new dimacodevEntities1();
 
         // GET: vehiculoes
         public ActionResult Index()
         {
-            return View(db.vehiculo.Where(x => x.activo == true).ToList());
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View(db.vehiculo.Where(x => x.activo == true).ToList());
+            }
         }
 
         // GET: vehiculoes/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            vehiculo vehiculo = db.vehiculo.Find(id);
-            if (vehiculo == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                vehiculo vehiculo = db.vehiculo.Find(id);
+                if (vehiculo == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(vehiculo);
             }
-            return View(vehiculo);
         }
 
         // GET: vehiculoes/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: vehiculoes/Create
@@ -48,31 +69,43 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "patente,descripcion,marca,modelo,color,velocidadPromedio,rendimiento,capacidadCarga")] vehiculo vehiculo)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.vehiculo.Add(vehiculo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.vehiculo.Add(vehiculo);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(vehiculo);
+                return View(vehiculo);
+            }
         }
-
         // GET: vehiculoes/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            vehiculo vehiculo = db.vehiculo.Find(id);
-            if (vehiculo == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                vehiculo vehiculo = db.vehiculo.Find(id);
+                if (vehiculo == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(vehiculo);
             }
-            return View(vehiculo);
         }
-
         // POST: vehiculoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -80,28 +113,41 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "patente,descripcion,marca,modelo,color,velocidadPromedio,rendimiento,capacidadCarga,activo")] vehiculo vehiculo)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.Entry(vehiculo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            return View(vehiculo);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(vehiculo).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(vehiculo);
+            }
         }
-
         // GET: vehiculoes/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            vehiculo vehiculo = db.vehiculo.Find(id);
-            if (vehiculo == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                vehiculo vehiculo = db.vehiculo.Find(id);
+                if (vehiculo == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(vehiculo);
             }
-            return View(vehiculo);
         }
 
         // POST: vehiculoes/Delete/5
@@ -109,12 +155,18 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            vehiculo vehiculo = db.vehiculo.Find(id);
-            db.vehiculo.Remove(vehiculo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                vehiculo vehiculo = db.vehiculo.Find(id);
+                db.vehiculo.Remove(vehiculo);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

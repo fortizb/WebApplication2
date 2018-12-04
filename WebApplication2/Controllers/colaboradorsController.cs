@@ -12,33 +12,55 @@ namespace WebApplication2.Controllers
 {
     public class colaboradorsController : Controller
     {
-        private dimacodevEntities db = new dimacodevEntities();
+        private dimacodevEntities1 db = new dimacodevEntities1();
 
         // GET: colaboradors
         public ActionResult Index()
         {
-            return View(db.colaborador.ToList());
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View(db.colaborador.ToList());
+            }
         }
 
         // GET: colaboradors/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            colaborador colaborador = db.colaborador.Find(id);
-            if (colaborador == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                colaborador colaborador = db.colaborador.Find(id);
+                if (colaborador == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(colaborador);
             }
-            return View(colaborador);
         }
 
         // GET: colaboradors/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["Login"] == null)
+            {
+                ViewBag.Msg = "Sesion Invalida";
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: colaboradors/Create
@@ -48,29 +70,43 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "run,rut,nombre,apellidoPaterno,apellidoMaterno,edad,cargo,telefono,valorHoraExtra,activo")] colaborador colaborador)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.colaborador.Add(colaborador);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.colaborador.Add(colaborador);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(colaborador);
+                return View(colaborador);
+            }
         }
 
         // GET: colaboradors/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            colaborador colaborador = db.colaborador.Find(id);
-            if (colaborador == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                colaborador colaborador = db.colaborador.Find(id);
+                if (colaborador == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(colaborador);
             }
-            return View(colaborador);
         }
 
         // POST: colaboradors/Edit/5
@@ -80,28 +116,42 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "run,rut,nombre,apellidoPaterno,apellidoMaterno,edad,cargo,telefono,valorHoraExtra,activo")] colaborador colaborador)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.Entry(colaborador).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            return View(colaborador);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(colaborador).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(colaborador);
+            }
         }
 
         // GET: colaboradors/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            colaborador colaborador = db.colaborador.Find(id);
-            if (colaborador == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                colaborador colaborador = db.colaborador.Find(id);
+                if (colaborador == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(colaborador);
             }
-            return View(colaborador);
         }
 
         // POST: colaboradors/Delete/5
@@ -109,10 +159,17 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            colaborador colaborador = db.colaborador.Find(id);
-            db.colaborador.Remove(colaborador);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                colaborador colaborador = db.colaborador.Find(id);
+                db.colaborador.Remove(colaborador);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

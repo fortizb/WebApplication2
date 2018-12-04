@@ -39,11 +39,9 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
                     <li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
-                    <li>@Html.ActionLink("Agregar Chofer", "AddChofer", new { id = item.idHojaRuta })</li>
-                    <li>@Html.ActionLink("Agregar Peonetas", "AddPeoneta", new { id = item.idHojaRuta })</li>
-                    <li><a class="dropdown-item" href="@Url.Action("Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)">Info</a></li>
+                    <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
+                    <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>
                 </ul>                                             
             </td>
         </tr>

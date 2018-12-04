@@ -12,19 +12,24 @@ namespace WebApplication2.Controllers
 {
     public class hojaRutasController : Controller
     {
-        private dimacodevEntities db = new dimacodevEntities();
+        private dimacodevEntities1 db = new dimacodevEntities1();
 
         // GET: hojaRutas
+      
         public ActionResult Index()
         {
-            var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 2).Include(h => h.vehiculo).Include(h => h.vehiculo1);
-            return View(hojaRuta.ToList());
-        }
-        public ActionResult Colaboradors()
-        {
-            return RedirectToAction("colaboradors");
-        }
 
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 2).Include(h => h.vehiculo).Include(h => h.vehiculo1);
+                return View(hojaRuta.ToList());
+                
+            }
+        }
         // GET: hojaRutas/Details/5
         public ActionResult AddDatos(int? id)
         {
@@ -44,8 +49,16 @@ namespace WebApplication2.Controllers
         // GET: hojaRutas/Create
         public ActionResult Create()
         {
-            ViewBag.patente = new SelectList(db.vehiculo, "patente", "patente");
-            return View();
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "patente");
+                return View();
+            }
         }
 
         // POST: hojaRutas/Create
@@ -55,36 +68,51 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idHojaRuta,patente,fechaIngreso,estado")] hojaRuta hojaRuta)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                hojaRuta.fechaCreacion = DateTime.Now;
-                hojaRuta.estado = "1";            
-                db.hojaRuta.Add(hojaRuta);
-                db.SaveChanges();
-                return RedirectToAction("Create", "colaboradorHojaRutas");
+                return RedirectToAction("Login", "Home");
             }
-            
-            ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-            ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-            return View(hojaRuta);
-        }
 
-        // GET: hojaRutas/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (ModelState.IsValid)
+                {
+                    hojaRuta.fechaCreacion = DateTime.Now;
+                    hojaRuta.estado = "1";
+                    db.hojaRuta.Add(hojaRuta);
+                    db.SaveChanges();
+                    return RedirectToAction("Create", "colaboradorHojaRutas");
+                }
+
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
+                return View(hojaRuta);
             }
-            hojaRuta hojaRuta = db.hojaRuta.Find(id);
-            if (hojaRuta == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-            ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-            return View(hojaRuta);
         }
+            // GET: hojaRutas/Edit/5
+            public ActionResult Edit(int? id)
+            {
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                hojaRuta hojaRuta = db.hojaRuta.Find(id);
+                if (hojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+      
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
+                return View(hojaRuta);
+             }
+         }
 
         // POST: hojaRutas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -93,47 +121,68 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idHojaRuta,patente,fechaCreacion,fechaModificacion,estado")] hojaRuta hojaRuta)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.Entry(hojaRuta).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-            ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-            return View(hojaRuta);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(hojaRuta).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
+                return View(hojaRuta);
+            }
         }
 
         // GET: hojaRutas/Delete/5
         public ActionResult AddPeoneta(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            hojaRuta hojaRuta = db.hojaRuta.Find(id);
-            if (hojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                hojaRuta hojaRuta = db.hojaRuta.Find(id);
+                if (hojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                TempData["id"] = id;
+                TempData["cargo"] = "Peoneta";
+                return RedirectToAction("Index", "colaboradorHojaRutas");
             }
-            TempData["id"] = id;
-            TempData["cargo"] = "Peoneta";
-            return RedirectToAction("Index", "colaboradorHojaRutas");
         }
         public ActionResult AddChofer(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            hojaRuta hojaRuta = db.hojaRuta.Find(id);
-            if (hojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                hojaRuta hojaRuta = db.hojaRuta.Find(id);
+                if (hojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                TempData["id"] = id;
+                TempData["cargo"] = "Chofer";
+                return RedirectToAction("Index", "colaboradorHojaRutas");
             }
-            TempData["id"] = id;
-            TempData["cargo"] = "Chofer";
-            return RedirectToAction("Index", "colaboradorHojaRutas");
         }
 
 
