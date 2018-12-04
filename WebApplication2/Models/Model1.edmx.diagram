@@ -4,15 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd938cb91c014b4bb26c26e68c4349e2" Name="Diagram1">
+      <Diagram DiagramId="34d18e22601c4104ad3f670543f12f9c" Name="Diagram1">
         <EntityTypeShape EntityType="dimacodevModel.colaborador" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dimacodevModel.colaboradorHojaRuta" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dimacodevModel.costosHojaRuta" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dimacodevModel.guias" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dimacodevModel.hojaRuta" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dimacodevModel.hojaRutaDetalle" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dimacodevModel.rol" Width="1.5" PointX="1.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dimacodevModel.usuario" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dimacodevModel.usuario" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="dimacodevModel.vehiculo" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="dimacodevModel.FK__colaborador__run__208CD6FA" ManuallyRouted="false" />
         <AssociationConnector Association="dimacodevModel.FK__colaborad__idHoj__1F98B2C1" ManuallyRouted="false" />
@@ -22,7 +21,6 @@
         <AssociationConnector Association="dimacodevModel.FK__hojaRuta__patent__2180FB33" ManuallyRouted="false" />
         <AssociationConnector Association="dimacodevModel.FK__hojaRuta__usuari__25518C17" ManuallyRouted="false" />
         <AssociationConnector Association="dimacodevModel.FK__hojaRutaD__idHoj__1CBC4616" ManuallyRouted="false" />
-        <AssociationConnector Association="dimacodevModel.FK_usuario_rol" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

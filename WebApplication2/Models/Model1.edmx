@@ -200,18 +200,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_usuario_rol">
-          <End Role="rol" Type="Self.rol" Multiplicity="1" />
-          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="rol">
-              <PropertyRef Name="rolID" />
-            </Principal>
-            <Dependent Role="usuario">
-              <PropertyRef Name="rolID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="dimacodevModelStoreContainer">
           <EntitySet Name="colaborador" EntityType="Self.colaborador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="colaboradorHojaRuta" EntityType="Self.colaboradorHojaRuta" Schema="dbo" store:Type="Tables" />
@@ -219,7 +207,6 @@
           <EntitySet Name="guias" EntityType="Self.guias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hojaRuta" EntityType="Self.hojaRuta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hojaRutaDetalle" EntityType="Self.hojaRutaDetalle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vehiculo" EntityType="Self.vehiculo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__colaborad__idHoj__1F98B2C1" Association="Self.FK__colaborad__idHoj__1F98B2C1">
@@ -253,10 +240,6 @@
           <AssociationSet Name="FK__hojaRutaD__idHoj__1CBC4616" Association="Self.FK__hojaRutaD__idHoj__1CBC4616">
             <End Role="hojaRuta" EntitySet="hojaRuta" />
             <End Role="hojaRutaDetalle" EntitySet="hojaRutaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_usuario_rol" Association="Self.FK_usuario_rol">
-            <End Role="rol" EntitySet="rol" />
-            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -362,7 +345,6 @@
           <Property Name="usuarioCargo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="rolID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="hojaRuta" Relationship="Self.FK__hojaRuta__usuari__25518C17" FromRole="usuario" ToRole="hojaRuta" />
-          <NavigationProperty Name="rol" Relationship="Self.FK_usuario_rol" FromRole="usuario" ToRole="rol" />
         </EntityType>
         <EntityType Name="vehiculo">
           <Key>
@@ -476,18 +458,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_usuario_rol">
-          <End Role="rol" Type="Self.rol" Multiplicity="1" />
-          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="rol">
-              <PropertyRef Name="rolID" />
-            </Principal>
-            <Dependent Role="usuario">
-              <PropertyRef Name="rolID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="dimacodevEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="colaborador" EntityType="Self.colaborador" />
           <EntitySet Name="colaboradorHojaRuta" EntityType="Self.colaboradorHojaRuta" />
@@ -495,7 +465,6 @@
           <EntitySet Name="guias" EntityType="Self.guias" />
           <EntitySet Name="hojaRuta" EntityType="Self.hojaRuta" />
           <EntitySet Name="hojaRutaDetalle" EntityType="Self.hojaRutaDetalle" />
-          <EntitySet Name="rol" EntityType="Self.rol" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="vehiculo" EntityType="Self.vehiculo" />
           <AssociationSet Name="FK__colaborador__run__208CD6FA" Association="Self.FK__colaborador__run__208CD6FA">
@@ -529,10 +498,6 @@
           <AssociationSet Name="FK__hojaRutaD__idHoj__1CBC4616" Association="Self.FK__hojaRutaD__idHoj__1CBC4616">
             <End Role="hojaRuta" EntitySet="hojaRuta" />
             <End Role="hojaRutaDetalle" EntitySet="hojaRutaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_usuario_rol" Association="Self.FK_usuario_rol">
-            <End Role="rol" EntitySet="rol" />
-            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -615,14 +580,6 @@
                 <ScalarProperty Name="fechaSalida" ColumnName="fechaSalida" />
                 <ScalarProperty Name="fechaLlegada" ColumnName="fechaLlegada" />
                 <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="rol">
-            <EntityTypeMapping TypeName="dimacodevModel.rol">
-              <MappingFragment StoreEntitySet="rol">
-                <ScalarProperty Name="rolID" ColumnName="rolID" />
-                <ScalarProperty Name="rolDesc" ColumnName="rolDesc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
