@@ -32,9 +32,6 @@
                 @Html.DisplayFor(modelItem => item.fechaCreacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fechaIngreso)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.fechaModificacion)
             </td>
             <td>
@@ -43,10 +40,8 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
                     <li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
-                    <li>@Html.ActionLink("Agregar Chofer", "AddChofer", new { id = item.idHojaRuta })</li>
-                    <li>@Html.ActionLink("Agregar Peonetas", "AddPeoneta", new { id = item.idHojaRuta })</li>
+                    <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
                     <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>
                 </ul>                                             
             </td>

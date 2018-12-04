@@ -23,9 +23,7 @@
                         </a>
                     </li>
                     <li class="has-sub">
-                        <a href="HojaRutas">
-                            <i class="fas fa-copy"></i>
-                            <span class="bot-line"></span> Hojas de Ruta
+                        @Html.ActionLink("Hoja de ruta", "Index", "hojaRutas")
                         </a>
                     </li>
                     <li class="has-sub">
@@ -142,7 +140,12 @@
                             <img src="~/Content/images/icon/avatar-01.jpg" alt="John Doe" />
                         </div>
                         <div class="content">
-                            <a class="js-acc-btn" href="#">john doe</a>
+                            @if (Session["usuarioNombre"] != null)
+                            {<text>
+                                    @Session["usuarioNombreCol"].ToString()
+                                    @Session["usuarioApellido"].ToString()
+                            </text>
+                        }
                         </div>
                         <div class="account-dropdown js-dropdown">
                             <div class="info clearfix">
@@ -176,8 +179,8 @@
                                 </div>
                             </div>
                             <div class="account-dropdown__footer">
-                                <a href="#">
-                                    <i class="zmdi zmdi-power"></i>Logout
+                                <h4> @Html.ActionLink("Logout", "Logout", "Home", new { }, new { @class = "zmdi zmdi-power" })</h4>  
+
                                 </a>
                             </div>
                         </div>

@@ -40,18 +40,6 @@
           <Property Name="monto" Type="int" Nullable="false" />
           <Property Name="fecha" Type="date" />
         </EntityType>
-        <EntityType Name="fechaTramo">
-          <Key>
-            <PropertyRef Name="fechaIngreso" />
-          </Key>
-          <Property Name="fechaIngreso" Type="int" Nullable="false" />
-          <Property Name="anio" Type="int" Nullable="false" />
-          <Property Name="mes" Type="int" Nullable="false" />
-          <Property Name="dia" Type="int" Nullable="false" />
-          <Property Name="trimestre" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="cuatrimestre" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="semestre" Type="varchar" MaxLength="1" Nullable="false" />
-        </EntityType>
         <EntityType Name="guias">
           <Key>
             <PropertyRef Name="numeroGuia" />
@@ -74,9 +62,9 @@
           <Property Name="idHojaRuta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="patente" Type="varchar" MaxLength="6" />
           <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="fechaIngreso" Type="int" Nullable="false" />
           <Property Name="fechaModificacion" Type="datetime" />
           <Property Name="estado" Type="nvarchar" MaxLength="20" />
+          <Property Name="usuarioID" Type="int" />
         </EntityType>
         <EntityType Name="hojaRutaDetalle">
           <Key>
@@ -88,6 +76,13 @@
           <Property Name="fechaLlegada" Type="datetime" />
           <Property Name="observaciones" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolDesc" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -97,6 +92,20 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuarioNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuarioClave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuarioActivo" Type="bit" Nullable="false" />
+          <Property Name="usuarioNombreCol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuarioApellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuarioTelefono" Type="varchar" MaxLength="20" />
+          <Property Name="usuarioCargo" Type="varchar" MaxLength="20" />
+          <Property Name="rolID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="vehiculo">
           <Key>
@@ -160,18 +169,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__hojaRuta__fechaI__1DB06A4F">
-          <End Role="fechaTramo" Type="Self.fechaTramo" Multiplicity="1" />
-          <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fechaTramo">
-              <PropertyRef Name="fechaIngreso" />
-            </Principal>
-            <Dependent Role="hojaRuta">
-              <PropertyRef Name="fechaIngreso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__hojaRuta__patent__1AD3FDA4">
           <End Role="vehiculo" Type="Self.vehiculo" Multiplicity="0..1" />
           <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="*" />
@@ -196,6 +193,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__hojaRuta__usuari__25518C17">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuarioID" />
+            </Principal>
+            <Dependent Role="hojaRuta">
+              <PropertyRef Name="usuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__hojaRutaD__idHoj__1CBC4616">
           <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="1" />
           <End Role="hojaRutaDetalle" Type="Self.hojaRutaDetalle" Multiplicity="*" />
@@ -208,15 +217,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="rolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dimacodevModelStoreContainer">
           <EntitySet Name="colaborador" EntityType="Self.colaborador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="colaboradorHojaRuta" EntityType="Self.colaboradorHojaRuta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="costosHojaRuta" EntityType="Self.costosHojaRuta" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="fechaTramo" EntityType="Self.fechaTramo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="guias" EntityType="Self.guias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hojaRuta" EntityType="Self.hojaRuta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="hojaRutaDetalle" EntityType="Self.hojaRutaDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vehiculo" EntityType="Self.vehiculo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__colaborad__idHoj__1F98B2C1" Association="Self.FK__colaborad__idHoj__1F98B2C1">
             <End Role="hojaRuta" EntitySet="hojaRuta" />
@@ -234,10 +256,6 @@
             <End Role="hojaRuta" EntitySet="hojaRuta" />
             <End Role="guias" EntitySet="guias" />
           </AssociationSet>
-          <AssociationSet Name="FK__hojaRuta__fechaI__1DB06A4F" Association="Self.FK__hojaRuta__fechaI__1DB06A4F">
-            <End Role="fechaTramo" EntitySet="fechaTramo" />
-            <End Role="hojaRuta" EntitySet="hojaRuta" />
-          </AssociationSet>
           <AssociationSet Name="FK__hojaRuta__patent__1AD3FDA4" Association="Self.FK__hojaRuta__patent__1AD3FDA4">
             <End Role="vehiculo" EntitySet="vehiculo" />
             <End Role="hojaRuta" EntitySet="hojaRuta" />
@@ -246,9 +264,17 @@
             <End Role="vehiculo" EntitySet="vehiculo" />
             <End Role="hojaRuta" EntitySet="hojaRuta" />
           </AssociationSet>
+          <AssociationSet Name="FK__hojaRuta__usuari__25518C17" Association="Self.FK__hojaRuta__usuari__25518C17">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="hojaRuta" EntitySet="hojaRuta" />
+          </AssociationSet>
           <AssociationSet Name="FK__hojaRutaD__idHoj__1CBC4616" Association="Self.FK__hojaRutaD__idHoj__1CBC4616">
             <End Role="hojaRuta" EntitySet="hojaRuta" />
             <End Role="hojaRutaDetalle" EntitySet="hojaRutaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_rol" Association="Self.FK_usuario_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -295,19 +321,6 @@
           <Property Name="fecha" Type="DateTime" Precision="0" />
           <NavigationProperty Name="hojaRuta" Relationship="Self.FK__costosHoj__idHoj__1EA48E88" FromRole="costosHojaRuta" ToRole="hojaRuta" />
         </EntityType>
-        <EntityType Name="fechaTramo">
-          <Key>
-            <PropertyRef Name="fechaIngreso" />
-          </Key>
-          <Property Name="fechaIngreso" Type="Int32" Nullable="false" />
-          <Property Name="anio" Type="Int32" Nullable="false" />
-          <Property Name="mes" Type="Int32" Nullable="false" />
-          <Property Name="dia" Type="Int32" Nullable="false" />
-          <Property Name="trimestre" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cuatrimestre" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="semestre" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="hojaRuta" Relationship="Self.FK__hojaRuta__fechaI__1DB06A4F" FromRole="fechaTramo" ToRole="hojaRuta" />
-        </EntityType>
         <EntityType Name="guias">
           <Key>
             <PropertyRef Name="numeroGuia" />
@@ -331,15 +344,15 @@
           <Property Name="idHojaRuta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="patente" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fechaIngreso" Type="Int32" Nullable="false" />
           <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="usuarioID" Type="Int32" />
           <NavigationProperty Name="colaboradorHojaRuta" Relationship="Self.FK__colaborad__idHoj__1F98B2C1" FromRole="hojaRuta" ToRole="colaboradorHojaRuta" />
           <NavigationProperty Name="costosHojaRuta" Relationship="Self.FK__costosHoj__idHoj__1EA48E88" FromRole="hojaRuta" ToRole="costosHojaRuta" />
-          <NavigationProperty Name="fechaTramo" Relationship="Self.FK__hojaRuta__fechaI__1DB06A4F" FromRole="hojaRuta" ToRole="fechaTramo" />
           <NavigationProperty Name="guias" Relationship="Self.FK__guias__idHojaRut__22751F6C" FromRole="hojaRuta" ToRole="guias" />
           <NavigationProperty Name="vehiculo" Relationship="Self.FK__hojaRuta__patent__1AD3FDA4" FromRole="hojaRuta" ToRole="vehiculo" />
           <NavigationProperty Name="vehiculo1" Relationship="Self.FK__hojaRuta__patent__2180FB33" FromRole="hojaRuta" ToRole="vehiculo" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__hojaRuta__usuari__25518C17" FromRole="hojaRuta" ToRole="usuario" />
           <NavigationProperty Name="hojaRutaDetalle" Relationship="Self.FK__hojaRutaD__idHoj__1CBC4616" FromRole="hojaRuta" ToRole="hojaRutaDetalle" />
         </EntityType>
         <EntityType Name="hojaRutaDetalle">
@@ -353,6 +366,14 @@
           <Property Name="observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="hojaRuta" Relationship="Self.FK__hojaRutaD__idHoj__1CBC4616" FromRole="hojaRutaDetalle" ToRole="hojaRuta" />
         </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_rol" FromRole="rol" ToRole="usuario" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -362,6 +383,22 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuarioNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuarioClave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuarioActivo" Type="Boolean" Nullable="false" />
+          <Property Name="usuarioNombreCol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuarioApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuarioTelefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="usuarioCargo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="rolID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="hojaRuta" Relationship="Self.FK__hojaRuta__usuari__25518C17" FromRole="usuario" ToRole="hojaRuta" />
+          <NavigationProperty Name="rol" Relationship="Self.FK_usuario_rol" FromRole="usuario" ToRole="rol" />
         </EntityType>
         <EntityType Name="vehiculo">
           <Key>
@@ -415,18 +452,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__hojaRuta__fechaI__1DB06A4F">
-          <End Role="fechaTramo" Type="Self.fechaTramo" Multiplicity="1" />
-          <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fechaTramo">
-              <PropertyRef Name="fechaIngreso" />
-            </Principal>
-            <Dependent Role="hojaRuta">
-              <PropertyRef Name="fechaIngreso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__guias__idHojaRut__22751F6C">
           <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="1" />
           <End Role="guias" Type="Self.guias" Multiplicity="*" />
@@ -463,6 +488,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__hojaRuta__usuari__25518C17">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuarioID" />
+            </Principal>
+            <Dependent Role="hojaRuta">
+              <PropertyRef Name="usuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__hojaRutaD__idHoj__1CBC4616">
           <End Role="hojaRuta" Type="Self.hojaRuta" Multiplicity="1" />
           <End Role="hojaRutaDetalle" Type="Self.hojaRutaDetalle" Multiplicity="*" />
@@ -475,15 +512,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dimacodevEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_usuario_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="rolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dimacodevEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="colaborador" EntityType="Self.colaborador" />
           <EntitySet Name="colaboradorHojaRuta" EntityType="Self.colaboradorHojaRuta" />
           <EntitySet Name="costosHojaRuta" EntityType="Self.costosHojaRuta" />
-          <EntitySet Name="fechaTramo" EntityType="Self.fechaTramo" />
           <EntitySet Name="guias" EntityType="Self.guias" />
           <EntitySet Name="hojaRuta" EntityType="Self.hojaRuta" />
           <EntitySet Name="hojaRutaDetalle" EntityType="Self.hojaRutaDetalle" />
+          <EntitySet Name="rol" EntityType="Self.rol" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="vehiculo" EntityType="Self.vehiculo" />
           <AssociationSet Name="FK__colaborador__run__208CD6FA" Association="Self.FK__colaborador__run__208CD6FA">
             <End Role="colaborador" EntitySet="colaborador" />
@@ -497,10 +547,6 @@
             <End Role="hojaRuta" EntitySet="hojaRuta" />
             <End Role="costosHojaRuta" EntitySet="costosHojaRuta" />
           </AssociationSet>
-          <AssociationSet Name="FK__hojaRuta__fechaI__1DB06A4F" Association="Self.FK__hojaRuta__fechaI__1DB06A4F">
-            <End Role="fechaTramo" EntitySet="fechaTramo" />
-            <End Role="hojaRuta" EntitySet="hojaRuta" />
-          </AssociationSet>
           <AssociationSet Name="FK__guias__idHojaRut__22751F6C" Association="Self.FK__guias__idHojaRut__22751F6C">
             <End Role="hojaRuta" EntitySet="hojaRuta" />
             <End Role="guias" EntitySet="guias" />
@@ -513,9 +559,17 @@
             <End Role="vehiculo" EntitySet="vehiculo" />
             <End Role="hojaRuta" EntitySet="hojaRuta" />
           </AssociationSet>
+          <AssociationSet Name="FK__hojaRuta__usuari__25518C17" Association="Self.FK__hojaRuta__usuari__25518C17">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="hojaRuta" EntitySet="hojaRuta" />
+          </AssociationSet>
           <AssociationSet Name="FK__hojaRutaD__idHoj__1CBC4616" Association="Self.FK__hojaRutaD__idHoj__1CBC4616">
             <End Role="hojaRuta" EntitySet="hojaRuta" />
             <End Role="hojaRutaDetalle" EntitySet="hojaRutaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_rol" Association="Self.FK_usuario_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -523,7 +577,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dimacodevModelStoreContainer" CdmEntityContainer="dimacodevEntities">
+        <EntityContainerMapping StorageEntityContainer="dimacodevModelStoreContainer" CdmEntityContainer="dimacodevEntities1">
           <EntitySetMapping Name="colaborador">
             <EntityTypeMapping TypeName="dimacodevModel.colaborador">
               <MappingFragment StoreEntitySet="colaborador">
@@ -562,19 +616,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="fechaTramo">
-            <EntityTypeMapping TypeName="dimacodevModel.fechaTramo">
-              <MappingFragment StoreEntitySet="fechaTramo">
-                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
-                <ScalarProperty Name="anio" ColumnName="anio" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="dia" ColumnName="dia" />
-                <ScalarProperty Name="trimestre" ColumnName="trimestre" />
-                <ScalarProperty Name="cuatrimestre" ColumnName="cuatrimestre" />
-                <ScalarProperty Name="semestre" ColumnName="semestre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="guias">
             <EntityTypeMapping TypeName="dimacodevModel.guias">
               <MappingFragment StoreEntitySet="guias">
@@ -597,9 +638,9 @@
                 <ScalarProperty Name="idHojaRuta" ColumnName="idHojaRuta" />
                 <ScalarProperty Name="patente" ColumnName="patente" />
                 <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
-                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
                 <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -614,6 +655,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="rol">
+            <EntityTypeMapping TypeName="dimacodevModel.rol">
+              <MappingFragment StoreEntitySet="rol">
+                <ScalarProperty Name="rolID" ColumnName="rolID" />
+                <ScalarProperty Name="rolDesc" ColumnName="rolDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="dimacodevModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -622,6 +671,21 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="dimacodevModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+                <ScalarProperty Name="usuarioNombre" ColumnName="usuarioNombre" />
+                <ScalarProperty Name="usuarioClave" ColumnName="usuarioClave" />
+                <ScalarProperty Name="usuarioActivo" ColumnName="usuarioActivo" />
+                <ScalarProperty Name="usuarioNombreCol" ColumnName="usuarioNombreCol" />
+                <ScalarProperty Name="usuarioApellido" ColumnName="usuarioApellido" />
+                <ScalarProperty Name="usuarioTelefono" ColumnName="usuarioTelefono" />
+                <ScalarProperty Name="usuarioCargo" ColumnName="usuarioCargo" />
+                <ScalarProperty Name="rolID" ColumnName="rolID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

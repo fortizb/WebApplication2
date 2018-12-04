@@ -11,17 +11,24 @@ namespace WebApplication2.Controllers
 {
     public class infoHojaRutaController : Controller
     {
-        private dimacodevEntities db = new dimacodevEntities();
+        private dimacodevEntities1 db = new dimacodevEntities1();
         // GET: infoHojaRuta
         public ActionResult Index(int? id)
         {
-            var model = new ResumenHojaRutaViewModel
+            if (Session["Login"] == null)
             {
-                guiasID = db.guias.ToList().Where(g => g.idHojaRuta == id),
-                colaboradorHojaRutaID = db.colaboradorHojaRuta.ToList().Where(ch => ch.idHojaRuta == id)
-                //colaboradorID = db.colaborador.ToList()
-            };
-            return View(model);
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                var model = new ResumenHojaRutaViewModel
+                {
+                    guiasID = db.guias.ToList().Where(g => g.idHojaRuta == id),
+                    colaboradorHojaRutaID = db.colaboradorHojaRuta.ToList().Where(ch => ch.idHojaRuta == id)
+                    //colaboradorID = db.colaborador.ToList()
+                };
+                return View(model);
+            }
         }
     }
 }

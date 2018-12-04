@@ -12,23 +12,18 @@ namespace WebApplication2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class fechaTramo
+    public partial class rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public fechaTramo()
+        public rol()
         {
-            this.hojaRuta = new HashSet<hojaRuta>();
+            this.usuario = new HashSet<usuario>();
         }
     
-        public int fechaIngreso { get; set; }
-        public int anio { get; set; }
-        public int mes { get; set; }
-        public int dia { get; set; }
-        public string trimestre { get; set; }
-        public string cuatrimestre { get; set; }
-        public string semestre { get; set; }
+        public int rolID { get; set; }
+        public string rolDesc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<hojaRuta> hojaRuta { get; set; }
+        public virtual ICollection<usuario> usuario { get; set; }
     }
 }
