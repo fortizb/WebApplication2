@@ -17,7 +17,7 @@ namespace WebApplication2.Controllers
         // GET: hojaRutas
         public ActionResult Index()
         {
-            var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 2).Include(h => h.fechaTramo).Include(h => h.vehiculo).Include(h => h.vehiculo1);
+            var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 2).Include(h => h.vehiculo).Include(h => h.vehiculo1);
             return View(hojaRuta.ToList());
         }
         public ActionResult Colaboradors()
@@ -44,7 +44,6 @@ namespace WebApplication2.Controllers
         // GET: hojaRutas/Create
         public ActionResult Create()
         {
-            ViewBag.fechaIngreso = new SelectList(db.fechaTramo, "fechaIngreso", "fechaIngreso");
             ViewBag.patente = new SelectList(db.vehiculo, "patente", "patente");
             return View();
         }
@@ -64,8 +63,7 @@ namespace WebApplication2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Create", "colaboradorHojaRutas");
             }
-
-            ViewBag.fechaIngreso = new SelectList(db.fechaTramo, "fechaIngreso", "trimestre", hojaRuta.fechaIngreso);
+            
             ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
             ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
             return View(hojaRuta);
@@ -83,7 +81,6 @@ namespace WebApplication2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.fechaIngreso = new SelectList(db.fechaTramo, "fechaIngreso", "fechaIngreso", hojaRuta.fechaIngreso);
             ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
             ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
             return View(hojaRuta);
@@ -94,7 +91,7 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idHojaRuta,patente,fechaCreacion,fechaIngreso,fechaModificacion,estado")] hojaRuta hojaRuta)
+        public ActionResult Edit([Bind(Include = "idHojaRuta,patente,fechaCreacion,fechaModificacion,estado")] hojaRuta hojaRuta)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +99,6 @@ namespace WebApplication2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.fechaIngreso = new SelectList(db.fechaTramo, "fechaIngreso", "trimestre", hojaRuta.fechaIngreso);
             ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
             ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
             return View(hojaRuta);

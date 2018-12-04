@@ -26,19 +26,19 @@ namespace WebApplication2.Models
         public int idHojaRuta { get; set; }
         public string patente { get; set; }
         public System.DateTime fechaCreacion { get; set; }
-        public int fechaIngreso { get; set; }
         public Nullable<System.DateTime> fechaModificacion { get; set; }
         public string estado { get; set; }
+        public Nullable<int> usuarioID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<colaboradorHojaRuta> colaboradorHojaRuta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<costosHojaRuta> costosHojaRuta { get; set; }
-        public virtual fechaTramo fechaTramo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<guias> guias { get; set; }
         public virtual vehiculo vehiculo { get; set; }
         public virtual vehiculo vehiculo1 { get; set; }
+        public virtual usuario usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<hojaRutaDetalle> hojaRutaDetalle { get; set; }
     }
