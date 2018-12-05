@@ -17,126 +17,49 @@
 
                     </li>
                     @*<li>
-                        <a href="@Url.Action("Index", "Home")">
-                            <i class="fa fa-briefcase"></i>
-                            <span>&nbsp;Reportes</span>
-                        </a>
-                    </li>*@
+            <a href="@Url.Action("Index", "Home")">
+                <i class="fa fa-briefcase"></i>
+                <span>&nbsp;Reportes</span>
+            </a>
+        </li>*@
                     <li class="has-sub">
-                        @*@Html.ActionLink("Hoja de ruta", "Index", "hojaRutas")*@
-                        <a href="@Url.Action("Index", "hojaRutas")">
-                            <i class="fa fa-copy"></i>
-                            <span>&nbsp;Hoja de ruta</span>
-                        </a>
+                        @if (Session["Login"].ToString() == "Planificador")
+                        {
+                            @*@Html.ActionLink("Hoja de ruta", "Index", "hojaRutas")*@
+                            <a href="@Url.Action("Index", "hojaRutas")">
+                                <i class="fa fa-copy"></i>
+                                <span>&nbsp;Hoja de ruta</span>
+                            </a>
+                        }
                     </li>
                     @*<li class="has-sub">
-                        <a href="HojaRutaDetalle">
-                            <i class="fas fa-copy"></i>
-                            <span class="bot-line"></span> Mapa
-                        </a>
-                    </li>*@
-                    <li class="has-sub">
-                        <a href="#">
-                            <i class="fas fa-group"></i>
-                            <span class="bot-line"></span>Gestión
-                        </a>
-                        <ul class="header3-sub-list list-unstyled">
-                            <li>
-                                <a href="Colaborador">Colaboradores</a>
-                            </li>
-                            <li>
-                                <a href="Vehiculos">Vehiculos</a>
-                            </li>
-                            <li>
-                                <a href="Guia">Guias De despacho</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+            <a href="HojaRutaDetalle">
+                <i class="fas fa-copy"></i>
+                <span class="bot-line"></span> Mapa
+            </a>
+        </li>*@
+                    @if (Session["Login"].ToString() == "Administrador")
+                    {
+                        <li class="has-sub">
+                            <a href="#">
+                                <i class="fas fa-group"></i>
+                                <span class="bot-line"></span>Gestión
+                            </a>
+                            <ul class="header3-sub-list list-unstyled">
+                                <li>
+                                    <a href="@Url.Action("Index", "colaboradors")">Colaboradores</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "vehiculoes")">Vehiculos</a>
+                                </li>
+                                <li>
+                                    <a href="Guia">Guias De despacho</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    </ul>
             </div>
-            <div class="header__tool">
-                <div class="header-button-item has-noti js-item-menu">
-                    <i class="zmdi zmdi-notifications"></i>
-                    <div class="notifi-dropdown notifi-dropdown--no-bor js-dropdown">
-                        <div class="notifi__title">
-                            <p>You have 3 Notifications</p>
-                        </div>
-                        <div class="notifi__item">
-                            <div class="bg-c1 img-cir img-40">
-                                <i class="zmdi zmdi-email-open"></i>
-                            </div>
-                            <div class="content">
-                                <p>You got a email notification</p>
-                                <span class="date">April 12, 2018 06:50</span>
-                            </div>
-                        </div>
-                        <div class="notifi__item">
-                            <div class="bg-c2 img-cir img-40">
-                                <i class="zmdi zmdi-account-box"></i>
-                            </div>
-                            <div class="content">
-                                <p>Your account has been blocked</p>
-                                <span class="date">April 12, 2018 06:50</span>
-                            </div>
-                        </div>
-                        <div class="notifi__item">
-                            <div class="bg-c3 img-cir img-40">
-                                <i class="zmdi zmdi-file-text"></i>
-                            </div>
-                            <div class="content">
-                                <p>You got a new file</p>
-                                <span class="date">April 12, 2018 06:50</span>
-                            </div>
-                        </div>
-                        <div class="notifi__footer">
-                            <a href="#">All notifications</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-button-item js-item-menu">
-                    <i class="zmdi zmdi-settings"></i>
-                    <div class="setting-dropdown js-dropdown">
-                        <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-account"></i>Account
-                                </a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-settings"></i>Setting
-                                </a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-money-box"></i>Billing
-                                </a>
-                            </div>
-                        </div>
-                        <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-globe"></i>Language
-                                </a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-pin"></i>Location
-                                </a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-email"></i>Email
-                                </a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-notifications"></i>Notifications
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
                         <div class="image">
@@ -146,7 +69,7 @@
                             @if (Session["usuarioNombre"] != null)
                             {<text>
                                     @Session["usuarioNombreCol"].ToString()
-                                    @Session["usuarioApellido"].ToString()
+                                   
                             </text>
                             }
                         </div>
@@ -154,32 +77,21 @@
                             <div class="info clearfix">
                                 <div class="image">
                                     <a href="#">
-                                        <img src="~/Content/images/icon/avatar-01.jpg" alt="John Doe" />
+                                        <img src="~/Content/images/icon/avatar-01.jpg"/>
+
                                     </a>
                                 </div>
                                 <div class="content">
                                     <h5 class="name">
-                                        <a href="#">john doe</a>
-                                    </h5>
-                                    <span class="email">johndoe@example.com</span>
-                                </div>
+                                        <text>
+                                            @Session["usuarioNombreCol"].ToString()
+                                            @Session["usuarioApellido"].ToString()
+                                        </text>
+</div>
                             </div>
                             <div class="account-dropdown__body">
                                 <div class="account-dropdown__item">
-                                    <a href="#">
-                                        <i class="zmdi zmdi-account"></i>Account
-                                    </a>
-                                </div>
-                                <div class="account-dropdown__item">
-                                    <a href="#">
-                                        <i class="zmdi zmdi-settings"></i>Setting
-                                    </a>
-                                </div>
-                                <div class="account-dropdown__item">
-                                    <a href="#">
-                                        <i class="zmdi zmdi-money-box"></i>Billing
-                                    </a>
-                                </div>
+                                   
                             </div>
                             <div class="account-dropdown__footer">
                                 <h4> @Html.ActionLink("Logout", "Logout", "Home", new { }, new { @class = "zmdi zmdi-power" })</h4>  

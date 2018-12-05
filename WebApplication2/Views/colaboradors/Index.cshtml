@@ -3,12 +3,11 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<br />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a class="btn btn-success" href="@Url.Action("Create", "colaboradors")" style="margin-top: 1em;"><i class="fa fa-plus"></i>&nbsp;Añadir Vehiculo</a>
 </p>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -66,9 +65,9 @@
         </td>
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.run }) |
-            @Html.ActionLink("Details", "Details", new { id=item.run }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.run })
+            <a class="btn btn-warning" href="@Url.Action("Edit", "colaboradors", new { id = item.run })" style="margin-top: 1em;"><i class="fa fa-edit"></i>&nbsp;Editar</a>
+            <a class="btn btn-danger" href="@Url.Action("Delete", "colaboradors", new { id = item.run })" style="margin-top: 1em;"><i class="fa fa-trash"></i>&nbsp;Eliminar</a>
+          
         </td>
     </tr>
 }

@@ -2,76 +2,77 @@
 
 @{
     ViewBag.Title = "Index";
+    <br />
+
+    <p>
+        <a class="btn btn-success" href="@Url.Action("Create", "vehiculoes")" style="margin-top: 1em;"><i class="fa fa-plus"></i>&nbsp;Añadir Vehiculo</a>
 
 
-<h2>Index</h2>
+    </p>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.patente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.velocidadPromedio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rendimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.capacidadCarga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { }, new {@class = "btn btn-success" })
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.patente)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.marca)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modelo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.velocidadPromedio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rendimiento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.capacidadCarga)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.marca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modelo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.velocidadPromedio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rendimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.capacidadCarga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.patente)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.marca)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modelo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.velocidadPromedio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rendimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.capacidadCarga)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.patente }) |
-            @Html.ActionLink("Details", "Details", new { id = item.patente }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.patente }, new {@class = "btn btn-warning" })
-        </td>
-    </tr>
+                    <a class="btn btn-warning" href="@Url.Action("Edit", "vehiculoes", new { id = item.patente })" style="margin-top: 1em;"><i class="fa fa-edit"></i>&nbsp;Editar</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "vehiculoes", new { id = item.patente })" style="margin-top: 1em;"><i class="fa fa-trash"></i>&nbsp;Eliminar</a>
+                </td>
+            </tr>
+        }
+
+    </table>
 }
-
-</table>
-    }
