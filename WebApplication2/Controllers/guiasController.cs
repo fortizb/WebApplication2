@@ -62,7 +62,7 @@ namespace WebApplication2.Controllers
             {
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
-                return RedirectToAction("Index", "guias");
+                return RedirectToAction("Index", "hojaRutas");
             }
         }
 

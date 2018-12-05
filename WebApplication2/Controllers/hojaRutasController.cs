@@ -81,7 +81,7 @@ namespace WebApplication2.Controllers
                     hojaRuta.estado = "1";
                     db.hojaRuta.Add(hojaRuta);
                     db.SaveChanges();
-                    return RedirectToAction("Create", "colaboradorHojaRutas");
+                    return RedirectToAction("Index");
                 }
 
                 ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
