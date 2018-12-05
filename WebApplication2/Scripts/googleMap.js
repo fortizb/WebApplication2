@@ -145,10 +145,10 @@ $("#tablaDireccion tbody tr").click(function () {
                 totalDuracion += legs[i].duration.value;
             }
             //alert('Paradas: '+wayPoints.length);
-            $('#totalDistancia').val((totalDistancia / 1000).toFixed(1));
-            $('#totalDuracion').val(((totalDuracion / 3600) + waypointsDuracion).toFixed(1));
-            $('#combustibleAprox').val(((totalDistancia / 1000) / 15).toFixed(1));
-            $('#costoAprox').val((((totalDistancia / 1000) / 15) * 653).toFixed(1));
+            $('#totalDistancia').text((totalDistancia / 1000).toFixed(1));
+            $('#totalDuracion').text(((totalDuracion / 3600) + waypointsDuracion).toFixed(1));
+            $('#combustibleAprox').text(((totalDistancia / 1000) / 15).toFixed(1));
+            $('#costoAprox').text((((totalDistancia / 1000) / 15) * 653).toFixed(1));
         } else {
             alert('No encontramos los resultados de su búsqueda.');
         }
