@@ -3,25 +3,30 @@
     <div class="section__content section__content--p35">
         <div class="header3-wrap">
             <div class="header__logo">
-                <a href="#">
+                <a href="@Url.Action("", "")">
                     <img src="~/Content/images/icon/dimaco_small.png" alt="CoolAdmin" width="200px" />
                 </a>
             </div>
             <div class="header__navbar">
                 <ul class="list-unstyled">
                     <li class="has-sub">
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class="fa fa-home"></i>
+                            <span>&nbsp;Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="has-sub">
                         <a href="@Url.Action("DashboardUsuario", "Home")">
                             <i class="fa fa-briefcase"></i>
                             <span>&nbsp;Dashboard</span>
                         </a>
-
                     </li>
                     @*<li>
-            <a href="@Url.Action("Index", "Home")">
-                <i class="fa fa-briefcase"></i>
-                <span>&nbsp;Reportes</span>
-            </a>
-        </li>*@
+                            <a href="@Url.Action("Index", "Home")">
+                                <i class="fa fa-briefcase"></i>
+                                <span>&nbsp;Reportes</span>
+                            </a>
+                        </li>*@
                     <li class="has-sub">
                         @if (Session["Login"].ToString() == "Planificador")
                         {
@@ -33,11 +38,11 @@
                         }
                     </li>
                     @*<li class="has-sub">
-            <a href="HojaRutaDetalle">
-                <i class="fas fa-copy"></i>
-                <span class="bot-line"></span> Mapa
-            </a>
-        </li>*@
+                            <a href="HojaRutaDetalle">
+                                <i class="fas fa-copy"></i>
+                                <span class="bot-line"></span> Mapa
+                            </a>
+                        </li>*@
                     @if (Session["Login"].ToString() == "Administrador")
                     {
                         <li class="has-sub">
@@ -53,50 +58,54 @@
                                     <a href="@Url.Action("Index", "vehiculoes")">Vehiculos</a>
                                 </li>
                                 <li>
-                                    <a href="Guia">Guias De despacho</a>
+                                    <a href="#">Guias De despacho</a>
                                 </li>
                             </ul>
                         </li>
                     }
-                    </ul>
+                </ul>
             </div>
-                <div class="account-wrap">
-                    <div class="account-item account-item--style2 clearfix js-item-menu">
-                        <div class="image">
-                            <img src="~/Content/images/icon/avatar-01.jpg" alt="John Doe" />
-                        </div>
-                        <div class="content">
-                            @if (Session["usuarioNombre"] != null)
-                            {<text>
-                                    @Session["usuarioNombreCol"].ToString()
-                                   
-                            </text>
-                            }
-                        </div>
-                        <div class="account-dropdown js-dropdown">
-                            <div class="info clearfix">
-                                <div class="image">
-                                    <a href="#">
-                                        <img src="~/Content/images/icon/avatar-01.jpg"/>
+            <div class="account-wrap">
+                <div class="account-item account-item--style2 clearfix js-item-menu">
+                    <div class="image">
+                        <img src="~/Content/images/icon/avatar-01.jpg" alt="John Doe" />
+                    </div>
+                    <div class="content">
+                        @if (Session["usuarioNombre"] != null)
+                        {<text>
+                                @Session["usuarioNombreCol"].ToString()
 
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h5 class="name">
-                                        <text>
-                                            @Session["usuarioNombreCol"].ToString()
-                                            @Session["usuarioApellido"].ToString()
-                                        </text>
-</div>
-                            </div>
-                            <div class="account-dropdown__body">
-                                <div class="account-dropdown__item">
-                                   
-                            </div>
-                            <div class="account-dropdown__footer">
-                                <h4> @Html.ActionLink("Logout", "Logout", "Home", new { }, new { @class = "zmdi zmdi-power" })</h4>  
+                        </text>
+                    }
+                    </div>
+                    <div class="account-dropdown js-dropdown">
+                        <div class="info clearfix">
+                            <div class="image">
+                                <a href="#">
+                                    <img src="~/Content/images/icon/avatar-01.jpg" />
 
                                 </a>
+                            </div>
+                            <div class="content">
+                                <h5 class="name">
+                                    <text>
+                                        @Session["usuarioNombreCol"].ToString()
+                                        @Session["usuarioApellido"].ToString()
+                                    </text>
+                            </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                            <div class="account-dropdown__item">
+
+                            </div>
+                            <div class="account-dropdown__footer">
+                                @*<h4> @Html.ActionLink("Logout", "Logout", "Home", new { }, new { @class = "zmdi zmdi-power" })</h4>*@
+
+                                <a href="@Url.Action("Logout", "Home")">
+                                    <i class="fa fa-sign-out-alt"></i>
+                                    <span>&nbsp;Salir</span>
+                                </a>
+
                             </div>
                         </div>
                     </div>
