@@ -603,7 +603,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Inicio.cshtml" />
     <Content Include="Views\colaboradors\Create.cshtml" />
     <Content Include="Views\colaboradors\Delete.cshtml" />
     <Content Include="Views\colaboradors\Details.cshtml" />

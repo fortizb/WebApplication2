@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -21,7 +22,20 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        
+
+        public ActionResult Inicio()
+        {
+            if (Session["usuarioID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                Thread.Sleep(4000); // 4000 = 4 seconds.
+                return RedirectToAction("Login");
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(usuario user)
@@ -40,7 +54,7 @@ namespace WebApplication2.Controllers
                         Session["usuarioApellido"] = obj.usuarioApellido.ToString();
                        
                        
-                        return View("Index");
+                        return View("Inicio");
                     }
                     else
                     {
