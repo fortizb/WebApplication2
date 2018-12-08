@@ -3,16 +3,16 @@
     <div class="section__content section__content--p35">
         <div class="header3-wrap">
             <div class="header__logo">
-                <a href="@Url.Action("", "")">
+                <a href="@Url.Action("Inicio", "Home")">
                     <img src="~/Content/images/icon/dimaco_small.png" alt="CoolAdmin" width="200px" />
                 </a>
             </div>
             <div class="header__navbar">
                 <ul class="list-unstyled">
                     <li class="has-sub">
-                        <a href="@Url.Action("Index", "Home")">
+                        <a href="@Url.Action("Inicio", "Home")">
                             <i class="fa fa-home"></i>
-                            <span>&nbsp;Dashboard</span>
+                            <span>&nbsp;Inicio</span>
                         </a>
                     </li>
                     <li class="has-sub">
@@ -95,9 +95,9 @@
                             </div>
                         </div>
                         <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
+                            @*<div class="account-dropdown__item">
 
-                            </div>
+                            </div>*@
                             <div class="account-dropdown__footer">
                                 @*<h4> @Html.ActionLink("Logout", "Logout", "Home", new { }, new { @class = "zmdi zmdi-power" })</h4>*@
 
