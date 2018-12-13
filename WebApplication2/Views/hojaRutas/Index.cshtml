@@ -3,15 +3,11 @@
 @{
     ViewBag.Title = "Index";
 }
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" media="all">
-
 <style type="text/css">
-
     .pagination > li.active > a, .pagination > li.active > span {
         background-color: #1e7338 !important;
-        border-color: #1e7338 !important; 
+        border-color: #1e7338 !important;
     }
-
 </style>
 
 <div class="container-fluid">
@@ -64,19 +60,17 @@
                 }
             </tbody>
         </table>
-        </div>
     </div>
+</div>
 
-    @section Scripts{
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#tabHojaRuta').DataTable({
-                    "language": {
-                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-                    }
-                });
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabHojaRuta').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
             });
-        </script>
-    }
+        });
+    </script>
+}

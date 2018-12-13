@@ -77,6 +77,7 @@ namespace WebApplication2.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    vehiculo.activo = true;
                     db.vehiculo.Add(vehiculo);
                     db.SaveChanges();
                     return RedirectToAction("Index");

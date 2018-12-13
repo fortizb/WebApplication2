@@ -4,14 +4,14 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <link href="~/Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" />
-    <div class="container">
+    <div class="container-fluid">
 
         <h3 style="margin-top: 1em;">Asignación de colaboradores</h3>
 
-        <a href="#" class="btn btn-info" onclick="AddChofer(0)" style="margin-top: 1em;"><i class="fa fa-plus"></i>&nbsp;Añadir colaborador</a>
-
-        <table class="table table-bordered" style="margin-top: 1.5em;">
-            <thead>
+        <a href="#" class="btn btn-info" onclick="AddChofer(0)" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Añadir colaborador</a>
+        <div class="table-responsive">
+        <table class="table table-borderless table-data3" style="margin-top: 1.5em;">
+            <thead style="background-color: #1e7338;">
                 <tr>
                     <th>R.U.N.</th>
                     <th>NOMBRE</th>
@@ -22,6 +22,7 @@
                 <tr id="LoadingStatus" style="color:red"></tr>
             </tbody>
         </table>
+        </div>
 
         @*Modal Añadir Colaborador*@
 
@@ -50,7 +51,7 @@
             </div>
         </div>
         @*@Html.ActionLink("Siguiente", "Siguiente", new { }, new { @class = "btn btn-success" })*@
-        <a class="btn btn-success" href="@Url.Action("Siguiente", "colaboradorHojaRutas")" style="margin-top: 1em;">Siguiente&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+        <a class="btn btn-success" href="@Url.Action("Siguiente", "colaboradorHojaRutas")" style="margin-top: 1em; background-color: #1e7338;">Siguiente&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
     </div>
 
 
