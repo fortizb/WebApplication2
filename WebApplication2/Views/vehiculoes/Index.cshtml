@@ -4,6 +4,13 @@
     ViewBag.Title = "Vehículos";
 }
 
+<style type="text/css">
+    .pagination > li.active > a, .pagination > li.active > span {
+        background-color: #1e7338 !important;
+        border-color: #1e7338 !important;
+    }
+</style>
+
 @*<br />
 
     <p>
@@ -82,8 +89,8 @@
         <a class="btn btn-success" href="@Url.Action("Create", "vehiculoes")" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Agregar</a>
     </p>
     <br />
-    <div class="table-responsive table--no-card m-b-30">
-        <table class="table table-borderless table-data3">
+    <div class="table-responsive">
+        <table id="tabVehiculos" class="table table-borderless table-data3">
             <thead style="background-color: #1e7338;">
                 <tr>
                     <th>
@@ -156,3 +163,14 @@
         </table>
     </div>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabVehiculos').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+}
