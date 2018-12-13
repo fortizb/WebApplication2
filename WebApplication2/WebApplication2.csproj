@@ -184,6 +184,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\colaboradorHojaRutasController.cs" />
     <Compile Include="Controllers\colaboradorsController.cs" />
+    <Compile Include="Controllers\costosHojaRutasController.cs" />
     <Compile Include="Controllers\guiasController.cs" />
     <Compile Include="Controllers\hojaRutaDetallesController.cs" />
     <Compile Include="Controllers\hojaRutasController.cs" />
@@ -639,6 +640,11 @@
     <Content Include="Views\infoHojaRuta\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\DashboardUsuario.cshtml" />
+    <Content Include="Views\costosHojaRutas\Create.cshtml" />
+    <Content Include="Views\costosHojaRutas\Delete.cshtml" />
+    <Content Include="Views\costosHojaRutas\Details.cshtml" />
+    <Content Include="Views\costosHojaRutas\Edit.cshtml" />
+    <Content Include="Views\costosHojaRutas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

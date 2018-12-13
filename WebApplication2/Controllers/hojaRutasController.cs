@@ -25,7 +25,7 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 2).Include(h => h.vehiculo).Include(h => h.vehiculo1);
+                var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 2 && h.estado == true).Include(h => h.vehiculo).Include(h => h.vehiculo1);
                 return View(hojaRuta.ToList());
                 
             }
@@ -66,7 +66,7 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idHojaRuta,patente,fechaIngreso,estado")] hojaRuta hojaRuta)
+        public ActionResult Create([Bind(Include = "patente")] hojaRuta hojaRuta)
         {
             if (Session["Login"] == null)
             {
@@ -79,6 +79,7 @@ namespace WebApplication2.Controllers
                 {
                     hojaRuta.fechaCreacion = DateTime.Now;
                     hojaRuta.estado = true;
+                    hojaRuta.usuarioID = Convert.ToInt32(Session["usuarioID"]);
                     db.hojaRuta.Add(hojaRuta);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -98,6 +99,8 @@ namespace WebApplication2.Controllers
             }
             else
             {
+               
+                
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -107,10 +110,13 @@ namespace WebApplication2.Controllers
                 {
                     return HttpNotFound();
                 }
-      
+                TempData["id"] = id;
+
+
+
+                ViewBag.patente = new SelectList(db.vehiculo, "patente", "patente", hojaRuta.patente);
                 ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-                ViewBag.patente = new SelectList(db.vehiculo, "patente", "descripcion", hojaRuta.patente);
-                return View(hojaRuta);
+                return RedirectToAction("Index", "costosHojaRutas");
              }
          }
 
@@ -121,6 +127,8 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idHojaRuta,patente,fechaCreacion,fechaModificacion,estado")] hojaRuta hojaRuta)
         {
+            int ids = Convert.ToInt32(TempData["id"]);
+            TempData["id"] = ids;
             if (Session["Login"] == null)
             {
                 return RedirectToAction("Login", "Home");

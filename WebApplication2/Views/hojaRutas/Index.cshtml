@@ -16,13 +16,13 @@
 
 <div class="container-fluid">
     <h3 style="margin-top: 1em;">Hojas de ruta</h3>
-
     <a class="btn btn-success" href="@Url.Action("Create", "hojaRutas")" style="margin: 1em 0 1em 0; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Crear hoja</a>
     <div class="table-responsive m-b-30">
         <table id="tabHojaRuta" class="table table-borderless table-data3" style="margin-top: 1em;">
             <thead style="background-color: #1e7338;">
                 <tr>
                     <th>N° Hoja de Ruta</th>
+                    <th>Planificador</th>
                     <th>Patente Vehiculo</th>
                     <th>Fecha de Creación</th>
                     <th>Fecha de Modificacion</th>
@@ -35,6 +35,10 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.idHojaRuta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.usuario.usuarioNombreCol)
+                            @Html.DisplayFor(modelItem => item.usuario.usuarioApellido)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.patente)

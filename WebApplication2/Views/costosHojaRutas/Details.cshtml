@@ -1,0 +1,66 @@
+﻿@model WebApplication2.Models.costosHojaRuta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>costosHojaRuta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.concepto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.concepto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proveedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proveedor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hojaRuta.patente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hojaRuta.patente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idCosto }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
