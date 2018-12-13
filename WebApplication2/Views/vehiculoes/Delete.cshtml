@@ -1,86 +1,144 @@
 ﻿@model WebApplication2.Models.vehiculo
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar vehículo";
 }
 
-<h3>¿De verdad desea Borrar este vehiculo?</h3>
-<div>
-    <h4>vehiculo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
+@*<div>
+        <h4>vehiculo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.marca)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.marca)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.marca)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.marca)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.modelo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.modelo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.modelo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.modelo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.color)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.color)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.color)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.color)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.velocidadPromedio)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.velocidadPromedio)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.velocidadPromedio)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.velocidadPromedio)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.rendimiento)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.rendimiento)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.rendimiento)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.rendimiento)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.capacidadCarga)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.capacidadCarga)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.capacidadCarga)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.capacidadCarga)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.activo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.activo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.activo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.activo)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>*@
+
+<div class="col-lg-6" style="margin: 0 auto; margin-top: 1em;">
+    <div class="top-campaign">
+        <h3 class="text-center m-b-30">¿Está seguro de eliminar este ítem?</h3>
+        <div class="table-responsive">
+            <table class="table table-top-campaign">
+                <tbody>
+                    <tr>
+                        <td>Patente</td>
+                        <td>@Html.DisplayFor(model => model.patente)</td>
+                    </tr>
+                    <tr>
+                        <td>Marca</td>
+                        <td>@Html.DisplayFor(model => model.marca)</td>
+                    </tr>
+                    <tr>
+                        <td>Modelo</td>
+                        <td>@Html.DisplayFor(model => model.modelo)</td>
+                    </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td>@Html.DisplayFor(model => model.color)</td>
+                    </tr>
+                    <tr>
+                        <td>Velocidad promedio</td>
+                        <td>@Html.DisplayFor(model => model.velocidadPromedio)</td>
+                    </tr>
+                    <tr>
+                        <td>Rendimiento</td>
+                        <td>@Html.DisplayFor(model => model.rendimiento)</td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad</td>
+                        <td>@Html.DisplayFor(model => model.capacidadCarga)</td>
+                    </tr>
+                    <tr>
+                        <td>Descripción</td>
+                        <td>@Html.DisplayFor(model => model.descripcion)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            @*<input type="submit" value="Delete" class="btn btn-default" />*@
+            <button type="submit" class="btn btn-lg btn-block" style="background-color: #1e7338; color: white;">
+                <i class="fa fa-trash fa-lg"></i>&nbsp;
+                Eliminar
+            </button>
+        }
+    </div>
+</div>
+<div class="col-md-12 text-center" style="margin-bottom: 1em;">
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a class="btn btn-success text-center" href="@Url.Action("Index", "vehiculoes")" style="background-color: #1e7338; margin: 0 auto;"><i class="fa fa-arrow-left"></i>&nbsp;Volver a la lista</a>
 </div>

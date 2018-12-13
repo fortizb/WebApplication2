@@ -1,75 +1,85 @@
 ﻿@model IEnumerable<WebApplication2.Models.colaborador>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Colaboradores";
 }
-<br />
-<p>
-    <a class="btn btn-success" href="@Url.Action("Create", "colaboradors")" style="margin-top: 1em;"><i class="fa fa-plus"></i>&nbsp;Añadir Vehiculo</a>
-</p>
-<br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.rut)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidoPaterno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidoMaterno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.edad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cargo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.valorHoraExtra)
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+    <p class="text-right">
+        <a class="btn btn-success" href="@Url.Action("Create", "colaboradors")" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Agregar</a>
+    </p>
+    <br />
+    <div class="table-responsive table--no-card m-b-30">
+        <table class="table table-borderless table-data3">
+            <thead style="background-color: #1e7338;">
+                <tr>
+                    <th>
+                        R.U.T.
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        A. Paterno
+                    </th>
+                    <th>
+                        A. Materno
+                    </th>
+                    <th>
+                        Edad
+                    </th>
+                    <th>
+                        Cargo
+                    </th>
+                    <th>
+                        Teléfono
+                    </th>
+                    <th>
+                        Valor H. Extra ($)
+                    </th>
+                    <th>
+                        Opciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rut)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.apellidoPaterno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.apellidoMaterno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.edad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cargo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.valorHoraExtra)
+                        </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.rut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidoPaterno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidoMaterno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.edad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cargo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.valorHoraExtra)
-        </td>
+                        <td>
+                            <div class="table-data-feature">
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", "colaboradors", new { id = item.run })"><i class="zmdi zmdi-edit"></i></a>
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" href="@Url.Action("Delete", "colaboradors", new { id = item.run })"><i class="zmdi zmdi-delete"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        <td>
-            <a class="btn btn-warning" href="@Url.Action("Edit", "colaboradors", new { id = item.run })" style="margin-top: 1em;"><i class="fa fa-edit"></i>&nbsp;Editar</a>
-            <a class="btn btn-danger" href="@Url.Action("Delete", "colaboradors", new { id = item.run })" style="margin-top: 1em;"><i class="fa fa-trash"></i>&nbsp;Eliminar</a>
-          
-        </td>
-    </tr>
-}
-
-</table>
