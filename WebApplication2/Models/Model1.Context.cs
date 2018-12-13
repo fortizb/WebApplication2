@@ -13,10 +13,10 @@ namespace WebApplication2.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dimacodevEntities1 : DbContext
+    public partial class dimacodevEntities : DbContext
     {
-        public dimacodevEntities1()
-            : base("name=dimacodevEntities1")
+        public dimacodevEntities()
+            : base("name=dimacodevEntities")
         {
         }
     
@@ -31,6 +31,7 @@ namespace WebApplication2.Models
         public virtual DbSet<guias> guias { get; set; }
         public virtual DbSet<hojaRuta> hojaRuta { get; set; }
         public virtual DbSet<hojaRutaDetalle> hojaRutaDetalle { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<vehiculo> vehiculo { get; set; }
     }

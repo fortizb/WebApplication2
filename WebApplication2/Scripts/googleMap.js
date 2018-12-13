@@ -11,10 +11,11 @@ var panelSumario = document.getElementById('panel-direcciones');
 //    $('#txtUbicacion2').val($('#txtUbicacionTD').text());
 //});
 
-$("#tablaDireccion tbody tr").click(function () {
-    var txtDireccion = $(this).find("td:eq(2)").text();
+//$("#tablaDireccion tbody tr").click(function () {
+$('#btnRutaSugerida').click(function () {
+    //var txtDireccion = $(this).find("td:eq(2)").text();
     //alert(total);
-    $('#txtUbicacion2').val(txtDireccion);
+    //$('#txtUbicacion2').val(txtDireccion);
     //});
 
     //$('#btnAgregarUbicacion').click(function () {
@@ -32,21 +33,21 @@ $("#tablaDireccion tbody tr").click(function () {
     // Add location to source as well as destination drop down lists.
     // Agrega las ubicaciones en la lista de origen así como también en la de destino.
     //$('#listaDestino').append('<option value="' + $('#txtUbicacion').val() + '">' + $('#txtUbicacion').val() + '</option>');
-    $('#listaOrigen').append('<option value="' + $('#txtUbicacion2').val() + '">' + $('#txtUbicacion2').val() + '</option>');
+    //$('#listaOrigen').append('<option value="' + $('#txtUbicacion2').val() + '">' + $('#txtUbicacion2').val() + '</option>');
 
     // Clear location text box and focus it.
     // Limpia el campo de texto de ubicaciones y se focaliza el cursor
-    $('#txtUbicacion2').val('');
-    $('#txtUbicacion2').focus();
+    //$('#txtUbicacion2').val('');
+    //$('#txtUbicacion2').focus();
 
     // Display success message.
     // Muestra el mensaje de finalización
-    $('#mensajeAgregado').html("\u00A1Agregado a la ruta!");
+    //$('#mensajeAgregado').html("\u00A1Agregado a la ruta!");
     // Hide success message after 5 seconds.
     // Oculta el mensaje después de 5 segundos
-    setTimeout(function () {
-        $('#mensajeAgregado').html("");
-    }, 5000);
+    //setTimeout(function () {
+    //    $('#mensajeAgregado').html("");
+    //}, 5000);
     //});
 
 
@@ -106,18 +107,29 @@ $("#tablaDireccion tbody tr").click(function () {
 
     // Add way points to array.
     // Agrega los puntos de ruta en un arreglo
-    var wayPoints = [];
-    $('#listaOrigen > option').each(function () {
-        if ($(this).val() != '' && $(this).val() != $('#listaOrigen').val() /*&& $(this).val() != $('#listaDestino').val()*/) {
-            var wayPoint = {
-                location: $(this).val(),
+    //var wayPoints = [];
+    //$('#listaOrigen > option').each(function () {
+    //    if ($(this).val() != '' && $(this).val() != $('#listaOrigen').val() /*&& $(this).val() != $('#listaDestino').val()*/) {
+    //        var wayPoint = {
+    //            location: $(this).val(),
+    //            stopover: true
+    //        };
+    //        //var punto1 = { location: 'Freire 240, Constitución, Chile', stopover: true }
+    //        //var punto2 = { location: 'Infante 120, Constitución, Chile', stopover: true }
+    //        wayPoints.push(wayPoint);
+    //    }
+    //});
+
+    var waypts = [];
+    var checkboxArray = document.getElementById('waypoints');
+    for (var i = 0; i < checkboxArray.length; i++) {
+        if (checkboxArray.options[i].selected) {
+            waypts.push({
+                location: checkboxArray[i].value,
                 stopover: true
-            };
-            //var punto1 = { location: 'Freire 240, Constitución, Chile', stopover: true }
-            //var punto2 = { location: 'Infante 120, Constitución, Chile', stopover: true }
-            wayPoints.push(wayPoint);
+            });
         }
-    });
+    }
 
     // Create directions request.
     // Crea la solicitud de las direcciones
@@ -125,7 +137,7 @@ $("#tablaDireccion tbody tr").click(function () {
         origin: $('#txtUbicacion').val(),
         destination: $('#txtUbicacion').val(),
         travelMode: 'DRIVING', /*google.maps.TravelMode[$('#listaModoViaje').val()],*/
-        waypoints: wayPoints,
+        waypoints: waypts,
         optimizeWaypoints: true /*$('#checkRutaOptima').is(':checked')*/
     };
 
@@ -138,7 +150,7 @@ $("#tablaDireccion tbody tr").click(function () {
 
             var totalDistancia = 0;
             var totalDuracion = 0;
-            var waypointsDuracion = wayPoints.length * 0.2;
+            var waypointsDuracion = waypts.length * 0.2;
             var legs = response.routes[0].legs;
             for (var i = 0; i < legs.length; ++i) {
                 totalDistancia += legs[i].distance.value;
@@ -250,7 +262,7 @@ function initializeMap() {
             }
         });
     });
-    document.getElementById('tablaDireccion').addEventListener('click', function () {
+    document.getElementById('btnRutaSugerida').addEventListener('click', function () {
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
 }
@@ -261,27 +273,27 @@ google.maps.event.addDomListener(window, "load", initializeMap);
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var waypts = [];
-    /* var listaOrigenArray = document.getElementById('listaOrigen');
-    for (var i = 0; i < listaOrigenArray.length; i++) {
-        if (listaOrigenArray.options[i] != null) {
+    var checkboxArray = document.getElementById('waypoints');
+    for (var i = 0; i < checkboxArray.length; i++) {
+        if (checkboxArray.options[i].selected) {
             waypts.push({
-                location: listaOrigenArray[i].value,
+                location: checkboxArray[i].value,
                 stopover: true
             });
         }
-    } */
+    }
 
-    $('#listaOrigen > option').each(function () {
-        if ($(this).val() != '' && $(this).val() != $('#listaOrigen').val() /*&& $(this).val() != $('#listaDestino').val()*/) {
-            var waypt = {
-                location: $(this).val(),
-                stopover: true
-            };
-            //var punto1 = { location: 'Freire 240, Constitución, Chile', stopover: true }
-            //var punto2 = { location: 'Infante 120, Constitución, Chile', stopover: true }
-            waypts.push(waypt);
-        }
-    });
+    //$('#listaOrigen > option').each(function () {
+    //    if ($(this).val() != '' && $(this).val() != $('#listaOrigen').val() /*&& $(this).val() != $('#listaDestino').val()*/) {
+    //        var waypt = {
+    //            location: $(this).val(),
+    //            stopover: true
+    //        };
+    //        //var punto1 = { location: 'Freire 240, Constitución, Chile', stopover: true }
+    //        //var punto2 = { location: 'Infante 120, Constitución, Chile', stopover: true }
+    //        waypts.push(waypt);
+    //    }
+    //});
 
     directionsService.route({
         origin: document.getElementById('txtUbicacion').value,

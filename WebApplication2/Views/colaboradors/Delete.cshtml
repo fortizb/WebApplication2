@@ -1,14 +1,9 @@
 ﻿@model WebApplication2.Models.colaborador
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Elimnar colaborador";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>colaborador</h4>
+@*<h4>colaborador</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -83,14 +78,63 @@
             @Html.DisplayFor(model => model.activo)
         </dd>
 
-    </dl>
+    </dl>*@
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="col-lg-6" style="margin: 0 auto; margin-top: 1em;">
+    <div class="top-campaign">
+        <h3 class="text-center m-b-30">¿Está seguro de eliminar este ítem?</h3>
+        <div class="table-responsive">
+            <table class="table table-top-campaign">
+                <tbody>
+                    <tr>
+                        <td>R.U.T.</td>
+                        <td>@Html.DisplayFor(model => model.rut)</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>@Html.DisplayFor(model => model.nombre)</td>
+                    </tr>
+                    <tr>
+                        <td>Apellido Paterno</td>
+                        <td>@Html.DisplayFor(model => model.apellidoPaterno)</td>
+                    </tr>
+                    <tr>
+                        <td>Apellido Materno</td>
+                        <td>@Html.DisplayFor(model => model.apellidoMaterno)</td>
+                    </tr>
+                    <tr>
+                        <td>Edad</td>
+                        <td>@Html.DisplayFor(model => model.edad)</td>
+                    </tr>
+                    <tr>
+                        <td>Cargo</td>
+                        <td>@Html.DisplayFor(model => model.cargo)</td>
+                    </tr>
+                    <tr>
+                        <td>Teléfono</td>
+                        <td>@Html.DisplayFor(model => model.telefono)</td>
+                    </tr>
+                    <tr>
+                        <td>Valor H. Extra</td>
+                        <td>@Html.DisplayFor(model => model.valorHoraExtra)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            @*<input type="submit" value="Delete" class="btn btn-default" />*@
+            <button type="submit" class="btn btn-lg btn-block" style="background-color: #1e7338; color: white;">
+                <i class="fa fa-trash fa-lg"></i>&nbsp;
+                Eliminar
+            </button>
+        }
+    </div>
+</div>
+<div class="col-md-12 text-center" style="margin-bottom: 1em;">
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a class="btn btn-success text-center" href="@Url.Action("Index", "colaboradors")" style="background-color: #1e7338; margin: 0 auto;"><i class="fa fa-arrow-left"></i>&nbsp;Volver a la lista</a>
 </div>

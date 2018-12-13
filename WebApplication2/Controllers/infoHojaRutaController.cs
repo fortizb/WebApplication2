@@ -11,7 +11,7 @@ namespace WebApplication2.Controllers
 {
     public class infoHojaRutaController : Controller
     {
-        private dimacodevEntities1 db = new dimacodevEntities1();
+        private dimacodevEntities db = new dimacodevEntities();
         // GET: infoHojaRuta
         public ActionResult Index(int? id)
         {

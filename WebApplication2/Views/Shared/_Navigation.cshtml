@@ -15,18 +15,18 @@
                             <span>&nbsp;Inicio</span>
                         </a>
                     </li>
-                    <li class="has-sub">
-                        <a href="@Url.Action("DashboardUsuario", "Home")">
-                            <i class="fa fa-briefcase"></i>
-                            <span>&nbsp;Dashboard</span>
-                        </a>
-                    </li>
-                    @*<li>
-                            <a href="@Url.Action("Index", "Home")">
+                    @*<li class="has-sub">
+                            <a href="@Url.Action("DashboardUsuario", "Home")">
                                 <i class="fa fa-briefcase"></i>
-                                <span>&nbsp;Reportes</span>
+                                <span>&nbsp;Dashboard</span>
                             </a>
-                        </li>*@
+                        </li>
+                        <li>
+                                <a href="@Url.Action("Index", "Home")">
+                                    <i class="fa fa-briefcase"></i>
+                                    <span>&nbsp;Reportes</span>
+                                </a>
+                            </li>*@
                     <li class="has-sub">
                         @if (Session["Login"].ToString() == "Planificador")
                         {
@@ -97,7 +97,7 @@
                         <div class="account-dropdown__body">
                             @*<div class="account-dropdown__item">
 
-                            </div>*@
+                                </div>*@
                             <div class="account-dropdown__footer">
                                 @*<h4> @Html.ActionLink("Logout", "Logout", "Home", new { }, new { @class = "zmdi zmdi-power" })</h4>*@
 

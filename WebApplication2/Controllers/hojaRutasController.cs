@@ -12,7 +12,7 @@ namespace WebApplication2.Controllers
 {
     public class hojaRutasController : Controller
     {
-        private dimacodevEntities1 db = new dimacodevEntities1();
+        private dimacodevEntities db = new dimacodevEntities();
 
         // GET: hojaRutas
       
@@ -78,7 +78,7 @@ namespace WebApplication2.Controllers
                 if (ModelState.IsValid)
                 {
                     hojaRuta.fechaCreacion = DateTime.Now;
-                    hojaRuta.estado = "1";
+                    hojaRuta.estado = true;
                     db.hojaRuta.Add(hojaRuta);
                     db.SaveChanges();
                     return RedirectToAction("Index");
