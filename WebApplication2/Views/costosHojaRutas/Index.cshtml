@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication2.Models.costosHojaRuta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.concepto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numDocumento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proveedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hojaRuta.patente)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.concepto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.proveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hojaRuta.patente)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idCosto }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idCosto }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idCosto })
+            </td>
+        </tr>
+
+
+    }
+    <a href="@Url.Action("Finalizar", "costosHojaRutas", new { }, null)" class="btn btn-warning">
+</table>

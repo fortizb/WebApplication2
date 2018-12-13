@@ -12,7 +12,7 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        private dimacodevEntities1 db = new dimacodevEntities1();
+        private dimacodevEntities db = new dimacodevEntities();
         public static class CustomRoles
         {
             public const string Administrador = "Administrador";
@@ -42,7 +42,7 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (dimacodevEntities1 db = new dimacodevEntities1())
+                using (dimacodevEntities db = new dimacodevEntities())
                 {
                     var obj = db.usuario.Where(a => a.usuarioNombre.Equals(user.usuarioNombre) && a.usuarioClave.Equals(user.usuarioClave)).FirstOrDefault();
                     if (obj != null)
@@ -85,7 +85,7 @@ namespace WebApplication2.Controllers
         }
         public ActionResult ChartPie()
         {
-            var _context = new dimacodevEntities1();
+            var _context = new dimacodevEntities();
             ArrayList xValue = new ArrayList();
             ArrayList yValue = new ArrayList();
 

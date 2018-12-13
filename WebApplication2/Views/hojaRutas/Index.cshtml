@@ -11,7 +11,9 @@
     <table class="table table-bordered" style="margin-top: 1em;">
         <thead>
             <tr>
+
                 <th>N° Hoja de Ruta</th>
+                <th>Planificador</th>
                 <th>Patente Vehiculo</th>
                 <th>Fecha de Creación</th>
                 <th>Fecha de Modificacion</th>
@@ -21,31 +23,36 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.idHojaRuta)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.patente)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.fechaCreacion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.fechaModificacion)
-                    </td>
-                    <td>
-                        <a class="btn btn-success" data-toggle="dropdown" href="#"><i class="fa fa-bars"></i>&nbsp;MENU</a>
-                        <ul class="dropdown-menu" role="menu">
-                            @*<li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
-                        <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
-                        <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>*@
-                            <a class="dropdown-item" href="@Url.Action("AddDatos", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-plus-circle"></i>&nbsp;Agregar</a>
-                            <a class="dropdown-item" href="@Url.Action("Edit", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-edit"></i>&nbsp;Modificar</a>
-                            <a class="dropdown-item" href="@Url.Action("Index", "infoHojaRuta",  new { id = item.idHojaRuta }, null)"><i class="fa fa-info-circle"></i>&nbsp;Resumen</a>
-                        </ul>
-                    </td>
-                </tr>
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.idHojaRuta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario.usuarioNombreCol)
+                    @Html.DisplayFor(modelItem => item.usuario.usuarioApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaModificacion)
+                </td>
+                <td>
+                    <a class="btn btn-success" data-toggle="dropdown" href="#"><i class="fa fa-bars"></i>&nbsp;MENU</a>
+                    <ul class="dropdown-menu" role="menu">
+                        @*<li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
+                <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
+                <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>*@
+                        <a class="dropdown-item" href="@Url.Action("AddDatos", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-plus-circle"></i>&nbsp;Agregar</a>
+                        <a class="dropdown-item" href="@Url.Action("Edit", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-edit"></i>&nbsp;Modificar</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "infoHojaRuta",  new { id = item.idHojaRuta }, null)"><i class="fa fa-info-circle"></i>&nbsp;Resumen</a>
+                    </ul>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

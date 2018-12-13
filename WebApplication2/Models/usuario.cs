@@ -28,7 +28,6 @@ namespace WebApplication2.Models
         public string usuarioApellido { get; set; }
         public string usuarioTelefono { get; set; }
         public string usuarioCargo { get; set; }
-        public int rolID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<hojaRuta> hojaRuta { get; set; }

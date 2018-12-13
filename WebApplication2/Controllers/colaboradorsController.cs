@@ -12,7 +12,7 @@ namespace WebApplication2.Controllers
 {
     public class colaboradorsController : Controller
     {
-        private dimacodevEntities1 db = new dimacodevEntities1();
+        private dimacodevEntities db = new dimacodevEntities();
 
         // GET: colaboradors
         public ActionResult Index()
