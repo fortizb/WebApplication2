@@ -78,6 +78,7 @@ namespace WebApplication2.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    colaborador.activo = true;
                     db.colaborador.Add(colaborador);
                     db.SaveChanges();
                     return RedirectToAction("Index");
