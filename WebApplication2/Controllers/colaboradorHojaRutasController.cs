@@ -64,7 +64,7 @@ namespace WebApplication2.Controllers
                 ViewBag.run = db.colaborador.Where(p => p.activo == true)
            .Select(p => new SelectListItem
            {
-               Text = p.nombre + " " + p.apellidoPaterno + " " + p.apellidoMaterno,
+               Text = p.nombre + " " + p.apellidoPaterno + " " + p.apellidoMaterno + " (" + p.cargo + ")",
                Value = p.run.ToString()
            });
                 int id = Convert.ToInt32(TempData["id"]);

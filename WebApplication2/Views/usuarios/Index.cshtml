@@ -1,0 +1,146 @@
+﻿@model IEnumerable<WebApplication2.Models.usuario>
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioClave)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioActivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioNombreCol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioApellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioTelefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioCargo)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioClave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioActivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioNombreCol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioApellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioTelefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioCargo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.usuarioID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.usuarioID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.usuarioID })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+<style type="text/css">
+    .pagination > li.active > a, .pagination > li.active > span {
+        background-color: #1e7338 !important;
+        border-color: #1e7338 !important;
+    }
+</style>
+<div class="container-fluid">
+    <p class="text-right">
+        <a class="btn btn-success" href="@Url.Action("Create", "usuarios")" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Agregar</a>
+    </p>
+    <br />
+    <div class="table-responsive" style="margin: 0 0 1em 0;">
+        <table id="tabColaboradores" class="table table-borderless table-data3">
+            <thead style="background-color: #1e7338;">
+                <tr>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Apellido
+                    </th>
+                    <th>
+                        Teléfono
+                    </th>
+                    <th>
+                        Cargo
+                    </th>
+                    <th>
+                        Opciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.usuarioNombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.usuarioNombreCol)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.usuarioApellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.usuarioTelefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.usuarioCargo)
+                        </td>
+
+                        <td>
+                            <div class="table-data-feature">
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", "usuarios", new { id = item.usuarioID })"><i class="zmdi zmdi-edit"></i></a>
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" href="@Url.Action("Delete", "usuarios", new { id = item.usuarioID })"><i class="zmdi zmdi-delete"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabColaboradores').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+}
