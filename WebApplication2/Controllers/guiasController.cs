@@ -25,7 +25,8 @@ namespace WebApplication2.Controllers
             {
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
-                var guias = db.guias.Where(x => x.idHojaRuta == 2 && x.estado == "Pendiente").Include(g => g.hojaRuta);
+                //Cambiar 2 por 0*
+                var guias = db.guias.Where(x => x.idHojaRuta == 0 && x.estado == "Pendiente").Include(g => g.hojaRuta);
                 return View(guias.ToList());
             }
         }
@@ -52,7 +53,7 @@ namespace WebApplication2.Controllers
                 return View(guias);
             }
         }
-        public ActionResult Siguiente()
+        public ActionResult Finalizar()
         {
             if (Session["Login"] == null)
             {
@@ -62,9 +63,12 @@ namespace WebApplication2.Controllers
             {
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
+                // Cambiar redirección a hoja de resumen*
                 return RedirectToAction("Index", "hojaRutas");
             }
         }
+
+        // Comentar métodos ya que no se usarán*
 
         // GET: guias/Create
         public ActionResult Create()
@@ -108,7 +112,7 @@ namespace WebApplication2.Controllers
             }
         }
 
-        // GET: guias/Edit/5
+        // Método añadir guía a hoja de ruta
         public ActionResult AddGuiaHR(int? idNumeroGuias)
         {
             if (Session["Login"] == null)
@@ -164,6 +168,8 @@ namespace WebApplication2.Controllers
                 return View(guias);
             }
         }
+
+        //Comentar o borrar método de eliminación
 
         // GET: guias/Delete/5
         public ActionResult Delete(int? id)

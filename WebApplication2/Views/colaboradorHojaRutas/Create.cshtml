@@ -1,15 +1,20 @@
 ﻿@model WebApplication2.Models.ColaboradorHojaRutaViewModel
 @{
     ViewBag.Title = "Agregar colaborador";
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Content/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <link href="~/Content/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" />
-    <div class="container-fluid">
+}
 
-        <h3 style="margin-top: 1em;">Asignación de colaboradores</h3>
+<style type="text/css">
+    .in {
+        background: rgba(0, 0, 0, 0.25);
+    }
+</style>
 
-        <a href="#" class="btn btn-info" onclick="AddChofer(0)" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Añadir colaborador</a>
-        <div class="table-responsive">
+<div class="container-fluid">
+
+    <h3 style="margin-top: 1em;">Asignación de colaboradores</h3>
+
+    <a href="#" class="btn btn-info" onclick="AddChofer(0)" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Añadir colaborador</a>
+    <div class="table-responsive">
         <table class="table table-borderless table-data3" style="margin-top: 1.5em;">
             <thead style="background-color: #1e7338;">
                 <tr>
@@ -22,43 +27,40 @@
                 <tr id="LoadingStatus" style="color:red"></tr>
             </tbody>
         </table>
-        </div>
+    </div>
 
-        @*Modal Añadir Colaborador*@
+    @*Modal Añadir Colaborador*@
 
-        <div class="modal fadeOut" id="MyModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 id="ModalTitle"></h4>
-                        <a href="#" class="close" data-dismiss="modal">&times;</a>
-                    </div>
-                    <div class="modal-body">
-                        <form id="form">
-                            <fieldset id="SubmitForm">
-                                <div class="col-md-10">
-                                    @Html.DropDownList("run", null, htmlAttributes: new { @id = "chrRun", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.run, "", new { @class = "text-danger" })
-                                </div>
-                                <br />
-                                <div class="form-group">
-                                    <a href="#" class="btn btn-block btn-danger" id="GuardarChofer">Guardar</a>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
+    <div class="modal fadeOut" id="MyModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="ModalTitle"></h4>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <fieldset id="SubmitForm">
+                            <div class="form-group">
+                                @Html.DropDownList("run", null, "-- Seleccione colaborador --", htmlAttributes: new { @id = "chrRun", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.run, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                            <div>
+                                <a href="#" class="btn btn-block btn-danger" id="GuardarChofer"><i class="fa fa-save"></i>&nbsp;&nbsp;Guardar</a>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
-        @*@Html.ActionLink("Siguiente", "Siguiente", new { }, new { @class = "btn btn-success" })*@
-        <a class="btn btn-success" href="@Url.Action("Siguiente", "colaboradorHojaRutas")" style="margin-top: 1em; background-color: #1e7338;">Siguiente&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
     </div>
+    @*@Html.ActionLink("Siguiente", "Siguiente", new { }, new { @class = "btn btn-success" })*@
+    <a class="btn btn-success" href="@Url.Action("Siguiente", "colaboradorHojaRutas")" style="margin-top: 1em; background-color: #1e7338;">Siguiente&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+</div>
 
 
-}
-
-
-
+@section Scripts{
 <script>
     $("#LoadingStatus").html("Loading...");
     $.get("/colaboradorHojaRutas/GetCHRList", null, DataBind);
@@ -79,8 +81,8 @@
     // Modal Agregar Colaborador
     function AddChofer(run) {
         $("#form")[0].reset();
-        $("#ModalTitle").html("Agregar Chofer");
-        $("#chrRun option:selected").text("--Seleccione Colaborador--");
+        $("#ModalTitle").html("Agregar chofer");
+        //$("#chrRun option:selected").text("--Seleccione Colaborador--");
         $("#MyModal").modal();
 
     }
@@ -98,7 +100,9 @@
             }
         })
     })
-</script>
+</script>    
+    }
+
 
 
 @*

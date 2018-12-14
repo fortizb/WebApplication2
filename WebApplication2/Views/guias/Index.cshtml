@@ -88,7 +88,8 @@
     <button id="btnRutaSugerida" class="btn btn-success"><i class="fa fa-list-ol"></i>&nbsp;Sugerir ruta</button>&nbsp;&nbsp;
     <button id="btnLimpiarRuta" type="button" class="btn btn-warning"><i class="fa fa-trash"></i>&nbsp;Limpiar ruta</button>&nbsp;&nbsp;
     @*@Html.ActionLink("Finalizar", "Siguiente", new { }, new { @class = "btn btn-warning" })*@
-    <a href="@Url.Action("Siguiente", "guias", new { }, null)" class="btn btn-warning">
+    @* Cambiar nombre de método* *@
+    <a href="@Url.Action("Finalizar", "guias", new { }, null)" class="btn btn-warning">
         <i class="fa fa-check-circle"></i>
         <span>&nbsp;Finalizar</span>
     </a>
