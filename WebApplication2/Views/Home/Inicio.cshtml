@@ -2,185 +2,227 @@
 {
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
-    <section class="welcome p-t-10">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="title-4">
-                        Bienvenido,
-                        @if (Session["usuarioNombre"] != null)
-                        {<text>
-                                @Session["usuarioNombreCol"].ToString()
-                        </text>
-                        }
-                    </h1>
-                    <hr class="line-seprate">
-                </div>
+}
+
+<section class="welcome p-t-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-4">
+                    Bienvenido,
+                    @if (Session["usuarioNombre"] != null)
+                    {<text>
+                            @Session["usuarioNombreCol"].ToString()
+                    </text>
+                }
+                </h1>
+                <hr class="line-seprate">
             </div>
         </div>
-    </section>
-    <!-- END WELCOME-->
-    <!-- STATISTIC-->
-    <section class="statistic statistic2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="statistic__item statistic__item--green">
-                        <h2 class="number">$10,368</h2>
-                        <span class="desc">Gasto Semanal de Transporte</span>
-                        <div class="icon">
-                            <i class="zmdi zmdi-truck"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="statistic__item statistic__item--orange">
-                        <h2 class="number">$388,688</h2>
-                        <span class="desc">Elementos Vendidos</span>
-                        <div class="icon">
-                            <i class="zmdi zmdi-shopping-cart"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="statistic__item statistic__item--blue">
-                        <h2 class="number">$1,086</h2>
-                        <span class="desc">Ventas de Esta Semana</span>
-                        <div class="icon">
-                            <i class="zmdi zmdi-calendar-note"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="statistic__item statistic__item--red">
-                        <h2 class="number">$1,060,386</h2>
-                        <span class="desc">Contribución total</span>
-                        <div class="icon">
-                            <i class="zmdi zmdi-money"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- END STATISTIC-->
-    <!-- STATISTIC CHART-->
-    <section class="statistic-chart">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="title-5 m-b-35">Reporte General</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <!-- CHART-->
-                    <div class="statistic-chart-1">
-                        <h3 class="title-3 m-b-30">Despachos mensuales</h3>
-                        <div class="chart-wrap">
-                            <canvas id="widgetChart5"></canvas>
-                        </div>
-                        <div class="statistic-chart-1-note">
-                            <span class="big">10,368</span>
-                            <span>/ 16220 items sold</span>
-                        </div>
-                    </div>
-                    <!-- END CHART-->
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <!-- TOP CAMPAIGN-->
-                    <div class="top-campaign">
-                        <h3 class="title-3 m-b-30">Mayores Compradores</h3>
-                        <div class="table-responsive">
-                            <table class="table table-top-campaign">
-                                <tbody>
-                                    <tr>
-                                        <td>1. Men 1</td>
-                                        <td>$70,261.65</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2. Men 2</td>
-                                        <td>$46,399.22</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3. Men 3</td>
-                                        <td>$35,364.90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4. Men 4</td>
-                                        <td>$20,366.96</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5. Men 5</td>
-                                        <td>$10,366.96</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- END TOP CAMPAIGN-->
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <!-- CHART PERCENT-->
-                    <div class="chart-percent-2">
-                        <h3 class="title-3 m-b-30">Despachos Realizados</h3>
-                        <div class="chart-wrap">
-                            <canvas id="percent-chart2"></canvas>
-                            <div id="chartjs-tooltip">
-                                <table></table>
-                            </div>
-                        </div>
-                        <div class="chart-info">
-                            <div class="chart-note">
-                                <span class="dot dot--blue"></span>
-                                <span>Realizados</span>
-                            </div>
-                            <div class="chart-note">
-                                <span class="dot dot--red"></span>
-                                <span>Pendientes</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END CHART PERCENT-->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- END STATISTIC CHART-->
+    </div>
+</section>
+<!-- END WELCOME-->
 
-    <script type="text/javascript">
+<h3 class="title-3 m-b-30">Despachos por Mes</h3>
 
-        window.onload = function () {
-            var chart = new CanvasJS.Chart("chartContainer", {
-                theme: "light2",
-                animationEnabled: true,
-                title: {
-                    text: "Simple Column Chart in ASP.NET MVC"
+<div id="barchart" style=" min-width: 30%; max-width: 70%; margin: 0 auto;"></div>
+<!-- STATISTIC-->
+<section class="statistic statistic2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--green">
+                    <h2 class="number">$@ViewBag.valorSemanal</h2>
+                    <span class="desc">Gasto Semanal</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-truck"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--orange">
+                    <h2 class="number">$@ViewBag.valorMensual</h2>
+                    <span class="desc">Gasto Ultimo Mes</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-truck"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--red">
+                    <h2 class="number">$@ViewBag.valorTotal</h2>
+                    <span class="desc">Gasto total</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-money"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div id="piechart"></div>
+            </div>
+
+        </div>
+</section>
+
+<script>
+    @*  Guias   *@
+    $(document).ready(function () {
+        $.getJSON("Home/GetData", function (data) {
+            Highcharts.chart('piechart', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
                 },
-                subtitles: [
-                    { text: "Try Resizing the Browser" }
-                ],
-                data: [
-                    {
-                        type: "column", //change type to bar, line, area, pie, etc
-                        dataPoints: [
-                            { x: 10, y: 71 },
-                            { x: 20, y: 55 },
-                            { x: 30, y: 50 },
-                            { x: 40, y: 65 },
-                            { x: 50, y: 95 },
-                            { x: 60, y: 68 },
-                            { x: 70, y: 28 },
-                            { x: 80, y: 34 },
-                            { x: 90, y: 14 }
-                        ]
+                title: {
+                    text: 'Estado de las guias'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
                     }
-                ]
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Pendiente',
+                        y: data.Pendiente,
+
+                    }, {
+                        name: 'Entregada',
+                        y: data.Entregada
+                    }]
+                }]
             });
-            chart.render();
-        };
-    </script>
+        });
+    });
+
+    @*   Meses   *@
+    $(document).ready(function () {
+        $.getJSON("Home/GetDataBarChart", function (data) {
+            var chart = Highcharts.chart('barchart', {
+
+                title: {
+                    text: 'Hojas de Ruta/Mes'
+                },
+
+                xAxis: {
+                    categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+                },
+
+                series: [{
+                    type: 'column',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Enero',
+                        y: data.Enero,
+
+                    }, {
+                        name: 'Febrero',
+                        y: data.Febrero
+                    }, {
+                        name: 'Marzo',
+                        y: data.Marzo
+                    }, {
+                        name: 'Abril',
+                        y: data.Abril
+                    },
+                    {
+                        name: 'Mayo',
+                        y: data.Mayo
+                    },
+                    {
+                        name: 'Junio',
+                        y: data.Junio
+
+                    }, {
+                        name: 'Julio',
+                        y: data.Julio
+
+                    }, {
+                        name: 'Agosto',
+                        y: data.Agosto
+
+                    }, {
+                        name: 'Septiembre',
+                        y: data.Septiembre
+
+                    }, {
+                        name: 'Octubre',
+                        y: data.Octubre
+
+                    }, {
+                        name: 'Noviembre',
+                        y: data.Noviembre
+
+                    }, {
+                        name: 'Diciembre',
+                        y: data.Diciembre
+
+
+
+                    }],
+                    showInLegend: false
+                }]
+
+            });
+
+
+            $('#plain').click(function () {
+                chart.update({
+                    chart: {
+                        inverted: false,
+                        polar: false
+                    },
+                    subtitle: {
+                        text: 'Plain'
+                    }
+                });
+            });
+
+            $('#inverted').click(function () {
+                chart.update({
+                    chart: {
+                        inverted: true,
+                        polar: false
+                    },
+                    subtitle: {
+                        text: 'Inverted'
+                    }
+                });
+            });
+
+            $('#polar').click(function () {
+                chart.update({
+                    chart: {
+                        inverted: false,
+                        polar: true
+                    },
+                    subtitle: {
+                        text: 'Polar'
+                    }
+                });
+            });
+        });
+    });
+
+</script>
 
 }
 

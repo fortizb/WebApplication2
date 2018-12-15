@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Añadir Costos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("AGREGAR", "Create")
 </p>
 <table class="table">
     <tr>
@@ -54,13 +54,15 @@
                 @Html.DisplayFor(modelItem => item.hojaRuta.patente)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idCosto }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idCosto }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idCosto })
+                @Html.ActionLink("Editar", "Edit", new { id = item.idCosto }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.idCosto })
             </td>
         </tr>
 
 
     }
-    <a href="@Url.Action("Finalizar", "costosHojaRutas", new { }, null)" class="btn btn-warning">
+        
 </table>
+<a href="@Url.Action("Finalizar", "costosHojaRuta", new { }, null)" class="btn btn-warning">
+    <i class="fa fa-check-circle"></i>
+    <span>&nbsp;Finalizar</span>
