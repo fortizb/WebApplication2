@@ -73,10 +73,16 @@
     }
 </style>
 <div class="container-fluid">
-    <p class="text-right">
-        <a class="btn btn-success" href="@Url.Action("Create", "usuarios")" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Agregar</a>
-    </p>
-    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-left" style="margin: 0.5em 0 0 0;">Usuarios</h2>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">
+                <a class="btn btn-success" href="@Url.Action("Create", "usuarios")" style="margin: 1em 0 1em 0; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Agregar</a>
+            </p>
+        </div>
+    </div>
     <div class="table-responsive" style="margin: 0 0 1em 0;">
         <table id="tabColaboradores" class="table table-borderless table-data3">
             <thead style="background-color: #1e7338;">

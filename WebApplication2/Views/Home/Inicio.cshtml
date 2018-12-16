@@ -1,79 +1,91 @@
-﻿@if (Session["Login"].ToString() == "Administrador")
-{
-
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-
+﻿@{
+    ViewBag.Title = "Inicio";
 }
 
-<section class="welcome p-t-10">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="title-4">
-                    Bienvenido,
-                    @if (Session["usuarioNombre"] != null)
-                    {<text>
-                            @Session["usuarioNombreCol"].ToString()
-                    </text>
-                }
-                </h1>
-                <hr class="line-seprate">
+@if (Session["Login"].ToString() == "Administrador")
+{
+    @*<section class="welcome p-t-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title-4">
+                            Bienvenido,
+                            @if (Session["usuarioNombre"] != null)
+                            {
+                                @Session["usuarioNombreCol"].ToString()
+                            }
+                        </h1>
+                        <hr class="line-seprate">
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>*@
+    <!-- END WELCOME-->
+    <div class="container">
+        <h2 class="text-center" style="margin: 1em 0 2em 0;">Resumen general</h2>
+        <div id="barchart"></div>
+
+        <!-- STATISTIC-->
+        <section class="statistic statistic2">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="barchart" style="width: 100%; margin: 0 auto;"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-center" style="margin: 0 0 2em 0;">Gastos periódicos</h4>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="statistic__item statistic__item--green">
+                        <h2 class="number">$@Session["valorSemanal"]</h2>
+                        <span class="desc">Gasto Semanal</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-truck"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="statistic__item statistic__item--orange">
+                        <h2 class="number">$@Session["valorMensual"]</h2>
+                        <span class="desc">Gasto Ultimo Mes</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-truck"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="statistic__item statistic__item--red">
+                        <h2 class="number">$@Session["valorTotal"]</h2>
+                        <span class="desc">Gasto total</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-money"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="piechart"></div>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
-<!-- END WELCOME-->
 
-<h3 class="title-3 m-b-30">Despachos por Mes</h3>
-
-<div id="barchart" style=" min-width: 30%; max-width: 70%; margin: 0 auto;"></div>
-<!-- STATISTIC-->
-<section class="statistic statistic2">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="statistic__item statistic__item--green">
-                    <h2 class="number">$@ViewBag.valorSemanal</h2>
-                    <span class="desc">Gasto Semanal</span>
-                    <div class="icon">
-                        <i class="zmdi zmdi-truck"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="statistic__item statistic__item--orange">
-                    <h2 class="number">$@ViewBag.valorMensual</h2>
-                    <span class="desc">Gasto Ultimo Mes</span>
-                    <div class="icon">
-                        <i class="zmdi zmdi-truck"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="statistic__item statistic__item--red">
-                    <h2 class="number">$@ViewBag.valorTotal</h2>
-                    <span class="desc">Gasto total</span>
-                    <div class="icon">
-                        <i class="zmdi zmdi-money"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div id="piechart"></div>
-            </div>
-
-        </div>
-</section>
-
-<script>
-    @*  Guias   *@
+    @section Scripts{
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        @*<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>*@
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script>
     $(document).ready(function () {
-        $.getJSON("Home/GetData", function (data) {
+        @* Guias *@
+        $.getJSON("/Home/GetData", function (data) {
             Highcharts.chart('piechart', {
                 chart: {
                     plotBackgroundColor: null,
@@ -82,7 +94,7 @@
                     type: 'pie'
                 },
                 title: {
-                    text: 'Estado de las guias'
+                    text: 'Estado de las guías'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -111,15 +123,12 @@
                 }]
             });
         });
-    });
-
-    @*   Meses   *@
-    $(document).ready(function () {
-        $.getJSON("Home/GetDataBarChart", function (data) {
+        @* Meses *@
+        $.getJSON("/Home/GetDataBarChart", function (data) {
             var chart = Highcharts.chart('barchart', {
 
                 title: {
-                    text: 'Hojas de Ruta/Mes'
+                    text: 'Hojas de ruta/mes'
                 },
 
                 xAxis: {
@@ -128,6 +137,7 @@
 
                 series: [{
                     type: 'column',
+                    styledMode: true,
                     colorByPoint: true,
                     data: [{
                         name: 'Enero',
@@ -175,8 +185,6 @@
                         name: 'Diciembre',
                         y: data.Diciembre
 
-
-
                     }],
                     showInLegend: false
                 }]
@@ -221,8 +229,8 @@
             });
         });
     });
-
-</script>
-
+        </script>
+    }
 }
+
 

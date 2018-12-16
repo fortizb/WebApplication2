@@ -21,6 +21,25 @@ namespace WebApplication2.Controllers
             }
             else
             {
+                id = Convert.ToInt32(TempData["id"]);
+                var model = new ResumenHojaRutaViewModel
+                {
+                    guiasID = db.guias.ToList().Where(g => g.idHojaRuta == id),
+                    colaboradorHojaRutaID = db.colaboradorHojaRuta.ToList().Where(ch => ch.idHojaRuta == id)
+                    //colaboradorID = db.colaborador.ToList()
+                };
+                return View(model);
+            }
+        }
+
+        public ActionResult Resumen(int? id)
+        {
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
                 var model = new ResumenHojaRutaViewModel
                 {
                     guiasID = db.guias.ToList().Where(g => g.idHojaRuta == id),

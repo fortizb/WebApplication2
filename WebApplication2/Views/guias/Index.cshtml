@@ -1,130 +1,142 @@
 ﻿@model IEnumerable<WebApplication2.Models.guias>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Guías y ruta";
+
     @*<style type="text/css">
-        #tablaDireccion td:hover {
-            cursor: pointer;
-        }
-
-        #listaOrigen {
-            display: none;
-        }
-    </style>*@
-
-<div class="container">
-    <h3 style="margin-top: 1em;">Agregar guías a hoja de ruta</h3>
-    <table id="tablaDireccion" class="table table-bordered" style="margin-top: 1em;">
-        <thead>
-            <tr>
-                <th>
-                    R.U.T.
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Dirección
-                </th>
-                <th>
-                    Teléfono
-                </th>
-                <th>
-                    Observación
-                </th>
-                <th>
-                    Patente
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.rut)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nombre)
-                    </td>
-                    <td>
-                        @(item.direccion + ", " + item.ciudad + ", Chile")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.telefono)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.observacion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.hojaRuta.patente)
-                    </td>
-                    <td>
-                        @*@Html.ActionLink("Agregar a Hoja De Ruta", "AddGuiaHR", new { idNumeroGuias = item.numeroGuia }, new { @class = "btn btn-primary" })*@
-                        <a href="@Url.Action("AddGuiaHR", "guias", new { idNumeroGuias = item.numeroGuia }, null)" class="btn btn-primary">
-                            <i class="fa fa-plus"></i>
-                            <span>&nbsp;Agregar a hoja de ruta</span>
-                        </a>
-                    </td>
-                </tr>
+            #tablaDireccion td:hover {
+                cursor: pointer;
             }
-        </tbody>
-    </table>
-    <h3 style="margin-top: 1em;">Sugerencia de ruta</h3>
-    <br />
-    <select class="form-control" multiple id="waypoints">
-        @foreach (var select in Model)
-        {
-            <option value="@(select.direccion + ", " + select.ciudad + ", Chile")">@(select.direccion + ", " + select.ciudad + ", Chile")</option>
-        }
-    </select>
-    @*<button id="btnRutaSugerida" class="btn btn-success btn-block col-md-6" style="margin-left: 1em;">Sugerir ruta</button>*@
-    <br />
-    <p class="msj-hecho text-center text-danger" style="margin-top: 0.5em;"><b id="mensajeAgregado"></b></p>
-    <br />
-    <a class="btn btn-success" data-toggle="collapse" href="#collapseRuta" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i>&nbsp;Mapa</a>&nbsp;&nbsp;
-    <button id="btnRutaSugerida" class="btn btn-success"><i class="fa fa-list-ol"></i>&nbsp;Sugerir ruta</button>&nbsp;&nbsp;
-    <button id="btnLimpiarRuta" type="button" class="btn btn-warning"><i class="fa fa-trash"></i>&nbsp;Limpiar ruta</button>&nbsp;&nbsp;
-    @*@Html.ActionLink("Finalizar", "Siguiente", new { }, new { @class = "btn btn-warning" })*@
-    @* Cambiar nombre de método* *@
-    <a href="@Url.Action("Finalizar", "guias", new { }, null)" class="btn btn-warning">
-        <i class="fa fa-check-circle"></i>
-        <span>&nbsp;Finalizar</span>
-    </a>
-    <br />
-    <!-- Área para cargar collapse de ruta -->
-    <div class="collapse" id="collapseRuta" style="margin-top: 1em;">
-        <div class="card card-body">
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#map">Mapa de direcciones</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#infoPanel">Descripción de direcciones</a></li>
-            </ul>
 
-            <div class="tab-content">
-                <div id="map" class="tab-pane fad in active">
-                    <div class="row">
-                        <form id="frmUbicacion" action="" role="form" class="col-md-6" style="margin-top: 1em;">
-                            <div class="form-group">
-                                <!--<label for="txtUbicacion" class="sr-only">Ubicación</label>-->
-                                <input id="txtUbicacion" type="hidden" value="Bernardo Ohiggins 916, Constitución, Región del Maule" class="form-control" />
-                                <input id="txtUbicacion2" type="hidden" placeholder="Ubicación" class="form-control" readonly />
-                            </div>
-                            <div class="form-group">
-                                <!--<input id="btnAgregarUbicacion" type="button" value="Añadir" class="btn btn-success btn-block" style="padding: 0.8em;" />-->
-                                <!--<div id="successMessage" class="alert alert-success success-msg col-md-5" role="alert">
+            #listaOrigen {
+                display: none;
+            }
+        </style>*@
+
+    <style type="text/css">
+        .pagination > li.active > a, .pagination > li.active > span {
+            background-color: #1e7338 !important;
+            border-color: #1e7338 !important;
+        }
+    </style>
+
+    <div class="container">
+        <h2 style="margin: 1em 0 1em 0;">Agregar guías a hoja de ruta</h2>
+        <div class="table-responsive">
+            <table id="tablaDireccion" class="table table-borderless table-data3" style="margin-top: 1em;">
+                <thead style="background-color: #1e7338;">
+                    <tr>
+                        <th>
+                            R.U.T.
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Dirección
+                        </th>
+                        <th>
+                            Teléfono
+                        </th>
+                        <th>
+                            Observación
+                        </th>
+                        <th>
+                            Patente
+                        </th>
+                        <th>
+                            Opción
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.rut)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre)
+                            </td>
+                            <td>
+                                @(item.direccion + ", " + item.ciudad + ", Chile")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.observacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hojaRuta.patente)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Agregar a Hoja De Ruta", "AddGuiaHR", new { idNumeroGuias = item.numeroGuia }, new { @class = "btn btn-primary" })*@
+                                <div class="table-data-feature">
+                                    <a class="item" data-toggle="tooltip" data-placement="top" title="Añadir a hoja de ruta" href="@Url.Action("AddGuiaHR", "guias", new { idNumeroGuias = item.numeroGuia }, null)">
+                                        <i class="zmdi zmdi-plus"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <h2 style="margin-top: 1em;">Sugerencia de ruta</h2>
+        <br />
+        <select class="form-control" multiple id="waypoints">
+            @foreach (var select in Model)
+            {
+                <option value="@(select.direccion + ", " + select.ciudad + ", Chile")">@(select.direccion + ", " + select.ciudad + ", Chile")</option>
+            }
+        </select>
+        @*<button id="btnRutaSugerida" class="btn btn-success btn-block col-md-6" style="margin-left: 1em;">Sugerir ruta</button>*@
+        <br />
+        <p class="msj-hecho text-center text-danger" style="margin-top: 0.5em;"><b id="mensajeAgregado"></b></p>
+        <br />
+        <a class="btn btn-success" data-toggle="collapse" href="#collapseRuta" role="button" aria-expanded="false" aria-controls="collapseExample" style="background-color: #1e7338;"><i class="fa fa-search"></i>&nbsp;Mapa</a>&nbsp;&nbsp;
+        <button id="btnRutaSugerida" class="btn btn-success" style="background-color: #1e7338;"><i class="fa fa-list-ol"></i>&nbsp;Sugerir ruta</button>&nbsp;&nbsp;
+        <button id="btnLimpiarRuta" type="button" class="btn btn-warning"><i class="fa fa-trash"></i>&nbsp;Limpiar ruta</button>&nbsp;&nbsp;
+        @*@Html.ActionLink("Finalizar", "Siguiente", new { }, new { @class = "btn btn-warning" })*@
+        @* Cambiar nombre de método* *@
+        <a href="@Url.Action("Finalizar", "guias", new { }, null)" class="btn btn-warning">
+            <i class="fa fa-check-circle"></i>
+            <span>&nbsp;Finalizar</span>
+        </a>
+        <br />
+        <!-- Área para cargar collapse de ruta -->
+        <div class="collapse" id="collapseRuta" style="margin-top: 1em;">
+            <div class="card card-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#map">Mapa de direcciones</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#infoPanel">Descripción de direcciones</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="map" class="tab-pane fad in active">
+                        <div class="row">
+                            <form id="frmUbicacion" action="" role="form" class="col-md-6" style="margin-top: 1em;">
+                                <div class="form-group">
+                                    <!--<label for="txtUbicacion" class="sr-only">Ubicación</label>-->
+                                    <input id="txtUbicacion" type="hidden" value="Bernardo Ohiggins 916, Constitución, Región del Maule" class="form-control" />
+                                    <input id="txtUbicacion2" type="hidden" placeholder="Ubicación" class="form-control" readonly />
+                                </div>
+                                <div class="form-group">
+                                    <!--<input id="btnAgregarUbicacion" type="button" value="Añadir" class="btn btn-success btn-block" style="padding: 0.8em;" />-->
+                                    <!--<div id="successMessage" class="alert alert-success success-msg col-md-5" role="alert">
                                     ¡Agregado a la lista!
                                 </div>-->
-                            </div>
-                            <!--<div class="form-group">
+                                </div>
+                                <!--<div class="form-group">
                                 <label for="listaOrigen" class="sr-only">Source</label>
                                 <select id="listaOrigen" class="form-control">
                                     <option value="">-- Origen --</option>
                                 </select>
                             </div>-->
-
-                            <!--<div class="form-group">
+                                <!--<div class="form-group">
                                 <label for="listaDestino" class="sr-only">Destination</label>
                                 <select id="listaDestino" class="form-control">
                                     <option value="">-- Destino --</option>
@@ -138,7 +150,7 @@
                                 </label>
                             </div>
                             <br />-->
-                            <!--<div class="form-group">
+                                <!--<div class="form-group">
                                 <label for="listaModoViaje" class="sr-only">Travel Mode</label>
                                 <select id="listaModoViaje" class="form-control">
                                     <option value="">-- Modo de viaje --</option>
@@ -147,49 +159,69 @@
                                     <option value="BICYCLING">Bicicleta</option>
                                 </select>
                             </div>-->
-                            <!--<div class="checkbox">
+                                <!--<div class="checkbox">
                                 <label>
                                     <input id="checkRutaOptima" type="checkbox" checked="checked" />
                                     Optimizar ruta
                                 </label>
                             </div>-->
-                            <!--<div class="form-group">
+                                <!--<div class="form-group">
                                 <input id="btnLimpiarRuta" type="button" value="Limpiar" class="btn btn-block btn-warning" style="padding: 0.8em;" />
                                 <input id="btnMostrarDirecciones" type="button" value="Mostrar" class="btn btn-block btn-success" style="padding: 0.8em;" />
                             </div>-->
-                        </form>
-                        <div id="googleMap" class="col-md-12 map" style="margin-top: 1em; height: 31em;"></div>
+                            </form>
+                            <div id="googleMap" class="col-md-12 map" style="margin-top: 1em; height: 31em;"></div>
+                        </div>
                     </div>
-                </div>
 
-                <div id="infoPanel" class="tab-pane fad">
-                    <div id="panel" class="col-md-12 panel"></div>
+                    <div id="infoPanel" class="tab-pane fad">
+                        <div id="panel" class="col-md-12 panel"></div>
+                    </div>
                 </div>
             </div>
         </div>
+        <br />
+        <table class="table table-borderless table-data3">
+            <thead style="background-color: #1e7338;">
+                <tr>
+                    <th>Distancia (KM)</th>
+                    <th>Duración (hr)</th>
+                    <th>Combustible (lts)</th>
+                    <th>Gasto posible</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="totalDistancia"></td>
+                    <td id="totalDuracion"></td>
+                    <td id="combustibleAprox"></td>
+                    <td id="costoAprox"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <div class="card">
+            <div class="card-header" style="background-color: #1e7338; color: white; border-color: #1e7338;">
+                <text class="card-title mb-3">Detalle de ruta sugerida</text>
+            </div>
+            <div class="card-body">
+                <div id="panel-direcciones"></div>
+            </div>
+        </div>        
     </div>
-    <br />
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Distancia (KM)</th>
-                <th>Duración (hr)</th>
-                <th>Combustible (lts)</th>
-                <th>Gasto posible</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td id="totalDistancia"></td>
-                <td id="totalDuracion"></td>
-                <td id="combustibleAprox"></td>
-                <td id="costoAprox"></td>
-            </tr>
-        </tbody>
-    </table>
-    <br />
-    <div id="panel-direcciones"></div>
-</div>
+
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQFeAyqNAmW4CDImQEIOKsNHQMiKIaxX4&libraries=places"></script>
 }
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tablaDireccion').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+    }

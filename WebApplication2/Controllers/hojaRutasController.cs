@@ -25,8 +25,8 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                // Cambiar 2 -> 0
-                var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 0 && h.estado == true).Include(h => h.vehiculo).Include(h => h.vehiculo1);
+                // Cambiar 2 -> 1
+                var hojaRuta = db.hojaRuta.Where(h => h.idHojaRuta > 1 && h.estado == true).Include(h => h.vehiculo).Include(h => h.vehiculo1);
                 return View(hojaRuta.ToList());
                 
             }

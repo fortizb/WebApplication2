@@ -1,68 +1,164 @@
 ﻿@model IEnumerable<WebApplication2.Models.costosHojaRuta>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Costos";
 }
 
-<h2>Añadir Costos</h2>
+@*<h2>Añadir Costos</h2>
 
-<p>
-    @Html.ActionLink("AGREGAR", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.concepto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numDocumento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.proveedor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.monto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.hojaRuta.patente)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <p>
+        @Html.ActionLink("AGREGAR", "Create")
+    </p>
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.concepto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.numDocumento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.proveedor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.monto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hojaRuta.patente)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.idCosto }) |
-                @Html.ActionLink("Borrar", "Delete", new { id = item.idCosto })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.concepto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.proveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hojaRuta.patente)
+            </th>
+            <th></th>
         </tr>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.concepto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.proveedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.monto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hojaRuta.patente)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.idCosto }) |
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.idCosto })
+                </td>
+            </tr>
 
+
+        }
+
+    </table>*@
+
+<style type="text/css">
+    .pagination > li.active > a, .pagination > li.active > span {
+        background-color: #1e7338 !important;
+        border-color: #1e7338 !important;
     }
-        
-</table>
-<a href="@Url.Action("Finalizar", "costosHojaRuta", new { }, null)" class="btn btn-warning">
-    <i class="fa fa-check-circle"></i>
-    <span>&nbsp;Finalizar</span>
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-left" style="margin: 0.5em 0 0 0;">Costos</h2>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">
+                <a class="btn btn-success" href="@Url.Action("Create", "costosHojaRutas")" style="margin: 1em 0 1em 0; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Agregar</a>
+            </p>
+        </div>
+    </div>
+    <div class="table-responsive" style="margin: 0 0 1em 0;">
+        <table id="tabColaboradores" class="table table-borderless table-data3">
+            <thead style="background-color: #1e7338;">
+                <tr>
+                    <th>
+                        Concepto
+                    </th>
+                    <th>
+                        N° Documento
+                    </th>
+                    <th>
+                        Proveedor
+                    </th>
+                    <th>
+                        Monto
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Patente
+                    </th>
+                    <th>
+                        Opciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.concepto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numDocumento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.proveedor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.monto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hojaRuta.patente)
+                        </td>
+                        <td>
+                            <div class="table-data-feature">
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit", "costosHojaRutas", new { id = item.idCosto })"><i class="zmdi zmdi-edit"></i></a>
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" href="@Url.Action("Delete", "costosHojaRutas", new { id = item.idCosto })"><i class="zmdi zmdi-delete"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <a href="@Url.Action("Index", "hojaRutas", new { }, null)" class="btn btn-success" style="background-color: #1e7338;">
+        <i class="fa fa-arrow-left"></i>
+        <span>&nbsp;Volver a hojas de ruta</span>
+    </a>
+    <a href="@Url.Action("Finalizar", "costosHojaRutas", new { }, null)" class="btn btn-warning">
+        <i class="fa fa-check-circle"></i>
+        <span>&nbsp;Finalizar</span>
+    </a>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabColaboradores').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                }
+            });
+        });
+    </script>
+}
+

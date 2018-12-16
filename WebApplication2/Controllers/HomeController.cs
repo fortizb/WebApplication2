@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -33,8 +32,6 @@ namespace WebApplication2.Controllers
             }
             else
             {
-               
-                Thread.Sleep(4000); // 4000 = 4 seconds.
                 return RedirectToAction("Login");
             }
         }
@@ -63,9 +60,9 @@ namespace WebApplication2.Controllers
                         int valorSemanal = list.Sum(x => x.monto);
                         int valorMensual = listMensual.Sum(x => x.monto);
                         int valorTotal = listTotal.Sum(x => x.monto);
-                        ViewBag.valorSemanal = valorSemanal;
-                        ViewBag.valorTotal = valorTotal;
-                        ViewBag.valorMensual = valorMensual;
+                        Session["valorSemanal"] = valorSemanal;
+                        Session["valorTotal"] = valorTotal;
+                        Session["valorMensual"] = valorMensual;
                         return View("Inicio");
                     }
                     else

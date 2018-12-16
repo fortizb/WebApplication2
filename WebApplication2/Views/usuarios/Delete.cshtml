@@ -1,80 +1,111 @@
 ﻿@model WebApplication2.Models.usuario
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar usuario";
 }
+<div class="col-lg-6" style="margin: 0 auto; margin-top: 1em;">
+    @*<h4>usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.usuarioNombre)
+            </dt>
 
-<h2>Delete</h2>
+            <dd>
+                @Html.DisplayFor(model => model.usuarioNombre)
+            </dd>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>usuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.usuarioNombre)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.usuarioClave)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.usuarioNombre)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.usuarioClave)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usuarioClave)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.usuarioActivo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.usuarioClave)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.usuarioActivo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usuarioActivo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.usuarioNombreCol)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.usuarioActivo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.usuarioNombreCol)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usuarioNombreCol)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.usuarioApellido)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.usuarioNombreCol)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.usuarioApellido)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usuarioApellido)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.usuarioTelefono)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.usuarioApellido)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.usuarioTelefono)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usuarioTelefono)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.usuarioCargo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.usuarioTelefono)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.usuarioCargo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usuarioCargo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usuarioCargo)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        </dl>*@
+    <div class="top-campaign">
+        <h3 class="text-center m-b-30">¿Está seguro de eliminar este ítem?</h3>
+        <div class="table-responsive">
+            <table class="table table-top-campaign">
+                <tbody>
+                    <tr>
+                        <td>Usuario</td>
+                        <td>@Html.DisplayFor(model => model.usuarioNombre)</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>@Html.DisplayFor(model => model.usuarioNombreCol)</td>
+                    </tr>
+                    <tr>
+                        <td>Apellido</td>
+                        <td>@Html.DisplayFor(model => model.usuarioApellido)</td>
+                    </tr>
+                    <tr>
+                        <td>Teléfono</td>
+                        <td>@Html.DisplayFor(model => model.usuarioTelefono)</td>
+                    </tr>
+                    <tr>
+                        <td>Cargo</td>
+                        <td>@Html.DisplayFor(model => model.usuarioCargo)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    }
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @*<input type="submit" value="Delete" class="btn btn-default" />*@
+            <button type="submit" class="btn btn-lg btn-block" style="background-color: #1e7338; color: white;">
+                <i class="fa fa-trash fa-lg"></i>&nbsp;
+                Eliminar
+            </button>
+        }
+    </div>
+    <div class="col-md-12 text-center" style="margin-bottom: 1em;">
+        @*@Html.ActionLink("Back to List", "Index")*@
+        <a class="btn btn-success text-center" href="@Url.Action("Index", "usuarios")" style="background-color: #1e7338; margin: 0 auto;"><i class="fa fa-arrow-left"></i>&nbsp;Volver a la lista</a>
+    </div>
 </div>

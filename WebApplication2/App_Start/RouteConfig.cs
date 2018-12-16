@@ -21,9 +21,7 @@ namespace WebApplication2
                  controller = "Home",
                  action = "Login",
                  id = UrlParameter.Optional
-             }
-         );
-          
+             });
         }
     }
 }

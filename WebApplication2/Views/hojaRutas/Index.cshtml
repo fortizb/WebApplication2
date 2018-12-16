@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebApplication2.Models.hojaRuta>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Hojas de ruta";
 }
 <style type="text/css">
     .pagination > li.active > a, .pagination > li.active > span {
@@ -11,8 +11,17 @@
 </style>
 
 <div class="container-fluid">
-    <h3 style="margin-top: 1em;">Hojas de ruta</h3>
-    <a class="btn btn-success" href="@Url.Action("Create", "hojaRutas")" style="margin: 1em 0 1em 0; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Crear hoja</a>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-left" style="margin: 0.5em 0 0 0;">Hojas de ruta</h2>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">
+                <a class="btn btn-success" href="@Url.Action("Create", "hojaRutas")" style="margin: 1em 0 1em 0; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Crear hoja</a>
+            </p>
+        </div>
+    </div>
+
     <div class="table-responsive m-b-30">
         <table id="tabHojaRuta" class="table table-borderless table-data3" style="margin-top: 1em;">
             <thead style="background-color: #1e7338;">
@@ -46,15 +55,18 @@
                             @Html.DisplayFor(modelItem => item.fechaModificacion)
                         </td>
                         <td>
-                            <a class="btn btn-success" data-toggle="dropdown" href="#" style="background-color: #1e7338;"><i class="fa fa-bars"></i>&nbsp;MENU</a>
-                            <ul class="dropdown-menu" role="menu">
-                                @*<li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
-                                    <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
-                                    <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>*@
-                                <a class="dropdown-item" href="@Url.Action("AddDatos", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-plus-circle"></i>&nbsp;Agregar</a>
-                                <a class="dropdown-item" href="@Url.Action("Edit", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-edit"></i>&nbsp;Modificar</a>
-                                <a class="dropdown-item" href="@Url.Action("Index", "infoHojaRuta",  new { id = item.idHojaRuta }, null)"><i class="fa fa-info-circle"></i>&nbsp;Resumen</a>
-                            </ul>
+                            <div class="text-left">
+                                <a data-toggle="dropdown" tabindex="0" class="btn btn-success" href="#" style="background-color: #1e7338;"><i class="fa fa-bars"></i>&nbsp;&nbsp;Menú</a>
+                                <div tabindex="-1" aria-hidden="true" role="menu" class="dropdown-menu">
+                                    @*<li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
+            <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
+            <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>*@
+                                    <a tabindex="0" class="dropdown-item" href="@Url.Action("AddDatos", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-plus-circle"></i>&nbsp;Agregar</a>
+                                    <a tabindex="0" class="dropdown-item" href="@Url.Action("Edit", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-edit"></i>&nbsp;Costos</a>
+                                    <a tabindex="0" class="dropdown-item" href="@Url.Action("Resumen", "infoHojaRuta",  new { id = item.idHojaRuta }, null)"><i class="fa fa-info-circle"></i>&nbsp;Resumen</a>
+                                </div>
+                            </div>
+                            
                         </td>
                     </tr>
                 }

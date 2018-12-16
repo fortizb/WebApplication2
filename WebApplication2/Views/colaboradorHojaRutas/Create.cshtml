@@ -10,12 +10,18 @@
 </style>
 
 <div class="container-fluid">
-
-    <h3 style="margin-top: 1em;">Asignación de colaboradores</h3>
-
-    <a href="#" class="btn btn-info" onclick="AddChofer(0)" style="margin-top: 1em; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Añadir colaborador</a>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-left" style="margin: 0.5em 0 0 0;">Asignación de colaboradores</h2>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">
+                <a href="#" class="btn btn-info" onclick="AddChofer(0)" style="margin: 1em 0 1em 0; background-color: #1e7338;"><i class="fa fa-plus"></i>&nbsp;Añadir colaborador</a>
+            </p>
+        </div>
+    </div>
     <div class="table-responsive">
-        <table class="table table-borderless table-data3" style="margin-top: 1.5em;">
+        <table id="tabColaboradorHoja" class="table table-borderless table-data3">
             <thead style="background-color: #1e7338;">
                 <tr>
                     <th>R.U.N.</th>
@@ -61,47 +67,47 @@
 
 
 @section Scripts{
-<script>
-    $("#LoadingStatus").html("Loading...");
-    $.get("/colaboradorHojaRutas/GetCHRList", null, DataBind);
-    function DataBind(chrList) {
-        //This Code For Receive All Data From Controller And Show It In Client Side
-        var SetData = $("#SetCHRList");
-        for (var i = 0; i < chrList.length; i++) {
-            var Data = "<tr class='row_" + chrList[i].idColHojaRuta + "'>" +
-                "<td>" + chrList[i].rut + "</td>" +
-                "<td>" + chrList[i].nombre + " " + chrList[i].apellidoPaterno + " " + chrList[i].apellidoMaterno + "</td>" +
-                "<td>" + chrList[i].cargo + "</td>" +
-                "</tr>";
-            SetData.append(Data);
-            $("#LoadingStatus").html(" ");
+    <script type="text/javascript">
+        $("#LoadingStatus").html("Sin datos...");
+        $.get("/colaboradorHojaRutas/GetCHRList", null, DataBind);
+        function DataBind(chrList) {
+            //This Code For Receive All Data From Controller And Show It In Client Side
+            var SetData = $("#SetCHRList");
+            for (var i = 0; i < chrList.length; i++) {
+                var Data = "<tr class='row_" + chrList[i].idColHojaRuta + "'>" +
+                    "<td>" + chrList[i].rut + "</td>" +
+                    "<td>" + chrList[i].nombre + " " + chrList[i].apellidoPaterno + " " + chrList[i].apellidoMaterno + "</td>" +
+                    "<td>" + chrList[i].cargo + "</td>" +
+                    "</tr>";
+                SetData.append(Data);
+                $("#LoadingStatus").html(" ");
+
+            }
+        }
+        // Modal Agregar Colaborador
+        function AddChofer(run) {
+            $("#form")[0].reset();
+            $("#ModalTitle").html("Agregar chofer");
+            //$("#chrRun option:selected").text("--Seleccione Colaborador--");
+            $("#MyModal").modal();
 
         }
-    }
-    // Modal Agregar Colaborador
-    function AddChofer(run) {
-        $("#form")[0].reset();
-        $("#ModalTitle").html("Agregar chofer");
-        //$("#chrRun option:selected").text("--Seleccione Colaborador--");
-        $("#MyModal").modal();
-
-    }
-    // Guardar Colaborador
-    $("#GuardarChofer").click(function () {
-        var data = $("#SubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/colaboradorHojaRutas/GuardarChoferInDB",
-            data: data,
-            success: function (result) {
-                alert("¡Completado!");
-                window.location.href = "/colaboradorHojaRutas/Create";
-                $("#MyModal").modal("hide");
-            }
+        // Guardar Colaborador
+        $("#GuardarChofer").click(function () {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/colaboradorHojaRutas/GuardarChoferInDB",
+                data: data,
+                success: function (result) {
+                    alert("¡Completado!");
+                    window.location.href = "/colaboradorHojaRutas/Create";
+                    $("#MyModal").modal("hide");
+                }
+            })
         })
-    })
-</script>    
-    }
+    </script>
+}
 
 
 

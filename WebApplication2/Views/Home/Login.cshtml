@@ -2,7 +2,7 @@
 @{
     /**/
 
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Iniciar sesión";
 
     using (Html.BeginForm("Login", "Home", FormMethod.Post))
     {
@@ -77,7 +77,7 @@
                                             @Html.ValidationMessageFor(a => a.usuarioClave)
                                         </div>
                                         
-                                        <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit" value="Login">Ingresar</button>
+                                        <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit" style="background: #1e7338;"><i class="fa fa-sign-in-alt"></i>&nbsp;&nbsp;Ingresar</button>
                                         <span style="color:red;">@ViewBag.MSG</span>
                                     </form>
                                 </div>
