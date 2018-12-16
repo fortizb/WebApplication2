@@ -4,13 +4,13 @@
         <div class="header3-wrap">
             <div class="header__logo">
                 <a href="@Url.Action("Inicio", "Home")">
-                    <img src="~/Content/images/icon/dimaco_small.png" alt="CoolAdmin" width="200px" />
+                    <img src="~/Content/images/icon/dimaco_small.png" alt="CoolAdmin" width="200" />
                 </a>
             </div>
             <div class="header__navbar">
                 <ul class="list-unstyled">
                     <li class="has-sub">
-                        <a href="@Url.Action("Inicio", "Home")">
+                        <a href="~/Home/Inicio">
                             <i class="fa fa-home"></i>
                             <span>&nbsp;Inicio</span>
                         </a>
@@ -68,7 +68,14 @@
             <div class="account-wrap">
                 <div class="account-item account-item--style2 clearfix js-item-menu">
                     <div class="image">
-                        <img src="~/Content/images/icon/avatar-01.jpg" alt="John Doe" />
+                        @if (Session["Login"].ToString() == "Administrador")
+                        {
+                            <img src="~/Content/images/icon/profile_admin.png" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/icon/profile_user.png" />
+                        }
                     </div>
                     <div class="content">
                         @if (Session["usuarioNombre"] != null)
@@ -82,8 +89,14 @@
                         <div class="info clearfix">
                             <div class="image">
                                 <a href="#">
-                                    <img src="~/Content/images/icon/avatar-01.jpg" />
-
+                                    @if (Session["Login"].ToString() == "Administrador")
+                                    {
+                                        <img src="~/Content/images/icon/profile_admin.png" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/icon/profile_user.png" />
+                                    }
                                 </a>
                             </div>
                             <div class="content">

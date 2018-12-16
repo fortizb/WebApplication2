@@ -25,8 +25,8 @@ namespace WebApplication2.Controllers
             {
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
-                //Cambiar 2 por 0*
-                var guias = db.guias.Where(x => x.idHojaRuta == 0 && x.estado == "Pendiente").Include(g => g.hojaRuta);
+                //Cambiar 2 por 1*
+                var guias = db.guias.Where(x => x.idHojaRuta == 1 && x.estado == "Pendiente").Include(g => g.hojaRuta);
                 return View(guias.ToList());
             }
         }
@@ -64,7 +64,7 @@ namespace WebApplication2.Controllers
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
                 // Cambiar redirección a hoja de resumen*
-                return RedirectToAction("Index", "hojaRutas");
+                return RedirectToAction("Index", "infoHojaRuta");
             }
         }
 

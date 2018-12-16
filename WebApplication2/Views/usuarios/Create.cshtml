@@ -1,7 +1,7 @@
 ﻿@model WebApplication2.Models.usuario
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear usuario";
 }
 
 <div class="containter-fluid">
@@ -125,7 +125,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label class="control-label mb-1">Cargo</label>
-                                @Html.EditorFor(model => model.usuarioCargo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DropDownListFor(model => model.usuarioCargo, new List<SelectListItem> { new SelectListItem { Text = "Administrador", Value = "Administrador" }, new SelectListItem { Text = "Planificador", Value = "Planificador" } }, "Por favor, seleccione...", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.usuarioCargo, "", new { @class = "text-danger" })
                             </div>
                         </div>

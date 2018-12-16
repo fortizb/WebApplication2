@@ -365,6 +365,8 @@
     <Content Include="Content\images\icon\logo-mini.png" />
     <Content Include="Content\images\icon\logo-white.png" />
     <Content Include="Content\images\icon\logo.png" />
+    <Content Include="Content\images\icon\profile_admin.png" />
+    <Content Include="Content\images\icon\profile_user.png" />
     <Content Include="Content\images\icon\Untitled-1.jpg" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\vendor\animsition\animsition.min.css" />
@@ -655,6 +657,7 @@
     <Content Include="Views\usuarios\Details.cshtml" />
     <Content Include="Views\usuarios\Edit.cshtml" />
     <Content Include="Views\usuarios\Index.cshtml" />
+    <Content Include="Views\infoHojaRuta\Resumen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
