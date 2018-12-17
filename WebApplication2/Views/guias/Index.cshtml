@@ -96,7 +96,7 @@
         <select class="form-control" multiple id="waypoints">
             @foreach (var select in Model)
             {
-                <option value="@(select.direccion + ", " + select.ciudad + ", Chile")">@(select.numeroGuia + ", " + select.direccion + ", " + select.ciudad + ", Chile")</option>
+                <option value="@(select.direccion + ", " + select.ciudad + ", Chile")">@("N° Guia: " + select.numeroGuia + " | " + select.direccion + ", " + select.ciudad + ", Chile")</option>
             }
         </select>
         @*<button id="btnRutaSugerida" class="btn btn-success btn-block col-md-6" style="margin-left: 1em;">Sugerir ruta</button>*@
@@ -105,9 +105,11 @@
         <br />
         <a class="btn btn-success" data-toggle="collapse" href="#collapseRuta" role="button" aria-expanded="false" aria-controls="collapseExample" style="background-color: #1e7338;"><i class="fa fa-search"></i>&nbsp;Mapa</a>&nbsp;&nbsp;
         <button id="btnRutaSugerida" class="btn btn-success" style="background-color: #1e7338;"><i class="fa fa-list-ol"></i>&nbsp;Sugerir ruta</button>&nbsp;&nbsp;
+        <a class="btn btn-success" id="btnImprimirEstimacion" href="#" style="background-color: #1e7338; margin: 1em 0 1em 0;"><i class="fa fa-print"></i>&nbsp;Imprimir ruta sugerida</a>&nbsp;&nbsp;
         <button id="btnLimpiarRuta" type="button" class="btn btn-warning"><i class="fa fa-trash"></i>&nbsp;Limpiar ruta</button>&nbsp;&nbsp;
         @*@Html.ActionLink("Finalizar", "Siguiente", new { }, new { @class = "btn btn-warning" })*@
         @* Cambiar nombre de método* *@
+
         <a href="@Url.Action("Finalizar", "guias", new { }, null)" class="btn btn-warning">
             <i class="fa fa-check-circle"></i>
             <span>&nbsp;Finalizar</span>
@@ -205,9 +207,7 @@
                 </tr>
             </tbody>
         </table>
-        
-        <a class="btn btn-success" id="btnImprimirEstimacion" href="#" style="background-color: #1e7338; margin: 1em 0 1em 0;"><i class="fa fa-print"></i>&nbsp;Imprimir ruta sugerida</a>
-        
+
         <div id="rutaEstimada" class="card">
             <div class="card-header" style="background-color: #1e7338; color: white; border-color: #1e7338;">
                 <text class="card-title mb-3">Detalle de ruta sugerida</text>
