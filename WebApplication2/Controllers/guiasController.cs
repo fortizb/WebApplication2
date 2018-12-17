@@ -63,6 +63,7 @@ namespace WebApplication2.Controllers
             {
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
+                TempData["Alerta"] = "Finalizar";
                 // Cambiar redirección a hoja de resumen*
                 return RedirectToAction("Index", "infoHojaRuta");
             }
@@ -135,6 +136,7 @@ namespace WebApplication2.Controllers
                 int id = Convert.ToInt32(TempData["id"]);
                 guias.idHojaRuta = id;
                 db.SaveChanges();
+                TempData["Alerta"] = "Asignar Guia";
                 TempData["id"] = id;
                 return RedirectToAction("Index");
 

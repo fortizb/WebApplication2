@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Agregar colaborador";
 }
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style type="text/css">
     .in {
         background: rgba(0, 0, 0, 0.25);
@@ -100,13 +100,44 @@
                 url: "/colaboradorHojaRutas/GuardarChoferInDB",
                 data: data,
                 success: function (result) {
-                    alert("¡Completado!");
+
                     window.location.href = "/colaboradorHojaRutas/Create";
                     $("#MyModal").modal("hide");
                 }
             })
         })
     </script>
+    @if (TempData["Alerta"] == "Colaborador Asignado")
+    {
+        <script>
+            swal({
+                title: "Colaborador Añadido Correctamente",
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
+    @if (TempData["Alerta"] == "Ya existe colaborador asignado")
+    {
+        <script>
+            swal({
+                title: "Colaborador Repetido",
+                icon: "warning",
+                button: "OK",
+            });
+        </script>
+    }
+
+    @if (TempData["Alerta"] == "Ya existe chofer asignado")
+    {
+        <script>
+            swal({
+                title: "Ya existe un chofer",
+                icon: "warning",
+                button: "OK",
+            });
+        </script>
+    }
 }
 
 

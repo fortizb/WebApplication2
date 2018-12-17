@@ -11,14 +11,21 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class costosHojaRuta
     {
+      
         public int idCosto { get; set; }
+        [Required(ErrorMessage = "El ID de la hoja de ruta es requerido")]
         public int idHojaRuta { get; set; }
+        [Required(ErrorMessage = "El Concepto es requerido")]
         public string concepto { get; set; }
+        [Required(ErrorMessage = "El N° de documento es requerido")]
         public int numDocumento { get; set; }
+        [Required(ErrorMessage = "El Proveedor es requerido")]
         public string proveedor { get; set; }
+        [Required(ErrorMessage = "El Monto es requerido")]
         public int monto { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
     

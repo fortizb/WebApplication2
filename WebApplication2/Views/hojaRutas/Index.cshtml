@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Hojas de ruta";
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style type="text/css">
     .pagination > li.active > a, .pagination > li.active > span {
         background-color: #1e7338 !important;
@@ -59,14 +61,14 @@
                                 <a data-toggle="dropdown" tabindex="0" class="btn btn-success" href="#" style="background-color: #1e7338;"><i class="fa fa-bars"></i>&nbsp;&nbsp;Menú</a>
                                 <div tabindex="-1" aria-hidden="true" role="menu" class="dropdown-menu">
                                     @*<li>@Html.ActionLink("Agregar", "AddDatos", new { id = item.idHojaRuta })</li>
-            <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
-            <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>*@
+                                        <li>@Html.ActionLink("Modificar Hoja de Ruta", "Edit", new { id = item.idHojaRuta })</li>
+                                        <li>@Html.ActionLink("Info", "Index", "infoHojaRuta", new { id = item.idHojaRuta }, null)</li>*@
                                     <a tabindex="0" class="dropdown-item" href="@Url.Action("AddDatos", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-plus-circle"></i>&nbsp;Agregar</a>
                                     <a tabindex="0" class="dropdown-item" href="@Url.Action("Edit", "hojaRutas", new { id = item.idHojaRuta }, null)"><i class="fa fa-edit"></i>&nbsp;Costos</a>
                                     <a tabindex="0" class="dropdown-item" href="@Url.Action("Resumen", "infoHojaRuta",  new { id = item.idHojaRuta }, null)"><i class="fa fa-info-circle"></i>&nbsp;Resumen</a>
                                 </div>
                             </div>
-                            
+
                         </td>
                     </tr>
                 }
@@ -85,4 +87,14 @@
             });
         });
     </script>
+    @if (TempData["Alerta"] == "Hoja de Ruta Cerrada")
+    {
+        <script>
+            swal({
+                title: "Hoja de ruta Cerrada Correctamente",
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
 }

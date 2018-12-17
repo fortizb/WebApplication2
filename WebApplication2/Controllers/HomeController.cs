@@ -38,7 +38,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(usuario user)
+        public ActionResult Login(UsuarioViewModel user)
         {
             if (ModelState.IsValid)
             {

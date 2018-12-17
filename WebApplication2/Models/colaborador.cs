@@ -11,7 +11,8 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class colaborador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +20,23 @@ namespace WebApplication2.Models
         {
             this.colaboradorHojaRuta = new HashSet<colaboradorHojaRuta>();
         }
-    
+        [Required(ErrorMessage = "El RUN es requerido")]
         public int run { get; set; }
+          [Required(ErrorMessage = "El RUT es requerido")]
         public string rut { get; set; }
+        [Required(ErrorMessage = "El Nombre es requerido")]
         public string nombre { get; set; }
+        [Required(ErrorMessage = "El Apellido es requerido")]
         public string apellidoPaterno { get; set; }
+        [Required(ErrorMessage = "El Apellido es requerido")]
         public string apellidoMaterno { get; set; }
+        [Required(ErrorMessage = "La edad es requerida")]
         public Nullable<int> edad { get; set; }
+        [Required(ErrorMessage = "El Cargo es requerido")]
         public string cargo { get; set; }
+        [Required(ErrorMessage = "El Telefono es requerido")]
         public Nullable<int> telefono { get; set; }
+        [Required(ErrorMessage = "El Valor de la hora extra es requerido")]
         public Nullable<int> valorHoraExtra { get; set; }
         public Nullable<bool> activo { get; set; }
     

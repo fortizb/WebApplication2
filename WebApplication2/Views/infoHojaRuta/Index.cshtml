@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Detalles hoja de ruta";
 }
+>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="container-fluid">
     <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de guías</h2>
     <table class="table table-borderless table-data3">
@@ -105,3 +107,13 @@
     </div>
 </div>
 
+@if (TempData["Alerta"] == "Finalizar")
+{
+    <script>
+        swal({
+            title: "Hoja de Ruta Lista para imprimir",
+            icon: "success",
+            button: "OK",
+        });
+    </script>
+}

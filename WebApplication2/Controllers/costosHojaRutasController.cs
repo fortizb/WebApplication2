@@ -19,7 +19,7 @@ namespace WebApplication2.Controllers
         {
             int id = Convert.ToInt32(TempData["id"]);
             TempData["id"] = id;
-            var costosHojaRuta = db.costosHojaRuta.Include(c => c.hojaRuta);
+            var costosHojaRuta = db.costosHojaRuta.Include(c => c.hojaRuta).Where(x => x.idHojaRuta == id);
             return View(costosHojaRuta.ToList());
         }
 
@@ -62,6 +62,7 @@ namespace WebApplication2.Controllers
                 costosHojaRuta.fecha = DateTime.Now;
                 db.costosHojaRuta.Add(costosHojaRuta);
                 db.SaveChanges();
+                TempData["Alerta"] = "Costo Agregado";
                 return RedirectToAction("Index");
             }
             
@@ -143,6 +144,7 @@ namespace WebApplication2.Controllers
                 hojaRuta.estado = false;
                 hojaRuta.fechaModificacion = DateTime.Now;
                 db.SaveChanges();
+                TempData["Alerta"] = "Hoja de Ruta Cerrada";
                 return RedirectToAction("Index", "hojaRutas");
             }
         }

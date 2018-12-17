@@ -53,6 +53,7 @@ namespace WebApplication2.Controllers
                 usuario.usuarioActivo = true;
                 db.usuario.Add(usuario);
                 db.SaveChanges();
+                TempData["alerta"] = "Agregar usuario";
                 return RedirectToAction("Index");
             }
 
@@ -79,12 +80,13 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "usuarioID,usuarioNombre,usuarioClave,usuarioActivo,usuarioNombreCol,usuarioApellido,usuarioTelefono,usuarioCargo")] usuario usuario)
+        public ActionResult Edit([Bind(Include = "usuarioID,usuarioNombre,usuarioClave,usuarioNombreCol,usuarioApellido,usuarioTelefono,usuarioCargo")] usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["alerta"] = "Editar usuario";
                 return RedirectToAction("Index");
             }
             return View(usuario);
@@ -113,6 +115,7 @@ namespace WebApplication2.Controllers
             usuario usuario = db.usuario.Find(id);
             db.usuario.Remove(usuario);
             db.SaveChanges();
+            TempData["alerta"] = "Borrar usuario";
             return RedirectToAction("Index");
         }
 

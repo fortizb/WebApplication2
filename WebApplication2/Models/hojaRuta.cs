@@ -11,7 +11,8 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class hojaRuta
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,12 +23,16 @@ namespace WebApplication2.Models
             this.guias = new HashSet<guias>();
             this.hojaRutaDetalle = new HashSet<hojaRutaDetalle>();
         }
-    
         public int idHojaRuta { get; set; }
+        [Required(ErrorMessage = "La patente es requerida")]
         public string patente { get; set; }
+      
         public System.DateTime fechaCreacion { get; set; }
+
         public Nullable<System.DateTime> fechaModificacion { get; set; }
+  
         public bool estado { get; set; }
+   
         public Nullable<int> usuarioID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

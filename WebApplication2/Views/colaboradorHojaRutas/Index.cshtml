@@ -1,23 +1,24 @@
 ﻿@model IEnumerable<WebApplication2.Models.colaboradorHojaRuta>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @{
     ViewBag.Title = "Index";
 
+    
+    <h2>
+        Lista de Colaboradores de la Hoja de Ruta
 
-    <h2>Lista de Colaboradores de la Hoja de Ruta
-     
     </h2>
-    <br/>
+    <br />
     <p>
         @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
     </p>
-    <br/>
+    <br />
     <table class="table">
         <tr>
             <th>
                 RUT
             </th>
-            
+
             <th>
                 CARGO
             </th>
@@ -32,28 +33,29 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.colaborador.rut)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.colaborador.cargo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.colaborador.nombre)
-                @Html.DisplayFor(modelItem => item.colaborador.apellidoPaterno)
-                @Html.DisplayFor(modelItem => item.colaborador.apellidoMaterno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.idHojaRuta)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idColHojaRuta }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idColHojaRuta }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idColHojaRuta })
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.colaborador.rut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.colaborador.cargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.colaborador.nombre)
+                    @Html.DisplayFor(modelItem => item.colaborador.apellidoPaterno)
+                    @Html.DisplayFor(modelItem => item.colaborador.apellidoMaterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idHojaRuta)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idColHojaRuta }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idColHojaRuta }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idColHojaRuta })
+                </td>
+            </tr>
         }
 
     </table>
+   
 }
