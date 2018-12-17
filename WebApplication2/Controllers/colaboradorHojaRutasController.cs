@@ -111,31 +111,48 @@ namespace WebApplication2.Controllers
 
     public JsonResult GuardarChoferInDB(ColaboradorHojaRutaViewModel model)
     {
-        
             var result = false;
-            try
+            if (model.run == 0)
             {
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
-                colaboradorHojaRuta col = new colaboradorHojaRuta();
-                colaborador colab = new colaborador();
-                col.idHojaRuta = id;
-                col.run = model.run;
-                var runColHojaRuta = db.colaboradorHojaRuta.Where(ch => ch.run == model.run && ch.idHojaRuta == id);
-                int cargoColHojaRuta = db.colaboradorHojaRuta.Where(ch => ch.colaborador.cargo == "Chofer" && ch.idHojaRuta == id).Count() ;
-                colab = db.colaborador.Find(model.run);
-                if (runColHojaRuta.Count() > 0)
+                TempData["Alerta"] = "Seleccione un colaborador valido";
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+              
+                try
                 {
-                    TempData["Alerta"] = "Ya existe colaborador asignado";
+                    int id = Convert.ToInt32(TempData["id"]);
                     TempData["id"] = id;
-                }
-                else if (cargoColHojaRuta > 0)
-                {
-                    if (colab.cargo == "Chofer")
+                    colaboradorHojaRuta col = new colaboradorHojaRuta();
+                    colaborador colab = new colaborador();
+                    col.idHojaRuta = id;
+                    col.run = model.run;
+                    var runColHojaRuta = db.colaboradorHojaRuta.Where(ch => ch.run == model.run && ch.idHojaRuta == id);
+                    int cargoColHojaRuta = db.colaboradorHojaRuta.Where(ch => ch.colaborador.cargo == "Chofer" && ch.idHojaRuta == id).Count();
+                    colab = db.colaborador.Find(model.run);
+                    if (runColHojaRuta.Count() > 0)
                     {
-                        TempData["Alerta"] = "Ya existe chofer asignado";
+                        TempData["Alerta"] = "Ya existe colaborador asignado";
                         TempData["id"] = id;
-                        //cargoColHojaRuta++;
+                    }
+                    else if (cargoColHojaRuta > 0)
+                    {
+                        if (colab.cargo == "Chofer")
+                        {
+                            TempData["Alerta"] = "Ya existe chofer asignado";
+                            TempData["id"] = id;
+                            //cargoColHojaRuta++;
+                        }
+                        else
+                        {
+                            db.colaboradorHojaRuta.Add(col);
+                            db.SaveChanges();
+                            TempData["Alerta"] = "Colaborador asignado";
+                            result = true;
+                        }
                     }
                     else
                     {
@@ -145,21 +162,14 @@ namespace WebApplication2.Controllers
                         result = true;
                     }
                 }
-                else
+
+                catch (Exception ex)
                 {
-                    db.colaboradorHojaRuta.Add(col);
-                    db.SaveChanges();
-                    TempData["Alerta"] = "Colaborador asignado";
-                    result = true;
-                }                
-            }
+                    throw ex;
+                }
 
-            catch (Exception ex)
-            {
-                throw ex;
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
         
     }
         

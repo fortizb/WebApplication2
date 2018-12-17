@@ -100,7 +100,6 @@
                 url: "/colaboradorHojaRutas/GuardarChoferInDB",
                 data: data,
                 success: function (result) {
-
                     window.location.href = "/colaboradorHojaRutas/Create";
                     $("#MyModal").modal("hide");
                 }
@@ -138,7 +137,19 @@
             });
         </script>
     }
-}
+
+    @if (TempData["Alerta"] == "Seleccione un colaborador válido")
+    {
+        <script>
+            swal({
+                title: "Seleccione un colaborador valido",
+                icon: "warning",
+                button: "OK",
+            });
+        </script>
+    }
+
+    }
 
 
 

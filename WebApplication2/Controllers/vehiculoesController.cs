@@ -78,6 +78,10 @@ namespace WebApplication2.Controllers
                 if (ModelState.IsValid)
                 {
                     vehiculo.activo = true;
+                    if(vehiculo.descripcion == null)
+                    {
+                        vehiculo.descripcion = "Sin descripción";
+                    }
                     db.vehiculo.Add(vehiculo);
                     db.SaveChanges();
                     TempData["alerta"] = "Agregar vehiculo";
@@ -165,7 +169,7 @@ namespace WebApplication2.Controllers
             else
             {
                 vehiculo vehiculo = db.vehiculo.Find(id);
-                db.vehiculo.Remove(vehiculo);
+                vehiculo.activo = false;
                 db.SaveChanges();
                 TempData["alerta"] = "Borrar vehiculo";
                 return RedirectToAction("Index");
