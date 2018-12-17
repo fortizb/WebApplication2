@@ -11,11 +11,14 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class colaboradorHojaRuta
     {
+     
         public int idColHojaRuta { get; set; }
         public int idHojaRuta { get; set; }
+        [Required(ErrorMessage = "El RUN es requerido")]
         public int run { get; set; }
     
         public virtual colaborador colaborador { get; set; }

@@ -68,7 +68,7 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "run,rut,nombre,apellidoPaterno,apellidoMaterno,edad,cargo,telefono,valorHoraExtra,activo")] colaborador colaborador)
+        public ActionResult Create([Bind(Include = "run,rut,nombre,apellidoPaterno,apellidoMaterno,edad,cargo,telefono,valorHoraExtra")] colaborador colaborador)
         {
             if (Session["Login"] == null)
             {
@@ -81,6 +81,7 @@ namespace WebApplication2.Controllers
                     colaborador.activo = true;
                     db.colaborador.Add(colaborador);
                     db.SaveChanges();
+                    TempData["alerta"] = "Agregar colaborador";
                     return RedirectToAction("Index");
                 }
 
@@ -127,6 +128,7 @@ namespace WebApplication2.Controllers
                 {
                     db.Entry(colaborador).State = EntityState.Modified;
                     db.SaveChanges();
+                    TempData["alerta"] = "Editar colaborador";
                     return RedirectToAction("Index");
                 }
                 return View(colaborador);
@@ -169,6 +171,7 @@ namespace WebApplication2.Controllers
                 colaborador colaborador = db.colaborador.Find(id);
                 db.colaborador.Remove(colaborador);
                 db.SaveChanges();
+                TempData["alerta"] = "Borrar colaborador";
                 return RedirectToAction("Index");
             }
         }

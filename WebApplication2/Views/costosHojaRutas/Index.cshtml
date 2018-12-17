@@ -3,66 +3,8 @@
 @{
     ViewBag.Title = "Costos";
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-@*<h2>Añadir Costos</h2>
-
-    <p>
-        @Html.ActionLink("AGREGAR", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.concepto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.numDocumento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.proveedor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.monto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.hojaRuta.patente)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.concepto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.numDocumento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.proveedor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.monto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.hojaRuta.patente)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.idCosto }) |
-                    @Html.ActionLink("Borrar", "Delete", new { id = item.idCosto })
-                </td>
-            </tr>
-
-
-        }
-
-    </table>*@
 
 <style type="text/css">
     .pagination > li.active > a, .pagination > li.active > span {
@@ -160,5 +102,16 @@
             });
         });
     </script>
+    @if (TempData["Alerta"] == "Costo Agregado")
+    {
+        <script>
+            swal({
+                title: "Costo Añadido Correctamente",
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
+
 }
 

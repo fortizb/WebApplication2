@@ -69,6 +69,8 @@ namespace WebApplication2.Controllers
            });
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
+                
+                
                 return View();
             }
         }
@@ -116,12 +118,40 @@ namespace WebApplication2.Controllers
                 int id = Convert.ToInt32(TempData["id"]);
                 TempData["id"] = id;
                 colaboradorHojaRuta col = new colaboradorHojaRuta();
+                colaborador colab = new colaborador();
                 col.idHojaRuta = id;
                 col.run = model.run;
-
-                db.colaboradorHojaRuta.Add(col);
-                db.SaveChanges();
-                result = true;
+                var runColHojaRuta = db.colaboradorHojaRuta.Where(ch => ch.run == model.run && ch.idHojaRuta == id);
+                int cargoColHojaRuta = db.colaboradorHojaRuta.Where(ch => ch.colaborador.cargo == "Chofer" && ch.idHojaRuta == id).Count() ;
+                colab = db.colaborador.Find(model.run);
+                if (runColHojaRuta.Count() > 0)
+                {
+                    TempData["Alerta"] = "Ya existe colaborador asignado";
+                    TempData["id"] = id;
+                }
+                else if (cargoColHojaRuta > 0)
+                {
+                    if (colab.cargo == "Chofer")
+                    {
+                        TempData["Alerta"] = "Ya existe chofer asignado";
+                        TempData["id"] = id;
+                        //cargoColHojaRuta++;
+                    }
+                    else
+                    {
+                        db.colaboradorHojaRuta.Add(col);
+                        db.SaveChanges();
+                        TempData["Alerta"] = "Colaborador asignado";
+                        result = true;
+                    }
+                }
+                else
+                {
+                    db.colaboradorHojaRuta.Add(col);
+                    db.SaveChanges();
+                    TempData["Alerta"] = "Colaborador asignado";
+                    result = true;
+                }                
             }
 
             catch (Exception ex)

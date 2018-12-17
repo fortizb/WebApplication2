@@ -80,6 +80,7 @@ namespace WebApplication2.Controllers
                     vehiculo.activo = true;
                     db.vehiculo.Add(vehiculo);
                     db.SaveChanges();
+                    TempData["alerta"] = "Agregar vehiculo";
                     return RedirectToAction("Index");
                 }
 
@@ -112,7 +113,7 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "patente,descripcion,marca,modelo,color,velocidadPromedio,rendimiento,capacidadCarga,activo")] vehiculo vehiculo)
+        public ActionResult Edit([Bind(Include = "patente,descripcion,marca,modelo,color,velocidadPromedio,rendimiento,capacidadCarga")] vehiculo vehiculo)
         {
             if (Session["Login"] == null)
             {
@@ -124,6 +125,7 @@ namespace WebApplication2.Controllers
                 {
                     db.Entry(vehiculo).State = EntityState.Modified;
                     db.SaveChanges();
+                    TempData["alerta"] = "Editar vehiculo";
                     return RedirectToAction("Index");
                 }
                 return View(vehiculo);
@@ -165,6 +167,7 @@ namespace WebApplication2.Controllers
                 vehiculo vehiculo = db.vehiculo.Find(id);
                 db.vehiculo.Remove(vehiculo);
                 db.SaveChanges();
+                TempData["alerta"] = "Borrar vehiculo";
                 return RedirectToAction("Index");
             }
         }

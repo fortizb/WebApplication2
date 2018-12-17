@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Vehículos";
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style type="text/css">
     .pagination > li.active > a, .pagination > li.active > span {
@@ -179,4 +180,40 @@
             });
         });
     </script>
+
+    @if (TempData["alerta"] == "Agregar vehiculo")
+    {
+        <script>
+
+            swal({
+                title: "Vehiculo Agregado Correctamente",
+
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
+    @if (TempData["alerta"] == "Editar vehiculo")
+    {
+        <script>
+
+            swal({
+                title: "Vehiculo Modificado Correctamente",
+
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
+    @if (TempData["alerta"] == "Borrar vehiculo")
+    {
+        <script>
+            swal({
+                title: "Vehiculo Eliminado Correctamente",
+
+                icon: "error",
+                button: "OK",
+            });
+        </script>
+    }
 }

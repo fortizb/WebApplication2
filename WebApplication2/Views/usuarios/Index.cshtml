@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Usuarios";
 }
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -149,4 +149,41 @@
             });
         });
     </script>
+
+
+    @if (TempData["alerta"] == "Agregar usuario")
+    {
+        <script>
+
+            swal({
+                title: "Usuario Agregado Correctamente",
+
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
+    @if (TempData["alerta"] == "Editar usuario")
+    {
+        <script>
+
+            swal({
+                title: "Usuario Modificado Correctamente",
+
+                icon: "success",
+                button: "OK",
+            });
+        </script>
+    }
+    @if (TempData["alerta"] == "Borrar usuario")
+    {
+        <script>
+            swal({
+                title: "Usuario Eliminado Correctamente",
+
+                icon: "error",
+                button: "",
+            });
+        </script>
+    }
 }
