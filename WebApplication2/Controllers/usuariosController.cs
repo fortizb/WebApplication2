@@ -17,22 +17,36 @@ namespace WebApplication2.Controllers
         // GET: usuarios
         public ActionResult Index()
         {
-            return View(db.usuario.ToList());
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View(db.usuario.ToList());
+            }
         }
 
         // GET: usuarios/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            usuario usuario = db.usuario.Find(id);
-            if (usuario == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                usuario usuario = db.usuario.Find(id);
+                if (usuario == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(usuario);
             }
-            return View(usuario);
         }
 
         // GET: usuarios/Create
@@ -63,16 +77,23 @@ namespace WebApplication2.Controllers
         // GET: usuarios/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            usuario usuario = db.usuario.Find(id);
-            if (usuario == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                usuario usuario = db.usuario.Find(id);
+                if (usuario == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(usuario);
             }
-            return View(usuario);
         }
 
         // POST: usuarios/Edit/5
@@ -82,29 +103,43 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "usuarioID,usuarioNombre,usuarioClave,usuarioNombreCol,usuarioApellido,usuarioTelefono,usuarioCargo")] usuario usuario)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-                TempData["alerta"] = "Editar usuario";
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            return View(usuario);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(usuario).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["alerta"] = "Editar usuario";
+                    return RedirectToAction("Index");
+                }
+                return View(usuario);
+            }
         }
 
         // GET: usuarios/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            usuario usuario = db.usuario.Find(id);
-            if (usuario == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                usuario usuario = db.usuario.Find(id);
+                if (usuario == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(usuario);
             }
-            return View(usuario);
         }
 
         // POST: usuarios/Delete/5
@@ -112,11 +147,18 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            usuario usuario = db.usuario.Find(id);
-            db.usuario.Remove(usuario);
-            db.SaveChanges();
-            TempData["alerta"] = "Borrar usuario";
-            return RedirectToAction("Index");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                usuario usuario = db.usuario.Find(id);
+                db.usuario.Remove(usuario);
+                db.SaveChanges();
+                TempData["alerta"] = "Borrar usuario";
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)
