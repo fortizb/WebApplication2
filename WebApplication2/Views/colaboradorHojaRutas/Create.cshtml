@@ -106,52 +106,50 @@
             })
         })
     </script>
-    @if (TempData["Alerta"] == "Colaborador Asignado")
-    {
-        <script>
-            swal({
-                title: "Colaborador Añadido Correctamente",
-                icon: "success",
-                button: "OK",
-            });
-        </script>
-    }
-    @if (TempData["Alerta"] == "Ya existe colaborador asignado")
-    {
-        <script>
-            swal({
-                title: "Colaborador Repetido",
-                icon: "warning",
-                button: "OK",
-            });
-        </script>
-    }
+}
 
-    @if (TempData["Alerta"] == "Ya existe chofer asignado")
-    {
-        <script>
-            swal({
-                title: "Ya existe un chofer",
-                icon: "warning",
-                button: "OK",
-            });
-        </script>
-    }
+@if (TempData["Alerta"] == "Colaborador Asignado")
+{
+    <script>
+        swal({
+            title: "Colaborador Añadido Correctamente",
+            icon: "success",
+            button: "OK",
+        });
+    </script>
+}
+@if (TempData["Alerta"] == "Ya existe colaborador asignado")
+{
+    <script>
+        swal({
+            title: "Colaborador Repetido",
+            icon: "warning",
+            button: "OK",
+        });
+    </script>
+}
 
-    @if (TempData["Alerta"] == "Seleccione un colaborador válido")
-    {
-        <script>
-            swal({
-                title: "Seleccione un colaborador valido",
-                icon: "warning",
-                button: "OK",
-            });
-        </script>
-    }
+@if (TempData["Alerta"] == "Ya existe chofer asignado")
+{
+    <script>
+        swal({
+            title: "Ya existe un chofer",
+            icon: "warning",
+            button: "OK",
+        });
+    </script>
+}
 
-    }
-
-
+@if (TempData["Alerta"] == "Seleccione un colaborador válido")
+{
+    <script>
+        swal({
+            title: "Seleccione un colaborador valido",
+            icon: "warning",
+            button: "OK",
+        });
+    </script>
+}
 
 @*
     <h2>Create</h2>
