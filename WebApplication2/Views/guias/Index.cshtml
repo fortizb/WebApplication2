@@ -21,76 +21,6 @@
     </style>
 
     <div class="container">
-        <h2 style="margin: 1em 0 1em 0;">Agregar guías a hoja de ruta</h2>
-        <div class="table-responsive">
-            <table id="tablaDireccion" class="table table-borderless table-data3" style="margin-top: 1em;">
-                <thead style="background-color: #1e7338;">
-                    <tr>
-                        <th>
-                            N° Guía
-                        </th>
-                        <th>
-                            R.U.T.
-                        </th>
-                        <th>
-                            Nombre
-                        </th>
-                        <th>
-                            Dirección
-                        </th>
-                        <th>
-                            Teléfono
-                        </th>
-                        <th>
-                            Observación
-                        </th>
-                        <th>
-                            Patente
-                        </th>
-                        <th>
-                            Opción
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.numeroGuia)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.rut)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.nombre)
-                            </td>
-                            <td>
-                                @(item.direccion + ", " + item.ciudad + ", Chile")
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.telefono)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.observacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.hojaRuta.patente)
-                            </td>
-                            <td>
-                                @*@Html.ActionLink("Agregar a Hoja De Ruta", "AddGuiaHR", new { idNumeroGuias = item.numeroGuia }, new { @class = "btn btn-primary" })*@
-                                <div class="table-data-feature">
-                                    <a class="item" data-toggle="tooltip" data-placement="top" title="Añadir a hoja de ruta" href="@Url.Action("AddGuiaHR", "guias", new { idNumeroGuias = item.numeroGuia }, null)">
-                                        <i class="zmdi zmdi-plus"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
         <h2 style="margin-top: 1em;">Sugerencia de ruta</h2>
         <br />
         <select class="form-control" multiple id="waypoints">
@@ -101,8 +31,8 @@
         </select>
         @*<button id="btnRutaSugerida" class="btn btn-success btn-block col-md-6" style="margin-left: 1em;">Sugerir ruta</button>*@
         <br />
-        <p class="msj-hecho text-center text-danger" style="margin-top: 0.5em;"><b id="mensajeAgregado"></b></p>
-        <br />
+        @*<p class="msj-hecho text-center text-danger" style="margin-top: 0.5em;"><b id="mensajeAgregado"></b></p>
+        <br />*@
         <a class="btn btn-success" data-toggle="collapse" href="#collapseRuta" role="button" aria-expanded="false" aria-controls="collapseExample" style="background-color: #1e7338;"><i class="fa fa-search"></i>&nbsp;Mapa</a>&nbsp;&nbsp;
         <button id="btnRutaSugerida" class="btn btn-success" style="background-color: #1e7338;"><i class="fa fa-list-ol"></i>&nbsp;Sugerir ruta</button>&nbsp;&nbsp;
         <a class="btn btn-success" id="btnImprimirEstimacion" href="#" style="background-color: #1e7338; margin: 1em 0 1em 0;"><i class="fa fa-print"></i>&nbsp;Imprimir ruta sugerida</a>&nbsp;&nbsp;
@@ -116,7 +46,7 @@
         </a>
         <br />
         <!-- Área para cargar collapse de ruta -->
-        <div class="collapse" id="collapseRuta" style="margin-top: 1em;">
+        <div class="collapse show" id="collapseRuta" style="margin-top: 1em;">
             <div class="card card-body">
                 <ul class="nav nav-tabs">
                     <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#map">Mapa de direcciones</a></li>
@@ -215,6 +145,76 @@
             <div class="card-body">
                 <div id="panel-direcciones"></div>
             </div>
+        </div>
+        <h2 style="margin: 1em 0 1em 0;">Agregar guías a hoja de ruta</h2>
+        <div class="table-responsive" style="margin: 1em 0 1em 0;">
+            <table id="tablaDireccion" class="table table-borderless table-data3">
+                <thead style="background-color: #1e7338;">
+                    <tr>
+                        <th>
+                            N° Guía
+                        </th>
+                        <th>
+                            R.U.T.
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Dirección
+                        </th>
+                        <th>
+                            Teléfono
+                        </th>
+                        <th>
+                            Observación
+                        </th>
+                        <th>
+                            Patente
+                        </th>
+                        <th>
+                            Opción
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.numeroGuia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.rut)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre)
+                            </td>
+                            <td>
+                                @(item.direccion + ", " + item.ciudad + ", Chile")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.observacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hojaRuta.patente)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Agregar a Hoja De Ruta", "AddGuiaHR", new { idNumeroGuias = item.numeroGuia }, new { @class = "btn btn-primary" })*@
+                                <div class="table-data-feature">
+                                    <a class="item" data-toggle="tooltip" data-placement="top" title="Añadir a hoja de ruta" href="@Url.Action("AddGuiaHR", "guias", new { idNumeroGuias = item.numeroGuia }, null)">
+                                        <i class="zmdi zmdi-plus"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQFeAyqNAmW4CDImQEIOKsNHQMiKIaxX4&libraries=places"></script>
