@@ -4,17 +4,29 @@
 }
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<div class="container-fluid pageprint">
+<div id="infoHojaRuta" class="container-fluid">
+    <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Hoja de ruta</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <p><strong>N° Hoja de ruta:</strong>&nbsp;@ViewBag.numHojaRuta</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Planificador:</strong>&nbsp;@Session["usuarioNombreCol"].ToString()&nbsp;@Session["usuarioApellido"].ToString()</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Fecha:</strong>&nbsp;@DateTime.Now.ToString("dd/MM/yyyy")</p>
+        </div>
+    </div>
     <div id="detalleHojaRuta">
-        <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de colaboradores</h2>
+        <h4 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de colaboradores</h4>
         <table class="table table-sm table-bordered">
             <thead class="text-center">
                 <tr>
                     @*<th>ID H. Ruta</th>
-                        <th>R.U.N.</th>*@
-                    <th>R.U.T.</th>
+                            <th>R.U.N.</th>
+                        <th>R.U.T.</th>*@
                     <th>Nombre</th>
-                    <th>Apellido</th>
+                    @*<th>Apellido</th>*@
                     <th>Cargo</th>
                 </tr>
             </thead>
@@ -23,20 +35,20 @@
                 {
                     <tr>
                         @*<td>
-                                @Html.DisplayFor(Model => ch.idHojaRuta)
-                            </td>
+                                    @Html.DisplayFor(Model => ch.idHojaRuta)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(Model => ch.run)
+                                </td>
                             <td>
-                                @Html.DisplayFor(Model => ch.run)
+                                @Html.DisplayFor(Model => ch.colaborador.rut)
+                        </td>*@
+                        <td>
+                            @(ch.colaborador.nombre + " " + ch.colaborador.apellidoPaterno)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(Model => ch.colaborador.apellidoPaterno)
                             </td>*@
-                        <td>
-                            @Html.DisplayFor(Model => ch.colaborador.rut)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(Model => ch.colaborador.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(Model => ch.colaborador.apellidoPaterno)
-                        </td>
                         <td>
                             @Html.DisplayFor(Model => ch.colaborador.cargo)
                         </td>
@@ -44,7 +56,7 @@
                 }
             </tbody>
         </table>
-        <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de guías</h2>
+        <h4 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de guías</h4>
         <table class="table table-sm table-bordered">
             <thead class="text-center">
                 <tr>
@@ -56,8 +68,8 @@
                     <th>Teléfono</th>
                     <th>Ciudad</th>
                     @*<th>Fecha de ingreso</th>
-                    <th>Observación</th>
-                    <th>Estado</th>*@
+                        <th>Observación</th>
+                        <th>Estado</th>*@
                     <th>Hora llegada</th>
                     <th>Hora salida</th>
                     <th>Recepción</th>
@@ -67,42 +79,42 @@
             <tbody>
                 @foreach (var g in Model.guiasID)
                 {
-                <tr>
-                    @*<td>
-            @Html.DisplayFor(Model => g.idHojaRuta)
-        </td>*@
-                    <td>
-                        @Html.DisplayFor(Model => g.numeroGuia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.rut)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.direccion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.telefono)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.ciudad)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(Model => g.fechaIngreso)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.observacion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => g.estado)
-                    </td>*@
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    <tr>
+                        @*<td>
+                                @Html.DisplayFor(Model => g.idHojaRuta)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(Model => g.numeroGuia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.rut)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => g.ciudad)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(Model => g.fechaIngreso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(Model => g.observacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(Model => g.estado)
+                            </td>*@
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -136,7 +148,7 @@
     <script src="~/Scripts/printThis.js"></script>
     <script>
         $('#btnImprimirDetalles').on("click", function () {
-            $('#detalleHojaRuta').printThis();
+            $('#infoHojaRuta').printThis();
         });
     </script>
 }

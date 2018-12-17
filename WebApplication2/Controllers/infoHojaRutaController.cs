@@ -22,6 +22,8 @@ namespace WebApplication2.Controllers
             else
             {
                 id = Convert.ToInt32(TempData["id"]);
+                ViewBag.numHojaRuta = id;
+
                 var model = new ResumenHojaRutaViewModel
                 {
                     guiasID = db.guias.ToList().Where(g => g.idHojaRuta == id),
