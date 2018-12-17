@@ -62,7 +62,7 @@ namespace WebApplication2.Controllers
             else
             {
                 int id = Convert.ToInt32(TempData["id"]);
-                TempData["id"] = id;
+                TempData["id"] = id; 
                 TempData["Alerta"] = "Finalizar";
                 // Cambiar redirección a hoja de resumen*
                 return RedirectToAction("Index", "infoHojaRuta");

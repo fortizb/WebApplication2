@@ -11,7 +11,8 @@ namespace WebApplication2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class vehiculo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,15 +21,22 @@ namespace WebApplication2.Models
             this.hojaRuta = new HashSet<hojaRuta>();
             this.hojaRuta1 = new HashSet<hojaRuta>();
         }
-    
+        [Required(ErrorMessage = "La patente es requerida")]
         public string patente { get; set; }
         public string descripcion { get; set; }
+        [Required(ErrorMessage = "La marca es requerido")]
         public string marca { get; set; }
+        [Required(ErrorMessage = "El modelo es requerido")]
         public string modelo { get; set; }
+        [Required(ErrorMessage = "El color es requerido")]
         public string color { get; set; }
+        [Required(ErrorMessage = "La velocidad promedio es requerida")]
         public Nullable<int> velocidadPromedio { get; set; }
+        [Required(ErrorMessage = "El Rendimiento es requerido")]
         public Nullable<int> rendimiento { get; set; }
+        [Required(ErrorMessage = "La capacidad de carga es requerida")]
         public Nullable<int> capacidadCarga { get; set; }
+
         public bool activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

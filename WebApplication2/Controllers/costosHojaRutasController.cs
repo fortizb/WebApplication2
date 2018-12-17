@@ -17,34 +17,55 @@ namespace WebApplication2.Controllers
         // GET: costosHojaRutas
         public ActionResult Index()
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            var costosHojaRuta = db.costosHojaRuta.Include(c => c.hojaRuta).Where(x => x.idHojaRuta == id);
-            return View(costosHojaRuta.ToList());
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                var costosHojaRuta = db.costosHojaRuta.Include(c => c.hojaRuta).Where(x => x.idHojaRuta == id);
+                return View(costosHojaRuta.ToList());
+            }
         }
 
         // GET: costosHojaRutas/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
-            if (costosHojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
+                if (costosHojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(costosHojaRuta);
             }
-            return View(costosHojaRuta);
         }
 
         // GET: costosHojaRutas/Create
         public ActionResult Create()
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente");
-            return View();
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente");
+                return View();
+            }
         }
 
         // POST: costosHojaRutas/Create
@@ -54,37 +75,51 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "concepto,numDocumento,proveedor,monto")] costosHojaRuta costosHojaRuta)
         {
-            int id = Convert.ToInt32(TempData["id"]);
-            TempData["id"] = id;
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                costosHojaRuta.idHojaRuta = id;
-                costosHojaRuta.fecha = DateTime.Now;
-                db.costosHojaRuta.Add(costosHojaRuta);
-                db.SaveChanges();
-                TempData["Alerta"] = "Costo Agregado";
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            
+            else
+            {
+                int id = Convert.ToInt32(TempData["id"]);
+                TempData["id"] = id;
+                if (ModelState.IsValid)
+                {
+                    costosHojaRuta.idHojaRuta = id;
+                    costosHojaRuta.fecha = DateTime.Now;
+                    db.costosHojaRuta.Add(costosHojaRuta);
+                    db.SaveChanges();
+                    TempData["Alerta"] = "Costo Agregado";
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", costosHojaRuta.idHojaRuta);
-            return View(costosHojaRuta);
+
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", costosHojaRuta.idHojaRuta);
+                return View(costosHojaRuta);
+            }
         }
 
         // GET: costosHojaRutas/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
-            if (costosHojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
+                if (costosHojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", costosHojaRuta.idHojaRuta);
+                return View(costosHojaRuta);
             }
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", costosHojaRuta.idHojaRuta);
-            return View(costosHojaRuta);
         }
 
         // POST: costosHojaRutas/Edit/5
@@ -94,29 +129,43 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idCosto,idHojaRuta,concepto,numDocumento,proveedor,monto,fecha")] costosHojaRuta costosHojaRuta)
         {
-            if (ModelState.IsValid)
+            if (Session["Login"] == null)
             {
-                db.Entry(costosHojaRuta).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Home");
             }
-            ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", costosHojaRuta.idHojaRuta);
-            return View(costosHojaRuta);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(costosHojaRuta).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.idHojaRuta = new SelectList(db.hojaRuta, "idHojaRuta", "patente", costosHojaRuta.idHojaRuta);
+                return View(costosHojaRuta);
+            }
         }
 
         // GET: costosHojaRutas/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Login"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
-            if (costosHojaRuta == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
+                if (costosHojaRuta == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(costosHojaRuta);
             }
-            return View(costosHojaRuta);
         }
 
         // POST: costosHojaRutas/Delete/5
@@ -124,10 +173,17 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
-            db.costosHojaRuta.Remove(costosHojaRuta);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Login"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                costosHojaRuta costosHojaRuta = db.costosHojaRuta.Find(id);
+                db.costosHojaRuta.Remove(costosHojaRuta);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Finalizar()

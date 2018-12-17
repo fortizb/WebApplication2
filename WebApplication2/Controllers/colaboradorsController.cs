@@ -23,7 +23,7 @@ namespace WebApplication2.Controllers
             }
             else
             {
-                return View(db.colaborador.ToList());
+                return View(db.colaborador.Where(x => x.activo == true).ToList());
             }
         }
 
@@ -169,7 +169,7 @@ namespace WebApplication2.Controllers
             else
             {
                 colaborador colaborador = db.colaborador.Find(id);
-                db.colaborador.Remove(colaborador);
+                colaborador.activo = false;
                 db.SaveChanges();
                 TempData["alerta"] = "Borrar colaborador";
                 return RedirectToAction("Index");
