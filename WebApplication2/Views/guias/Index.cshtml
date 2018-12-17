@@ -96,7 +96,6 @@
         <select class="form-control" multiple id="waypoints">
             @foreach (var select in Model)
             {
-
                 <option value="@(select.direccion + ", " + select.ciudad + ", Chile")">@(select.numeroGuia + ", " + select.direccion + ", " + select.ciudad + ", Chile")</option>
             }
         </select>
@@ -134,48 +133,48 @@
                                 <div class="form-group">
                                     <!--<input id="btnAgregarUbicacion" type="button" value="Añadir" class="btn btn-success btn-block" style="padding: 0.8em;" />-->
                                     <!--<div id="successMessage" class="alert alert-success success-msg col-md-5" role="alert">
-                                        ¡Agregado a la lista!
-                                    </div>-->
-                                </div>
-                                <!--<div class="form-group">
-                                    <label for="listaOrigen" class="sr-only">Source</label>
-                                    <select id="listaOrigen" class="form-control">
-                                        <option value="">-- Origen --</option>
-                                    </select>
+                                    ¡Agregado a la lista!
                                 </div>-->
-                                <!--<div class="form-group">
-                                    <label for="listaDestino" class="sr-only">Destination</label>
-                                    <select id="listaDestino" class="form-control">
-                                        <option value="">-- Destino --</option>
-                                    </select>
                                 </div>
+                                <!--<div class="form-group">
+                                <label for="listaOrigen" class="sr-only">Source</label>
+                                <select id="listaOrigen" class="form-control">
+                                    <option value="">-- Origen --</option>
+                                </select>
+                            </div>-->
+                                <!--<div class="form-group">
+                                <label for="listaDestino" class="sr-only">Destination</label>
+                                <select id="listaDestino" class="form-control">
+                                    <option value="">-- Destino --</option>
+                                </select>
+                            </div>
 
-                                <div class="checkbox">
-                                    <label>
-                                        <input id="checkDestinoIgualAOrigen" type="checkbox" />
-                                        Igual que el origen
-                                    </label>
-                                </div>
-                                <br />-->
+                            <div class="checkbox">
+                                <label>
+                                    <input id="checkDestinoIgualAOrigen" type="checkbox" />
+                                    Igual que el origen
+                                </label>
+                            </div>
+                            <br />-->
                                 <!--<div class="form-group">
-                                    <label for="listaModoViaje" class="sr-only">Travel Mode</label>
-                                    <select id="listaModoViaje" class="form-control">
-                                        <option value="">-- Modo de viaje --</option>
-                                        <option value="DRIVING">Conducir</option>
-                                        <option value="WALKING">Caminar</option>
-                                        <option value="BICYCLING">Bicicleta</option>
-                                    </select>
-                                </div>-->
+                                <label for="listaModoViaje" class="sr-only">Travel Mode</label>
+                                <select id="listaModoViaje" class="form-control">
+                                    <option value="">-- Modo de viaje --</option>
+                                    <option value="DRIVING">Conducir</option>
+                                    <option value="WALKING">Caminar</option>
+                                    <option value="BICYCLING">Bicicleta</option>
+                                </select>
+                            </div>-->
                                 <!--<div class="checkbox">
-                                    <label>
-                                        <input id="checkRutaOptima" type="checkbox" checked="checked" />
-                                        Optimizar ruta
-                                    </label>
-                                </div>-->
+                                <label>
+                                    <input id="checkRutaOptima" type="checkbox" checked="checked" />
+                                    Optimizar ruta
+                                </label>
+                            </div>-->
                                 <!--<div class="form-group">
-                                    <input id="btnLimpiarRuta" type="button" value="Limpiar" class="btn btn-block btn-warning" style="padding: 0.8em;" />
-                                    <input id="btnMostrarDirecciones" type="button" value="Mostrar" class="btn btn-block btn-success" style="padding: 0.8em;" />
-                                </div>-->
+                                <input id="btnLimpiarRuta" type="button" value="Limpiar" class="btn btn-block btn-warning" style="padding: 0.8em;" />
+                                <input id="btnMostrarDirecciones" type="button" value="Mostrar" class="btn btn-block btn-success" style="padding: 0.8em;" />
+                            </div>-->
                             </form>
                             <div id="googleMap" class="col-md-12 map" style="margin-top: 1em; height: 31em;"></div>
                         </div>
@@ -188,7 +187,7 @@
             </div>
         </div>
         <br />
-        <table class="table table-borderless table-data3">
+        <table id="datosEstimados" class="table table-borderless table-data3">
             <thead style="background-color: #1e7338;">
                 <tr>
                     <th>Distancia (KM)</th>
@@ -206,8 +205,10 @@
                 </tr>
             </tbody>
         </table>
-        <br />
-        <div class="card">
+        
+        <a class="btn btn-success" id="btnImprimirEstimacion" href="#" style="background-color: #1e7338; margin: 1em 0 1em 0;"><i class="fa fa-print"></i>&nbsp;Imprimir ruta sugerida</a>
+        
+        <div id="rutaEstimada" class="card">
             <div class="card-header" style="background-color: #1e7338; color: white; border-color: #1e7338;">
                 <text class="card-title mb-3">Detalle de ruta sugerida</text>
             </div>
@@ -216,12 +217,16 @@
             </div>
         </div>
     </div>
-
-
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQFeAyqNAmW4CDImQEIOKsNHQMiKIaxX4&libraries=places"></script>
 }
 
 @section Scripts{
+    <script src="~/Scripts/printThis.js"></script>
+    <script>
+        $('#btnImprimirEstimacion').on("click", function () {
+            $('#googleMap, #datosEstimados, #rutaEstimada').printThis();
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tablaDireccion').DataTable({

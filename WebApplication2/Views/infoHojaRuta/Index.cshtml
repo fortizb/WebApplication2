@@ -2,32 +2,75 @@
 @{
     ViewBag.Title = "Detalles hoja de ruta";
 }
->
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<div class="container-fluid">
-    <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de guías</h2>
-    <table class="table table-borderless table-data3">
-        <thead style="background-color: #1e7338;">
-            <tr>
-                @*<th>ID H. Ruta</th>*@
-                <th>N° Guía</th>
-                <th>R.U.T.</th>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Ciudad</th>
-                <th>Fecha de ingreso</th>
-                <th>Observación</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var g in Model.guiasID)
-            {
+<div class="container-fluid pageprint">
+    <div id="detalleHojaRuta">
+        <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de colaboradores</h2>
+        <table class="table table-sm table-bordered">
+            <thead class="text-center">
+                <tr>
+                    @*<th>ID H. Ruta</th>
+                        <th>R.U.N.</th>*@
+                    <th>R.U.T.</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Cargo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ch in Model.colaboradorHojaRutaID)
+                {
+                    <tr>
+                        @*<td>
+                                @Html.DisplayFor(Model => ch.idHojaRuta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(Model => ch.run)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.rut)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.apellidoPaterno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => ch.colaborador.cargo)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de guías</h2>
+        <table class="table table-sm table-bordered">
+            <thead class="text-center">
+                <tr>
+                    @*<th>ID H. Ruta</th>*@
+                    <th>N° Guía</th>
+                    <th>R.U.T.</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Ciudad</th>
+                    @*<th>Fecha de ingreso</th>
+                    <th>Observación</th>
+                    <th>Estado</th>*@
+                    <th>Hora llegada</th>
+                    <th>Hora salida</th>
+                    <th>Recepción</th>
+                    <th>Firma cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var g in Model.guiasID)
+                {
                 <tr>
                     @*<td>
-                            @Html.DisplayFor(Model => g.idHojaRuta)
-                        </td>*@
+            @Html.DisplayFor(Model => g.idHojaRuta)
+        </td>*@
                     <td>
                         @Html.DisplayFor(Model => g.numeroGuia)
                     </td>
@@ -46,7 +89,7 @@
                     <td>
                         @Html.DisplayFor(Model => g.ciudad)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(Model => g.fechaIngreso)
                     </td>
                     <td>
@@ -54,55 +97,26 @@
                     </td>
                     <td>
                         @Html.DisplayFor(Model => g.estado)
-                    </td>
+                    </td>*@
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <h2 class="text-center" style="margin: 1em 0 0.5em 0;">Detalle de colaboradores</h2>
-    <table class="table table-borderless table-data3">
-        <thead style="background-color: #1e7338;">
-            <tr>
-                @*<th>ID H. Ruta</th>
-                    <th>R.U.N.</th>*@
-                <th>R.U.T.</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Cargo</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var ch in Model.colaboradorHojaRutaID)
-            {
-                <tr>
-                    @*<td>
-                            @Html.DisplayFor(Model => ch.idHojaRuta)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(Model => ch.run)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.rut)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.apellidoPaterno)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(Model => ch.colaborador.cargo)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 <div class="container-fluid">
     <div class="col-md-12 text-center" style="margin: 2em 0 1em 0;">
         <a href="@Url.Action("Index", "hojaRutas", new { }, null)" class="btn btn-success" style="background-color: #1e7338;">
             <i class="fa fa-arrow-left"></i>
             <span>&nbsp;Volver a hojas de ruta</span>
+        </a>
+        <a class="btn btn-success" id="btnImprimirDetalles" href="#" style="background-color: #1e7338; margin: 1em 0 1em 0;">
+            <i class="fa fa-print"></i>
+            &nbsp;Imprimir detalles
         </a>
     </div>
 </div>
@@ -111,9 +125,18 @@
 {
     <script>
         swal({
-            title: "Hoja de Ruta Lista para imprimir",
+            title: "Hoja de ruta lista para imprimir",
             icon: "success",
             button: "OK",
+        });
+    </script>
+}
+
+@section Scripts{
+    <script src="~/Scripts/printThis.js"></script>
+    <script>
+        $('#btnImprimirDetalles').on("click", function () {
+            $('#detalleHojaRuta').printThis();
         });
     </script>
 }
